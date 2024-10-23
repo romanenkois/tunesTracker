@@ -1,4 +1,5 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
+import { Track } from '@dto/track';
 
 // to be deprecated later on in dev
 @Injectable({providedIn: 'root'})
@@ -11,11 +12,11 @@ export class DataRepository {
     this.secretToken.set(token)
   }
 
-  private trackData: WritableSignal<any> = signal<any>(null)
+  private trackData: WritableSignal<Track> = signal<any>(null)
   public getTrackData() {
     return this.trackData()
   }
-  public setTrackData(data: any) {
+  public setTrackData(data: Track) {
     this.trackData.set(data)
   }
 }

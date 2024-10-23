@@ -1,19 +1,22 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
-import { ApiService } from '@service/api.service';
+import { CommonModule } from '@angular/common';
+import { Component, computed, inject } from '@angular/core';
+import { DataRepository } from '@repository/data.repository';
+import { GetTrackCommand } from 'app/commands/get-track.service';
 
 @Component({
   selector: 'app-user-data',
   standalone: true,
-  imports: [],
+  imports: [ CommonModule],
   templateUrl: './user-data.component.html',
   styleUrl: './user-data.component.scss'
 })
-export default class UserDataComponent implements OnInit {
+export default class UserDataComponent  {
+  private getTrackCommand: GetTrackCommand = inject(GetTrackCommand);
+  private dataRepository: DataRepository = inject(DataRepository);
 
-  private apiService: ApiService = inject(ApiService);
+  public trackData = computed(() => this.dataRepository.getTrackData());
 
-  ngOnInit() {
-    this.apiService.getSecretToken();
-    this.apiService.getTrack('5bDol0wPoQlIgLWzP8tbkW');
+  constructor() {
+    this.getTrackCommand.getTrack('5bDol0wPoQlIgLWzP8tbkW');
   }
 }
