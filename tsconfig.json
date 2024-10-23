@@ -6,7 +6,7 @@
     "baseUrl": "./src",
     "paths": {
       "@dto/*": ["app/data/dto/*"],
-      "@service/*": ["app/services/*"],
+      "@service/*": ["app/data/services/*"],
       "@repository/*": ["app/data/repositories/*"],
       "@environment/*": ["environments/*"],
     },

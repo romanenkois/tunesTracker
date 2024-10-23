@@ -1,6 +1,6 @@
 import { Component, computed, inject, OnInit } from '@angular/core';
-import { ApiService } from 'app/data/services/api.service';
-// import { ApiService } from '@service';
+import { ApiService } from '@service/api.service';
+
 @Component({
   selector: 'app-user-data',
   standalone: true,
