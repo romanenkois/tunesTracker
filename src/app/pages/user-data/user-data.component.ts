@@ -1,6 +1,6 @@
 import { Component, computed, inject, OnInit } from '@angular/core';
-import { UserDataService } from '../api/user-data.service';
-
+import { ApiService } from 'app/data/services/api.service';
+// import { ApiService } from '@service';
 @Component({
   selector: 'app-user-data',
   standalone: true,
@@ -9,11 +9,11 @@ import { UserDataService } from '../api/user-data.service';
   styleUrl: './user-data.component.scss'
 })
 export default class UserDataComponent implements OnInit {
-  userDataService: UserDataService = inject(UserDataService);
 
-  trackData = computed(() => this.userDataService.trackData());
+  private apiService: ApiService = inject(ApiService);
 
   ngOnInit() {
-    
+    this.apiService.getSecretToken();
+    this.apiService.getTrack('5bDol0wPoQlIgLWzP8tbkW');
   }
 }

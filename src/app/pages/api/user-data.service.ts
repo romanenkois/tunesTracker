@@ -1,16 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal, WritableSignal } from '@angular/core';
+import { environment } from '../../../enviroments/environment.development';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class UserDataService {
+// depricated
+@Injectable({ providedIn: 'root' })
+class UserDataService {
   private http: HttpClient = inject(HttpClient);
 
+  private BASE_URL = environment.BASE_URL;
+  private CLIENT_ID = environment.CLIENT_ID;
+  private CLIENT_SECRET = environment.CLIENT_SECRET;
+  private SECRET_TOKEN = '';
+  userId: WritableSignal<string> = signal('');
 
   constructor() {
     this.getSecretToken().then(() => {
-      this.getUserPlaylists('31l6hgkzygyre6ijmn4xaqmbda3m');
+      this.getUserPlaylists('');
       // this.getTrackData();
       // this.getUserId().then(() => {
       //   this.getUserPlaylists(this.userId());

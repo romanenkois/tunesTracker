@@ -6,6 +6,8 @@
     "baseUrl": "./src",
     "paths": {
       "@dto/*": ["app/data/dto/*"],
+      "@service/*": ["app/services/*"],
+      "@repository/*": ["app/data/repositories/*"],
       "@environment/*": ["environments/*"],
     },
     "outDir": "./dist/out-tsc",
