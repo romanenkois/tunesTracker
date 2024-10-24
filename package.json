@@ -3,10 +3,18 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "install-all": "npm install && cd server && npm install && cd ../client && npm install",
+    "start": "concurrently \"npm run start:server\" \"npm run start:client\"",
+    "start:server": "cd server && npm run dev",
+    "start:client": "cd client && npm start",
+    "build": "cd client && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
 }
