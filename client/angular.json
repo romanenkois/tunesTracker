@@ -3,33 +3,11 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "tunesTracker": {
+    "tunes-tracker-client": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss",
-          "skipTests": true
-        },
-        "@schematics/angular:class": {
-          "skipTests": true
-        },
-        "@schematics/angular:directive": {
-          "skipTests": true
-        },
-        "@schematics/angular:guard": {
-          "skipTests": true
-        },
-        "@schematics/angular:interceptor": {
-          "skipTests": true
-        },
-        "@schematics/angular:pipe": {
-          "skipTests": true
-        },
-        "@schematics/angular:resolver": {
-          "skipTests": true
-        },
-        "@schematics/angular:service": {
-          "skipTests": true
+          "style": "scss"
         }
       },
       "root": "",
@@ -39,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/tunes-tracker",
+            "outputPath": "dist/tunes-tracker-client",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -86,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "tunesTracker:build:production"
+              "buildTarget": "tunes-tracker-client:build:production"
             },
             "development": {
-              "buildTarget": "tunesTracker:build:development"
+              "buildTarget": "tunes-tracker-client:build:development"
             }
           },
           "defaultConfiguration": "development"
