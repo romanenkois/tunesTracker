@@ -1,0 +1,6 @@
+node_modules
+.env
+
+# keeps logs dir, but ignores all files in it
+logs/*
+!logs/.gitkeep
