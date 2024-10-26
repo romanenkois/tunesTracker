@@ -1,4 +1,4 @@
-export type Artist = {
+export type ArtistDTO = {
   external_urls: {
     spotify: string
   }
@@ -21,7 +21,7 @@ export type Artist = {
 }
 
 
-export type ArtistSimplified = {
+export type ArtistSimplifiedDTO = {
   external_urls: {
     spotify: string
   },

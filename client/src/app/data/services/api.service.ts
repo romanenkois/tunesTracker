@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { TrackDTO } from '@dto/track';
 import { DataRepository } from '@repository/data.repository';
 import { environment } from 'enviroments/environment.development';
 import { Observable } from 'rxjs';
@@ -12,28 +13,9 @@ export class ApiService {
 
   private dataRepository: DataRepository = inject(DataRepository);
 
-  public getTrack(id: string, market?: string): Observable<any> {
+  public getTrack(id: string, market?: string): Observable<TrackDTO> {
     return this.http.get<any>(
-      `${environment.BASE_URL}/v1/tracks/${id}`,
-      {headers: {
-        Authorization: `Bearer ${this.dataRepository.getSecretToken()}`,
-        ...(market ? {market} : {})
-      }}
+      `${environment.BASE_URL}/tracks/track/${id}`
     )
-  }
-
-  public getSecretToken(): Observable<any> {
-    const body = new URLSearchParams();
-    body.append("grant_type", "client_credentials");
-    body.append("client_id", environment.CLIENT_ID);
-    body.append("client_secret", environment.CLIENT_SECRET);
-
-    const headers = {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    };
-    return this.http.post<any>(
-      'https://accounts.spotify.com/api/token',
-      body.toString(),
-      { headers });
   }
 }

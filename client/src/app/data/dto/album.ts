@@ -1,6 +1,6 @@
-import { ArtistSimplified } from '@dto/artist';
+import { ArtistSimplifiedDTO } from '@dto/artist';
 
-export type Album = {
+export type AlbumDTO = {
   album_type: 'album' | 'single' | 'compilation',
   total_tracks: number,
   available_markets: Array<string>,
@@ -24,7 +24,7 @@ export type Album = {
   },
   type: 'album',
   uri: string,
-  artists: Array<ArtistSimplified>
+  artists: Array<ArtistSimplifiedDTO>
   tracks: Array<{
     href: string,
     limit: number,
@@ -33,7 +33,7 @@ export type Album = {
     previous: string | null,
     total: number,
     items: Array<{
-      artists: Array<ArtistSimplified>,
+      artists: Array<ArtistSimplifiedDTO>,
       available_markets: Array<string>,
       disc_number: number,
       duration_ms: number,
@@ -78,7 +78,7 @@ export type Album = {
   popularity: number,
 }
 
-export type AlbumSimpified = {
+export type AlbumSimpifiedDTO = {
   album_type: 'album' | 'single' | 'compilation',
   total_tracks: number,
   available_markets: Array<string>,
@@ -102,5 +102,5 @@ export type AlbumSimpified = {
   },
   type: 'album',
   uri: string,
-  artists: Array<ArtistSimplified>
+  artists: Array<ArtistSimplifiedDTO>
 }
