@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { TrackDTO } from '@dto/track';
+import { TrackDTO } from '@dto/track.dto';
 import { DataRepository } from '@repository/data.repository';
 import { environment } from 'enviroments/environment.development';
 import { Observable } from 'rxjs';

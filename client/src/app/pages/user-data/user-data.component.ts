@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { DataRepository } from '@repository/data.repository';
-import { GetTrackCommand } from 'app/commands/get-track.service';
+import { GetTrackCommand } from '@commands/get-track.service';
 
 @Component({
   selector: 'app-user-data',

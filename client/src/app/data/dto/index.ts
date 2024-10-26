@@ -1,6 +1,6 @@
-export * from './album';
+export * from './album.dto';
 
-export * from './artist';
+export * from './artist.dto';
 
-export * from './track';
+export * from './track.dto';
 

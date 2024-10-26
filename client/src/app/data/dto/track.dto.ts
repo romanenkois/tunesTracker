@@ -1,5 +1,5 @@
-import { AlbumSimpifiedDTO } from "@dto/album"
-import { ArtistSimplifiedDTO } from "@dto/artist"
+import { AlbumSimpifiedDTO } from "@dto/album.dto"
+import { ArtistSimplifiedDTO } from "@dto/artist.dto"
 
 export type TrackDTO = {
   album: Array<AlbumSimpifiedDTO>,

@@ -5,9 +5,14 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
+      "@commands/*": ["app/commands/*"],
+
       "@dto/*": ["app/data/dto/*"],
-      "@service/*": ["app/data/services/*"],
+      "@entity/*": ["app/data/entities/*"],
+      "@mapper/*": ["app/data/mappers/*"],
       "@repository/*": ["app/data/repositories/*"],
+      "@service/*": ["app/data/services/*"],
+
       "@environment/*": ["environments/*"],
     },
     "outDir": "./dist/out-tsc",

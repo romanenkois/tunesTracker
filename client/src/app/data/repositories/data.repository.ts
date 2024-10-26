@@ -1,14 +1,14 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
-import { TrackDTO } from '@dto/track';
+import { Track } from '@entity/track.entity';
 
 // to be deprecated later on in dev
 @Injectable({providedIn: 'root'})
 export class DataRepository {
-  private trackData: WritableSignal<TrackDTO> = signal<any>(null)
+  private trackData: WritableSignal<Track> = signal<any>(null)
   public getTrackData() {
     return this.trackData()
   }
-  public setTrackData(data: TrackDTO) {
+  public setTrackData(data: Track) {
     this.trackData.set(data)
   }
 }

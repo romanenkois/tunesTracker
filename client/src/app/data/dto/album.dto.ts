@@ -1,4 +1,4 @@
-import { ArtistSimplifiedDTO } from '@dto/artist';
+import { ArtistSimplifiedDTO } from '@dto/artist.dto';
 
 export type AlbumDTO = {
   album_type: 'album' | 'single' | 'compilation',
@@ -9,13 +9,11 @@ export type AlbumDTO = {
   },
   href: string,
   id: string,
-  images: [
-    Array<{
-      url: string,
-      height: number,
-      width: number
-    }>
-  ],
+  images: Array<{
+    url: string,
+    height: number,
+    width: number
+  }>,
   name: string,
   release_date: string,
   release_date_precision: string,
