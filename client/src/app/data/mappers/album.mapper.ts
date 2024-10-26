@@ -38,7 +38,7 @@ export class AlbumMapper {
       uri: dto.uri,
 
       name: dto.name,
-      images: Array.isArray(dto.images[0]) ? dto.images[0] : dto.images as any, // Handle potential nested array
+      images: dto.images,
 
       release_date: dto.release_date,
       album_type: dto.album_type,

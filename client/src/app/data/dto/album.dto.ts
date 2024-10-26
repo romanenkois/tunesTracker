@@ -85,13 +85,11 @@ export type AlbumSimpifiedDTO = {
   },
   href: string,
   id: string,
-  images: [
-    Array<{
-      url: string,
-      height: number,
-      width: number
-    }>
-  ],
+  images: Array<{
+    url: string,
+    height: number,
+    width: number
+  }>,
   name: string,
   release_date: string,
   release_date_precision: string,
