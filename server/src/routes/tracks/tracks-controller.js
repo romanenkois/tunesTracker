@@ -9,6 +9,16 @@ const getTrack = async (req, res) => {
     }
 }
 
+const getTracks = async (req, res) => {
+    try {
+        const data = await fetchSpotifyApi(`v1/tracks?ids=${req.params.ids}`, 'GET');
+        res.status(200).json(data);
+    } catch (error) {
+        handleError(res, error);
+    }
+}
+
 module.exports = {
-    getTrack
+    getTrack,
+    getTracks
 }

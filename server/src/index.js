@@ -7,17 +7,19 @@ const dotenv = require('dotenv');
 dotenv.config();
 const { config } = require('./shared/config/config');
 
-// routers imports
-const tracksRouter = require('./routes/tracks/tracks-router');
-
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// routers implementation
-app.use(tracksRouter);
+// main router
+const v1Router = express.Router();
+const tracksRouter = require('./routes/tracks/tracks-router');
+v1Router.use('/tracks', tracksRouter);
+
+// implementing main router
+app.use('/tunes-tracker-api', v1Router);
 
 // Start server
 const PORT = config.server.port;
