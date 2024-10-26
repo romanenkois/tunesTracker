@@ -1,3 +1,5 @@
+const { config } = require('../config/config');
+
 token = '';
 
 const handleError = (res, error) => {
@@ -8,8 +10,8 @@ const handleError = (res, error) => {
 async function getSecretToken() {
     const body = new URLSearchParams();
     body.append("grant_type", "client_credentials");
-    body.append("client_id", process.env.SPOTIFY_CLIENT_ID);
-    body.append("client_secret", process.env.SPOTIFY_CLIENT_SECRET);
+    body.append("client_id", config.spotify.clientId);
+    body.append("client_secret", config.spotify.clientSecret);
     
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded'

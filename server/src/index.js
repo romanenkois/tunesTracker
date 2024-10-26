@@ -5,16 +5,7 @@ const dotenv = require('dotenv');
 
 // env imports
 dotenv.config();
-const config = {
-  server: {
-    port: process.env.PORT
-  },
-  spotify: {
-    clientId: process.env.SPOTIFY_CLIENT_ID,
-    clientSecret: process.env.SPOTIFY_CLIENT_SECRET
-  }
-}
-module.exports = config;
+const { config } = require('./shared/config/config');
 
 // routers imports
 const tracksRouter = require('./routes/tracks/tracks-router');
@@ -29,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(tracksRouter);
 
 // Start server
-const PORT = process.env.PORT;
+const PORT = config.server.port;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

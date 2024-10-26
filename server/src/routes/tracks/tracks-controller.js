@@ -1,4 +1,4 @@
-const { fetchSpotifyApi } = require('../../shared/utils/general-connect');
+const { fetchSpotifyApi } = require('../../shared/utils/api-connect');
 
 const getTrack = async (req, res) => {
     try {
