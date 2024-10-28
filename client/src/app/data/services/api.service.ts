@@ -22,7 +22,7 @@ export class ApiService {
     )
   }
 
-  public getArtist(id: string, market?: string): Observable<ArtistResponse> {
+  public getArtist(id: string): Observable<ArtistResponse> {
     return this.http.get<ArtistResponse>(
       `${environment.BASE_URL}/artists/artist/${id}` // custom api uses /artists/:id, when spotify uses /artists/:id
     )
