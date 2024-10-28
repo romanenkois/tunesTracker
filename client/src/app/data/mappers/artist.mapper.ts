@@ -3,10 +3,6 @@ import { ArtistDTO, ArtistSimplifiedDTO } from '@dto/artist.dto';
 
 export class ArtistMapper {
   public static toEntity(dto: ArtistDTO): Artist {
-    if (!dto) {
-      throw new Error('Cannot map null or undefined ArtistDTO to Artist');
-    }
-
     return {
       id: dto.id,
       href: dto.href,
@@ -20,10 +16,6 @@ export class ArtistMapper {
   }
 
   public static toSimplifiedEntity(dto: ArtistSimplifiedDTO): ArtistSimplified {
-    if (!dto) {
-      throw new Error('Cannot map null or undefined ArtistSimplifiedDTO to ArtistSimplified');
-    }
-
     return {
       id: dto.id,
       href: dto.href,

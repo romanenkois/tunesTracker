@@ -5,10 +5,6 @@ import { ArtistMapper } from '@mapper/artist.mapper';
 
 export class TrackMapper {
   public static toEntity(dto: TrackDTO): Track {
-    if (!dto) {
-      throw new Error('Cannot map null or undefined TrackDTO to Track');
-    }
-
     return {
       id: dto.id,
       href: dto.href,
