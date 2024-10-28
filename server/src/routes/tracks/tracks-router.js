@@ -7,6 +7,6 @@ const {
 } = require('./tracks-controller');
 
 router.get('/track/:id', getTrack);
-router.get('/tracks/:ids', getTracks);
+// router.get('/tracks/:ids', getTracks);
 
 module.exports = router;

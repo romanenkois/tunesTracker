@@ -16,6 +16,11 @@ app.use(express.urlencoded({ extended: true }));
 // main router
 const v1Router = express.Router();
 const tracksRouter = require('./routes/tracks/tracks-router');
+const albumsRouter = require('./routes/albums/albums-router');
+const artistsRouter = require('./routes/artists/artists-router');
+
+v1Router.use('/albums', albumsRouter);
+v1Router.use('/artists', artistsRouter);
 v1Router.use('/tracks', tracksRouter);
 
 // implementing main router
