@@ -1,6 +1,5 @@
-import { Artist, ArtistSimplified } from "@entity/artist.entity";
+import { ArtistSimplified } from "@entity/artist.entity";
 import { AlbumSimplified } from "@entity/album.entity";
-import { AlbumSimpifiedDTO } from "@dto/album.dto";
 
 export type Track = {
   id: string,
@@ -12,6 +11,5 @@ export type Track = {
   duration_ms: number,
 
   artists: Array<ArtistSimplified>
-  album: Array<AlbumSimpifiedDTO>
-  // album: Array<AlbumSimplified>
+  album: AlbumSimplified
 }

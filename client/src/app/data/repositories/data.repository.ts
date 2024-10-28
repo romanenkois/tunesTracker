@@ -9,6 +9,7 @@ export class DataRepository {
     return this.trackData()
   }
   public setTrackData(data: Track) {
+    console.log('setting track data', data)
     this.trackData.set(data)
   }
 }

@@ -2,7 +2,7 @@ import { AlbumSimpifiedDTO } from "@dto/album.dto"
 import { ArtistSimplifiedDTO } from "@dto/artist.dto"
 
 export type TrackDTO = {
-  album: Array<AlbumSimpifiedDTO>,
+  album: AlbumSimpifiedDTO,
   artists: Array<ArtistSimplifiedDTO>,
   available_markets: Array<string>,
   disc_number: number,

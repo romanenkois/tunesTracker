@@ -17,8 +17,7 @@ export class TrackMapper {
       popularity: dto.popularity,
       duration_ms: dto.duration_ms,
       artists: dto.artists.map(artist => ArtistMapper.toSimplifiedEntity(artist)),
-      album: dto.album
-      // album: dto.album.map(album => AlbumMapper.toSimplifiedEntity(album))
+      album: AlbumMapper.toSimplifiedEntity(dto.album)
     };
   }
 }
