@@ -12,13 +12,13 @@ export class ApiService {
 
   public getTrack(id: string, market?: string): Observable<TrackResponse> {
     return this.http.get<TrackResponse>(
-      `${environment.BASE_URL}/tracks/track/${id}`
+      `${environment.BASE_URL}/tracks/track/${id}${market ? `?market=${market}` : ''}`
     )
   }
 
   public getAlbum(id: string, market?: string): Observable<AlbumResponse> {
     return this.http.get<AlbumResponse>(
-      `${environment.BASE_URL}/albums/album/${id}` // custom api uses /album/:id, when spotify uses /albums/:id
+      `${environment.BASE_URL}/albums/album/${id}${market ? `?market=${market}` : ''}` // custom api uses /album/:id, when spotify uses /albums/:id
     )
   }
 
