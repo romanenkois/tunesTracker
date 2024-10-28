@@ -1,4 +1,3 @@
-# Editor configuration, see https://editorconfig.org
 root = true
 
 [*]
@@ -14,3 +13,6 @@ quote_type = single
 [*.md]
 max_line_length = off
 trim_trailing_whitespace = false
+
+[*.{html,css,scss}]
+indent_size = 4
