@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { TrackDTO } from '@dto/track.dto';
+import { AlbumResponse, ArtistResponse, TrackResponse } from '@dto/response.dto';
 import { environment } from 'enviroments/environment.development';
 import { Observable } from 'rxjs';
 
@@ -10,13 +10,21 @@ import { Observable } from 'rxjs';
 export class ApiService {
   private readonly http: HttpClient = inject(HttpClient);
 
-  public getTrack(id: string, market?: string): Observable<TrackDTO> {
-    return this.http.get<any>(
+  public getTrack(id: string, market?: string): Observable<TrackResponse> {
+    return this.http.get<TrackResponse>(
       `${environment.BASE_URL}/tracks/track/${id}`
     )
   }
 
-  public getAlbum() {
+  public getAlbum(id: string, market?: string): Observable<AlbumResponse> {
+    return this.http.get<AlbumResponse>(
+      `${environment.BASE_URL}/albums/album/${id}` // custom api uses /album/:id, when spotify uses /albums/:id
+    )
+  }
 
+  public getArtist(id: string, market?: string): Observable<ArtistResponse> {
+    return this.http.get<ArtistResponse>(
+      `${environment.BASE_URL}/artists/artist/${id}` // custom api uses /artists/:id, when spotify uses /artists/:id
+    )
   }
 }

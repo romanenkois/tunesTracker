@@ -4,6 +4,7 @@ import { AlbumSimplified } from "@entity/album.entity";
 export type Track = {
   id: string,
   href: string,
+  uri: string,
   preview_url: string | undefined,
 
   name: string,

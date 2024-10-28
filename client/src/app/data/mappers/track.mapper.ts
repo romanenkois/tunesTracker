@@ -8,10 +8,13 @@ export class TrackMapper {
     return {
       id: dto.id,
       href: dto.href,
+      uri: dto.uri,
       preview_url: dto.preview_url,
+
       name: dto.name,
       popularity: dto.popularity,
       duration_ms: dto.duration_ms,
+
       artists: dto.artists.map(artist => ArtistMapper.toSimplifiedEntity(artist)),
       album: AlbumMapper.toSimplifiedEntity(dto.album)
     };
