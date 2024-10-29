@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+
 const { config } = require('../config/config');
 
 token = '';
@@ -5,6 +8,26 @@ token = '';
 const handleError = (res, error) => {
     console.log(error);
     res.status(500).json({error});
+}
+
+function writeLog(message) {
+    const date = new Date();
+
+    const logFileName = `${date.toISOString().slice(0, 10)}-${date.getHours()}-log.txt`;
+    const logFilePath = path.join(__dirname, '..', '..', '..', 'logs', logFileName);
+
+    try {
+        // Create the logs directory if it doesn't exist
+        if (!fs.existsSync(path.join(__dirname, '..', '..', '..', 'logs'))) {
+            fs.mkdirSync(path.join(__dirname, '..', '..', '..', 'logs'));
+        }
+
+        // Append the log message to the file
+        fs.appendFileSync(logFilePath, `${date.toISOString()}, ${message}\n`);
+        
+    } catch (err) {
+        console.error('Error writing log:', err);
+    }
 }
 
 async function getSecretToken() {
@@ -18,35 +41,42 @@ async function getSecretToken() {
     };
   
     try {
-      const response = await fetch('https://accounts.spotify.com/api/token', {
-        method: 'POST',
-        headers: headers,
-        body: body.toString()
-      });
-      
-      return await response.json();
-    } catch (error) {
-      console.error('Error fetching token:', error);
-      throw error;
+        const response = await fetch('https://accounts.spotify.com/api/token', {
+            method: 'POST',
+            headers: headers,
+            body: body.toString()
+        });
+        
+        return await response.json();
+
+        } catch (error) {
+        console.error('Error fetching token:', error);
+        throw error;
     }
 }
 
-async function fetchSpotifyApi(endpoint, method, body) {
+async function fetchSpotifyApi(clientIP, endpoint, method, body) {
     try {
         const response = await fetch(`https://api.spotify.com/${endpoint}`, {
             method,
             headers: {
                 Authorization: `Bearer ${token.access_token}`
             },
-            method,
             body
         });
         if (response.status === 401) {
-            date = new Date();
+            const date = new Date();
             console.log('Token expired ', date);
+
             token = await getSecretToken();
-            return fetchSpotifyApi(endpoint, method, body);
+            message = `Token_expired/New_Token, ${token.access_token}`;
+            writeLog(message);
+            
+            return fetchSpotifyApi(clientIP, endpoint, method, body);
         } else {
+            message = `${method}, ${endpoint}, ${clientIP}, ${body}, ${response.status},`;
+            writeLog(message);
+
             return await response.json();
         }
 

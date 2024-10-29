@@ -2,6 +2,7 @@ const { fetchSpotifyApi } = require('../../shared/utils/api-connect');
 
 const getTrack = async (req, res) => {
     try {
+        const clientIP = req.connection.remoteAddress || req.socket.remoteAddress;
         const { id } = req.params;
         const { market } = req.query;
         
@@ -10,7 +11,7 @@ const getTrack = async (req, res) => {
             endpoint += `?market=${market}`;
         }
 
-        const data = await fetchSpotifyApi(endpoint, 'GET');
+        const data = await fetchSpotifyApi(clientIP, endpoint, 'GET' );
         res.status(200).json(data);
     } catch (error) {
         handleError(res, error);
@@ -19,7 +20,7 @@ const getTrack = async (req, res) => {
 
 const getTracks = async (req, res) => {
     try {
-        const data = await fetchSpotifyApi(`v1/tracks?ids=${req.params.ids}`, 'GET');
+        const data = await fetchSpotifyApi(clientIP, `v1/tracks?ids=${req.params.ids}`, 'GET');
         res.status(200).json(data);
     } catch (error) {
         handleError(res, error);
