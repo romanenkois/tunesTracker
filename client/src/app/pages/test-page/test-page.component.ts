@@ -12,7 +12,7 @@ import { TrackDataRepository } from '@repository/track-data.repository';
   templateUrl: './test-page.component.html',
   styleUrl: './test-page.component.scss'
 })
-export class TestPageComponent {
+export default class TestPageComponent {
   private getTrackCommand: GetTrackCommand = inject(GetTrackCommand);
   private getAlbumCommand: GetAlbumCommand = inject(GetAlbumCommand);
 
