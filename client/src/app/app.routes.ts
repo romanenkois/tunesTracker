@@ -6,12 +6,12 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/user-data/user-data.component')
   },
   {
-    path: 'authorization',
+    path: 'login',
     loadComponent: () => import('./pages/authorization/authorization.component')
   },
   {
     path: '',
-    redirectTo: 'authorization',
+    redirectTo: 'login',
     pathMatch: 'full'
   }
 ];
