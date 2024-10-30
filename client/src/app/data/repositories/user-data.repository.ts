@@ -1,6 +1,5 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
 
-
 @Injectable({providedIn: 'root'})
 export class UserDataRepository {
   private readonly userCode: WritableSignal<string> = signal<string>('');
@@ -10,6 +9,4 @@ export class UserDataRepository {
   public getUserCode(): string {
     return this.userCode();
   }
-
-
 }
