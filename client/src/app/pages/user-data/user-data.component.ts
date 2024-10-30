@@ -6,6 +6,7 @@ import { GetTrackCommand } from '@commands/get-track.command';
 import { AlbumDataRepository } from '@repository/album-data.repository';
 import { TrackDataRepository } from '@repository/track-data.repository';
 import { UserDataRepository } from '@repository/user-data.repository';
+import { ApiService } from '@service/api.service';
 
 @Component({
   selector: 'app-user-data',
@@ -17,21 +18,24 @@ import { UserDataRepository } from '@repository/user-data.repository';
 export default class UserDataComponent  {
   private router: Router = inject(Router);
 
-  private getTrackCommand: GetTrackCommand = inject(GetTrackCommand);
-  private getAlbumCommand: GetAlbumCommand = inject(GetAlbumCommand);
+  private api: ApiService = inject(ApiService);
 
-  private trackRepository: TrackDataRepository = inject(TrackDataRepository);
-  private albumRepository: AlbumDataRepository = inject(AlbumDataRepository);
   private userDataRepository: UserDataRepository = inject(UserDataRepository);
 
-  public trackData = computed(() => this.trackRepository.getTrackData());
-  public albumData = computed(() => this.albumRepository.getAlbumData());
-
   constructor() {
+    // check if user is logged in
     let userCode: string = this.userDataRepository.getUserCode();
     if (userCode === '') {
       this.router.navigate(['/login']);
+    } else {
+      console.log('user code', userCode);
+
+      this.api.getUserccessToken(userCode).subscribe(res => {
+        console.log('ac token ',res.access_token);
+      })
+      this.api.getUserTopItems(userCode, 'artist', 'short_term').subscribe(res => {
+        console.log('res', res);
+      })
     }
-    console.log(userCode);
   }
 }

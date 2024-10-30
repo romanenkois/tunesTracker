@@ -1,4 +1,4 @@
-const { fetchSpotifyApi } = require('../../shared/utils/api-connect');
+const { fetchSpotifyApi, handleError } = require('../../shared/utils/api-connect');
 
 const getArtist = async (req, res) => {
     try {
