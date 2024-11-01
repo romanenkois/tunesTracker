@@ -57,26 +57,31 @@ async function getCCToken() {
 }
 
 async function getACToken(code) {
-    console.log('code', code);
+
+    // console.log('code', code);
 
     const body = new URLSearchParams();
     body.append('grant_type', "authorization_code");
     body.append('redirect_uri', 'http://localhost:4200/login');
-    body.append('code', code);
+    body.append('code', code.toString());
 
     const headers = {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Basic ' + btoa(config.spotify.clientId + ':' + config.spotify.clientSecret)
-    };
+        'content-type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Basic ' + Buffer.from(`${config.spotify.clientId}:${config.spotify.clientSecret}`).toString('base64')
 
-    console.log('hhh ',headers);
+    }
+
+    console.log('header ',headers);
     console.log('body ',body.toString());
 
     const response = await fetch('https://accounts.spotify.com/api/token', {
         method: 'POST',
         headers: headers,
-        body: body.toString()
+        body: body.toString(),
+        json: true
     });
+
+    console.log('response', response);
 
     return await response.json();
 
@@ -86,22 +91,30 @@ async function fetchSpotifyApi(clientIP, endpoint, method, body = null, code = n
     // try {
         console.log('fetchSpotifyApi', endpoint, method, body);
 
-        let token = TOKEN_CLIENT_CRIDENTIALS.access_token;
-        if (code !== null) {
-            token = await getACToken(code);
-        }
+        // let token = TOKEN_CLIENT_CRIDENTIALS.access_token;
+
+
+
+
+        // if (code !== null) {
+        //     token = await getACToken(code);
+        //     console.log('\x1b[33m%s\x1b[0m' ,'AC token', token);
+
+        //     // token = 'BQBH86kNSU0YKp9vCG_RKPbFcrPcA9L7VFa0Kc2-C-rVzJrkz9riSJkrtjSrjtF1ZN3jvfWGud2wp4yxmjdsh8gUJKenR5GJ4UNc0Uc1v6rxa8pkV2l7_sxyigLgPYE_cOZuHtMr4TmSi-CMpT1j0cMLNfNSCynfvmMqT97pOlNvjF-H-AlmT0_MY2fVXHWQUejh7v6GLBR5X-Z_pl-aQJqWihjQ0EEKc9MO7pg6YjE'
+        // }
+        
+        token = 'AQDAAnWS2wLumtUpGH1yOcMSPFmZIVMVHzc934KxiR7TrGzxXBu95eF0fpru66wfgp0rggq5kqW_tfAqqFNKPgPuN26Ve9iQEcqmVSrO7ylakLFvQe5FwhXgY43gCI_BDFz2KJK6IShNuP_E7aVPVYVX8nPhnPzYqO_4TkGaOaU6AivRxVu7Lp91OFImU-orh9I2jZy0NobcaeyuLQxuKI6fR3XbF82ZGwYseU9JFicBrckkC4ZB6jKCZwrAf8jlmgQc3YtOB_XVNuCiN3-v4SnAwOfMflXfq7teBHFoWf5o6kgA3T3WZLouV9ukmyR-lY_QOdlVcLhdmrxiNtgbzL2TyUiroSk'
 
         let headers = {
             Authorization: `Bearer ${token}`
         }
-
         const response = await fetch(`https://api.spotify.com/${endpoint}`, {
             method,
             headers: headers,
             body
         });
 
-        if (response.status === 401) {
+        if (response.status === 401 && code === null) {
             const date = new Date();
             console.log('Token expired ', date);
 

@@ -28,8 +28,29 @@ export class ApiService {
     )
   }
 
-  public getUserTopItems(code: string, type: 'artist' | 'tracks', time_range?: 'short_term' | 'medium_term' | 'long_term', limit?: number, offset?: number): Observable<any> {
-    let endpoint: string = `${environment.BASE_URL}/user-data/top-items/${type}`;
+  // public getUserTopItems(code: string, type: 'artist' | 'tracks', time_range?: 'short_term' | 'medium_term' | 'long_term', limit?: number, offset?: number): Observable<any> {
+  //   let endpoint: string = `${environment.BASE_URL}/user-data/top-items/${type}`;
+
+  //   if (time_range) {
+  //     endpoint += `?time_range=${time_range}`;
+  //   }
+  //   if (limit) {
+  //     endpoint += `&limit=${limit}`;
+  //   }
+  //   if (offset) {
+  //     endpoint += `&offset=${offset}`;
+  //   }
+
+  //   let headers = {
+  //     'code': code
+  //   }
+
+  //   return this.http.get(endpoint, { headers });
+  // }
+
+  public getUserTopItemsDirect(tokenAC: string, type: 'artist' | 'tracks', time_range?: 'short_term' | 'medium_term' | 'long_term', limit?: number, offset?: number): Observable<any> {
+    let endpoint: string = `https://api.spotify.com/v1/me/top/artists`;
+
     if (time_range) {
       endpoint += `?time_range=${time_range}`;
     }
@@ -41,7 +62,8 @@ export class ApiService {
     }
 
     let headers = {
-      'code': code
+      'Authorization': `Bearer ${tokenAC}`,
+      'Content-Type': 'application/x-www-form-urlencoded'
     }
 
     return this.http.get(endpoint, { headers });
@@ -49,15 +71,6 @@ export class ApiService {
 
   // to be deprecated later on
   public getUserccessToken(code: string): Observable<any> {
-    // return this.http.post(
-    //   `https://accounts.spotify.com/api/token`,
-    //   {
-    //     grant_type: 'authorization_code',
-    //     code: code,
-    //     redirect_uri: 'http://localhost:4200/login'
-    //   },
-    //   body
-    // )
     const body = new URLSearchParams();
     body.append('grant_type', "authorization_code");
     body.append('redirect_uri', 'http://localhost:4200/login');
