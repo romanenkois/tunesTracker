@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router';
+import { authorizationGuard } from './authorization-guard.guard';
 
 export const routes: Routes = [
   {
     path: 'user-data',
-    loadComponent: () => import('./pages/user-data/user-data.component')
+    loadComponent: () => import('./pages/user-data/user-data.component'),
+    canActivate: [ authorizationGuard ]
   },
   {
     path: 'login',
@@ -17,5 +19,9 @@ export const routes: Routes = [
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: 'login',
   }
 ];

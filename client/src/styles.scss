@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --black-color: #080a0f;
+    --white-color: #FFFFFF;
+    --green-spotify-color: #1ED760;
+    --green-spotify-hover-color: #1ab952;
+    --primary-color: #3d65a1;
+
+
+    --small-font-size: 1rem;
+    --small-medium-font-size: 1.2rem;
+    --medium-font-size: 1.5rem;
+    --medium-large-font-size: 1.8rem;
+    --large-font-size: 2rem;
+
+    --small-padding: 0.5rem;
+    --medium-padding: 1rem;
+    --large-padding: 1.5rem;
+}
+
+* {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    color: var(--white-color);
+    background: var(--black-color);
+}
+
+p {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}

@@ -24,6 +24,6 @@ export default class TestPageComponent {
 
   constructor() {
     this.getTrackCommand.getTrack('5bDol0wPoQlIgLWzP8tbkW', 'ES');
-    this.getAlbumCommand.getAlbum('2WUxZpVbQWjMqyc7SDQlzh');
+    // this.getAlbumCommand.getAlbum('2WUxZpVbQWjMqyc7SDQlzh');
   }
 }

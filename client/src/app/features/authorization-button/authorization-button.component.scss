@@ -1,0 +1,52 @@
+* {
+    outline: 1px red solid;
+}
+
+.button {
+    height: 100%;
+    width: 100%;
+    max-width: 400px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+    background-color: var(--green-spotify-color);
+    transition: background-color 0.3s ease-in-out;
+
+    a {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        div {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: var(--small-padding) var(--medium-padding);
+
+            p {
+                margin: 0;
+                font-size: var(--medium-font-size);
+                font-weight: bold;
+                color: var(--white-color);
+            }
+
+            img {
+                width: var(--medium-font-size);
+                height: var(--medium-font-size);
+                margin-left: 0.5rem;
+            }
+        }
+    }
+}
+
+.button:hover {
+    background-color: var(--green-spotify-hover-color);
+}
