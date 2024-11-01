@@ -25,20 +25,27 @@ export default class UserDataComponent  {
 
   constructor() {
     // check if user is logged in
-    let userCode: string = this.userDataRepository.getUserCode();
-    if (userCode === '') {
+    let code: string = this.userDataRepository.getUserCode();
+    if (code === '') {
       // this.router.navigate(['/login']);
     } else {
-      console.log('user code', userCode);
+      console.log('user code', {code});
 
-      this.api.getUserccessToken(userCode).subscribe(res => {
-        console.log('ac token ',res.access_token);
+      // this.api.getUserccessToken(code).subscribe(res => {
+      //   console.log('ac token ',res.access_token);
 
-        this.api.getUserTopItemsDirect(res.access_token, 'artist', 'short_term', 5).subscribe(res => {
-          console.log('res', res);
-        })
+      //   this.api.getUserTopItemsIndirect(res.access_token, 'artists', 'short_term', 5).subscribe(res => {
+      //     console.log('res', res);
+      //   })
+
+      //   // this.api.getUserTopItemsDirect(res.access_token, 'artists', 'short_term', 5).subscribe(res => {
+      //   //   console.log('res', res);
+      //   // })
+      // })
+
+      this.api.getUserTopItems(code, 'artists', 'short_term', 5).subscribe(res => {
+        console.log('res', res);
       })
-
     }
   }
 }

@@ -28,28 +28,28 @@ export class ApiService {
     )
   }
 
-  // public getUserTopItems(code: string, type: 'artist' | 'tracks', time_range?: 'short_term' | 'medium_term' | 'long_term', limit?: number, offset?: number): Observable<any> {
-  //   let endpoint: string = `${environment.BASE_URL}/user-data/top-items/${type}`;
+  public getUserTopItems(code: string, type: 'artists' | 'tracks', time_range?: 'short_term' | 'medium_term' | 'long_term', limit?: number, offset?: number): Observable<any> {
+    let endpoint: string = `${environment.BASE_URL}/user-data/top-items/${type}`;
 
-  //   if (time_range) {
-  //     endpoint += `?time_range=${time_range}`;
-  //   }
-  //   if (limit) {
-  //     endpoint += `&limit=${limit}`;
-  //   }
-  //   if (offset) {
-  //     endpoint += `&offset=${offset}`;
-  //   }
+    if (time_range) {
+      endpoint += `?time_range=${time_range}`;
+    }
+    if (limit) {
+      endpoint += `&limit=${limit}`;
+    }
+    if (offset) {
+      endpoint += `&offset=${offset}`;
+    }
 
-  //   let headers = {
-  //     'code': code
-  //   }
+    let headers = {
+      'code': code
+    }
 
-  //   return this.http.get(endpoint, { headers });
-  // }
+    return this.http.get(endpoint, { headers });
+  }
 
-  public getUserTopItemsDirect(tokenAC: string, type: 'artist' | 'tracks', time_range?: 'short_term' | 'medium_term' | 'long_term', limit?: number, offset?: number): Observable<any> {
-    let endpoint: string = `https://api.spotify.com/v1/me/top/artists`;
+  public getUserTopItemsDirect(tokenAC: string, type: 'artists' | 'tracks', time_range?: 'short_term' | 'medium_term' | 'long_term', limit?: number, offset?: number): Observable<any> {
+    let endpoint: string = `https://api.spotify.com/v1/me/top/${type}`;
 
     if (time_range) {
       endpoint += `?time_range=${time_range}`;
@@ -69,6 +69,32 @@ export class ApiService {
     return this.http.get(endpoint, { headers });
   }
 
+  public getUserTopItemsIndirect(tokenAC: string, type: 'artists' | 'tracks', time_range?: 'short_term' | 'medium_term' | 'long_term', limit?: number, offset?: number): Observable<any> {
+    let endpoint: string = `${environment.BASE_URL}/user-data/top-items/${type}`;
+
+    if (time_range) {
+      endpoint += `?time_range=${time_range}`;
+    }
+    if (limit) {
+      endpoint += `&limit=${limit}`;
+    }
+    if (offset) {
+      endpoint += `&offset=${offset}`;
+    }
+
+    let headers = {
+      'code': `${tokenAC}`,
+      'tokenAC': `${tokenAC}`
+    }
+
+    // let headers = {
+    //   'Authorization': `Bearer ${tokenAC}`,
+    //   'Content-Type': 'application/x-www-form-urlencoded'
+    // }
+
+    return this.http.get(endpoint, { headers });
+  }
+
   // to be deprecated later on
   public getUserccessToken(code: string): Observable<any> {
     const body = new URLSearchParams();
@@ -80,9 +106,6 @@ export class ApiService {
       'Content-Type': 'application/x-www-form-urlencoded',
       'Authorization': 'Basic ' + btoa(environment.SPOTIFY_CLIENT_ID + ':' + environment.SPOTIFY_CLIENT_SECRET)
     };
-
-    console.log('hhh', headers)
-    console.log('body ',body.toString());
 
     return this.http.post<any>(
       'https://accounts.spotify.com/api/token',
