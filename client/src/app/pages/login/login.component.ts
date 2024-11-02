@@ -1,17 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserDataRepository } from '@repository/user-data.repository';
-import { environment } from 'enviroments/environment.development';
 import { AuthorizationButtonComponent } from "../../features/authorization-button/authorization-button.component";
 
 @Component({
-  selector: 'app-authorization',
+  selector: 'app-login',
   standalone: true,
   imports: [AuthorizationButtonComponent],
-  templateUrl: './authorization.component.html',
-  styleUrl: './authorization.component.scss'
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss'
 })
-export default class AuthorizationComponent {
+export default class LoginComponent {
   private activeRouter: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
 
@@ -25,7 +24,7 @@ export default class AuthorizationComponent {
     this.activeRouter.queryParams.subscribe((params: any) => {
       if (params.code && params.state === this.state) {
         this.userDataRepository.setUserCode(params.code);
-        this.router.navigate(['/user-data']);
+        this.router.navigate(['/home']);
       } else if (params.error) {
         console.log('access denied'); // do sm else
       }

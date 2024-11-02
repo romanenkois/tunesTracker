@@ -1,15 +1,15 @@
 import { Routes } from '@angular/router';
-import { authorizationGuard } from './authorization-guard.guard';
+import { authorizationGuard } from './shared/guards/authorization-guard.guard';
 
 export const routes: Routes = [
   {
-    path: 'user-data',
-    loadComponent: () => import('./pages/user-data/user-data.component'),
+    path: 'home',
+    loadComponent: () => import('./pages/home/home.component'),
     canActivate: [ authorizationGuard ]
   },
   {
     path: 'login',
-    loadComponent: () => import('./pages/authorization/authorization.component')
+    loadComponent: () => import('./pages/login/login.component')
   },
   {
     path: 'test',
