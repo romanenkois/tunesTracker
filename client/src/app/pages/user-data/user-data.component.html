@@ -1,25 +1,10 @@
 <div class="wrapper">
     <div class="content">
-        <div class="wrapper">
-            <div class="items">
-            @for (item of this.userTopArtists; track $index) {
-                <div class="item">
-                    <p>{{item.name}}</p>
-                </div>
-            }
-            </div>
-            <div class="actions">
-                <div class="btn-inc">
-                    <button (click)="pageNumberIncrease()">+</button>
-                </div>
-                <div class="btn-dec">
-                    <button (click)="pageNumberDecrease()">-</button>
-                </div>
-            </div>
+        <div class="">
+            <app-user-top-artists></app-user-top-artists>
         </div>
     </div>
 
     <div class="navigation-mobile">
-        <app-navigation-mobile></app-navigation-mobile>
     </div>
 </div>
