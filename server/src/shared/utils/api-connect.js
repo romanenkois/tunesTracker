@@ -84,20 +84,19 @@ async function fetchSpotifyApi(clientIP, endpoint, method, body, code, tokenAC) 
 
         let token = TOKEN_CLIENT_CRIDENTIALS.access_token;
         if (tokenAC) {
-            console.warn('tokenAC')
+            // console.warn('tokenAC')
             token = tokenAC;
         } else if (code) {
-            console.warn('code')
+            // console.warn('code')
             const tokenData = await getACToken(code);
             console.warn(tokenData);
             token = tokenData.access_token;
-            console.warn(token);
+            // console.warn(token);
         } else {
-            console.warn('none')
-            if (TOKEN_CLIENT_CRIDENTIALS === 'none') {
-                TOKEN_CLIENT_CRIDENTIALS = await getCCToken();
-                console.warn(12);
-            }
+            // console.warn('none')
+            // if (TOKEN_CLIENT_CRIDENTIALS === 'none') {
+            //     TOKEN_CLIENT_CRIDENTIALS = await getCCToken();
+            // }
         }
 
         let headers = {
