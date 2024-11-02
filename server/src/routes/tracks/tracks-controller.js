@@ -1,4 +1,5 @@
-const { fetchSpotifyApi, handleError } = require('../../shared/utils/api-connect');
+const { fetchSpotifyApi } = require('../../shared/utils/api-connect');
+const { handleError } = require('../../shared/utils/error-handler');
 
 const getTrack = async (req, res) => {
     try {
