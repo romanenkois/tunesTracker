@@ -46,7 +46,27 @@ async function getACToken(code) {
     return await response.json();
 }
 
+async function getRefreshToken(refreshToken) {
+    const body = new URLSearchParams();
+    body.append('grant_type', 'refresh_token');
+    body.append('refresh_token', refreshToken);
+
+    const headers = {
+        'content-type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Basic ' + Buffer.from(`${config.spotify.clientId}:${config.spotify.clientSecret}`).toString('base64')
+    }
+
+    const response = await fetch('https://accounts.spotify.com/api/token', {
+        method: 'POST',
+        headers: headers,
+        body: body.toString()
+    });
+
+    return await response.json();
+}
+
 module.exports = {
     getCCToken,
-    getACToken
+    getACToken,
+    getRefreshToken
 }
