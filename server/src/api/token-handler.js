@@ -1,5 +1,9 @@
 const { config } = require('../shared/config/config');
 
+/**
+ * Fetches a new token for general purposes.
+ * This token has no scopes, and used to access public data.
+ */
 async function getCCToken() {
     const body = new URLSearchParams();
     body.append("grant_type", 'client_credentials');
@@ -19,13 +23,19 @@ async function getCCToken() {
 
         return await response.json();
 
-        } catch (error) {
+    } catch (error) {
         console.error('Error fetching token:', error);
         throw error;
     }
 }
 
-async function getACToken(code) {
+
+/**
+ * Retrieves a refresh token after user authorization, using the code, user obtained from Spotify.
+ *
+ * @param {string} code - The authorization code received from Spotify.
+ */
+async function getRefreshToken(code) {
 
     const body = new URLSearchParams();
     body.append('grant_type', 'authorization_code');
@@ -46,7 +56,12 @@ async function getACToken(code) {
     return await response.json();
 }
 
-async function getRefreshToken(refreshToken) {
+/**
+ * Retrieves a new access token using the refresh token.
+ *
+ * @param {string} refreshToken - The refresh token retrived from Spotify.
+ */
+async function getUserAccessToken(refreshToken) {
     const body = new URLSearchParams();
     body.append('grant_type', 'refresh_token');
     body.append('refresh_token', refreshToken);
@@ -67,6 +82,6 @@ async function getRefreshToken(refreshToken) {
 
 module.exports = {
     getCCToken,
-    getACToken,
-    getRefreshToken
+    getRefreshToken,
+    getUserAccessToken
 }
