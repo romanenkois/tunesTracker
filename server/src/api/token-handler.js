@@ -1,4 +1,4 @@
-const { config } = require('../config/config');
+const { config } = require('../shared/config/config');
 
 async function getCCToken() {
     const body = new URLSearchParams();

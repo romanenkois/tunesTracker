@@ -1,10 +1,10 @@
-const { fetchSpotifyApi } = require('../../shared/utils/api-connect');
+const { fetchSpotifyApi } = require('../../api/api-connect');
 const { handleError } = require('../../shared/utils/error-handler');
 
 const getUserTopItems = async (req, res) => {
     try {
         const clientIP = req.connection.remoteAddress || req.socket.remoteAddress;
-        
+
         const { code } = req.headers;
         const { tokenac } = req.headers;
 
@@ -16,7 +16,7 @@ const getUserTopItems = async (req, res) => {
         const { time_range } = req.query;
         const { limit } = req.query;
         const { offset } = req.query;
-        
+
         let endpoint = `v1/me/top/${type}`;
         if (time_range) {
             endpoint += `?time_range=${time_range}`;

@@ -1,4 +1,4 @@
-const { fetchSpotifyApi } = require('../../shared/utils/api-connect');
+const { fetchSpotifyApi } = require('../../api/api-connect');
 const { handleError } = require('../../shared/utils/error-handler');
 
 const getAlbum = async (req, res) => {
@@ -6,7 +6,7 @@ const getAlbum = async (req, res) => {
         const clientIP =  await req.connection.remoteAddress || req.socket.remoteAddress;
         const { id } = req.params;
         const { market } = req.query;
-        
+
         let endpoint = `v1/albums/${id}`;
         if (market) {
             endpoint += `?market=${market}`;

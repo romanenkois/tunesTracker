@@ -1,4 +1,4 @@
-const { writeLog } = require('./logger');
+const { writeLog } = require('../shared/utils/logger');
 const { getACToken, getCCToken } = require('./token-handler');
 
 TOKEN_CLIENT_CRIDENTIALS = 'none';
@@ -28,7 +28,7 @@ async function fetchSpotifyApi(clientIP, endpoint, method, body, code, tokenAC) 
 
             // we will save the refresh token for future use
 
-            
+
             // TODO ////////////////////////////////////////////////
         }
 
