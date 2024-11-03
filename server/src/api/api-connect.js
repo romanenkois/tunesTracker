@@ -1,5 +1,6 @@
 const { writeLog } = require('../shared/utils/logger');
-const { getACToken, getCCToken } = require('./token-handler');
+const { getCCToken, getRefreshToken, getUserAccessToken } = require('./token-handler');
+const { addNewRecord, getUserRefreshToken } = require('./connections-handler');
 
 TOKEN_CLIENT_CRIDENTIALS = 'none';
 
@@ -17,7 +18,7 @@ async function fetchSpotifyApi(clientIP, endpoint, method, body, code, tokenAC) 
     } else if (code) {
         // we will try to get ac and refresh token,
         // as we do it first time
-        const tokenData = await getACToken(code);
+        const tokenData = await getRefreshToken(code);
         console.log(tokenData);
 
         // if we get the token, we will use it right away
