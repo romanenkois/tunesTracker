@@ -28,13 +28,19 @@ export class ApiService {
     )
   }
 
-  public getUserTopItems(code: string, type: 'artists' | 'tracks', time_range?: 'short_term' | 'medium_term' | 'long_term', limit?: number, offset?: number): Observable<any> {
+  public getUserTopItems(
+    code: string,
+    type: 'artists' | 'tracks',
+    time_range?: 'short_term' | 'medium_term' | 'long_term',
+    limit?: number,
+    offset?: number
+  ): Observable<any> {
     let endpoint: string = `${environment.BASE_URL}/user-data/top-items/${type}`;
 
     if (time_range) {
       endpoint += `?time_range=${time_range}`;
     }
-    if (limit) {
+    if (limit && limit > 0 && limit <= 50) {
       endpoint += `&limit=${limit}`;
     }
     if (offset) {

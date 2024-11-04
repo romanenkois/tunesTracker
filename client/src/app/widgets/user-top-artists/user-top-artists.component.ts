@@ -28,13 +28,23 @@ export class UserTopArtistsComponent {
     this.page.update(page => page - 1);
   }
   pageNumberIncrease() {
-    this.page.update(page => page - 1);
+    this.page.update(page => page + 1);
   }
 
   constructor() {
     effect(() => {
-      this.api.getUserTopItems(this.code, 'artists', 'short_term', this.pageSize, (this.page()-1)*this.pageSize).subscribe(res => {
+      this.api.getUserTopItems(
+        this.code, 'artists',
+        'short_term', this.pageSize,
+        (this.page()-1)*this.pageSize
+      ).subscribe(res => {
         console.log('res', res);
+
+        if (res.items.length === 0) {
+          this.pageNumberDecrease();
+          return;
+        }
+
         this.userTopArtists = res.items;
       })
     })
