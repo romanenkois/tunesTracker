@@ -1,12 +1,13 @@
 token = [];
 
-
 function addNewRecord(refreshToken, code, userData) {
     this.token.push({
         refresh_token: refreshToken,
         code: code,
         user_data: userData
     });
+
+    console.log('New record added', this.token); // should be logged better
 }
 
 function getUserRefreshToken(code) {

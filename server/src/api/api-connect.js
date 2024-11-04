@@ -14,35 +14,41 @@ async function fetchSpotifyApi(clientIP, endpoint, method, body, code, tokenAC) 
     if (tokenAC) {
         token = tokenAC;
 
-    // if req provides THE code, it will be used to get token
+    // if req provides THE code, that means the authorization from user is required
     } else if (code) {
-        // we will try to get ac and refresh token,
-        // as we do it first time
-        const tokenData = await getRefreshToken(code);
-        console.log(tokenData);
-
-        // if we get the token, we will use it right away
-        if (tokenData.access_token) {
-            token = tokenData.access_token;
-            console.warn(tokenData.access_token);
-            console.log(tokenData.refresh_token);
-
-            // we will save the refresh token for future use
-
-
-            // TODO ////////////////////////////////////////////////
+        // first we check if user is alredy authorized in active server session
+        var userRefreshToken = getUserRefreshToken(code);
+        if (userRefreshToken) {
+            token = await getUserAccessToken(userRefreshToken);
+            token = token.access_token;
         }
 
-        // if we didnt get the token, as it was already used,
-        // we will use refresh token to get new one
-        else if (
-        tokenData.error === 'invalid_grant' &&
-        tokenData.error_description === 'Invalid authorization code') {
-            // TODO ////////////////////////////////////////////////////
-        }
+        // if not, we will get the token from Spotify, using provided code
+        else {
+            const tokenData = await getRefreshToken(code);
 
+            // if we get the token, we will use it to req info about user, and use it for further requests
+            if (tokenData.access_token) {
+                tempToken = tokenData.access_token;
+                const userData = await fetchSpotifyApi('::1', 'v1/me', 'GET', null, null, tempToken);
+                addNewRecord(tokenData.refresh_token, code, JSON.stringify(userData));
+
+                token = await getUserAccessToken(tokenData.refresh_token);
+                token = token.access_token;
+            }
+
+            // this is the edge case, when the server has no data of user,
+            // that has authorized before, and still is "authorized" on client side
+            else if (
+            tokenData.error === 'invalid_grant' &&
+            tokenData.error_description === 'Invalid authorization code') {
+
+                console.log('error of 87');
+            }
+        }
     }
 
+    // actual fetch to spotify api
     let headers = {
         Authorization: `Bearer ${token}`
     }
