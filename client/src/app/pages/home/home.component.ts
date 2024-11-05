@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { UserTopArtistsComponent } from "../../widgets/user-top-artists/user-top-artists.component";
+import { TopTracksFragmentComponent, TopArtistsFragmentComponent, HomeFragmentComponent } from '@fragment/index';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [UserTopArtistsComponent],
+  imports: [ TopArtistsFragmentComponent, TopTracksFragmentComponent, HomeFragmentComponent ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

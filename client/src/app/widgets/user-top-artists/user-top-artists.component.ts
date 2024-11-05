@@ -1,4 +1,5 @@
-import { Component, effect, inject, signal, WritableSignal } from '@angular/core';
+import { Component, computed, effect, inject, signal, WritableSignal } from '@angular/core';
+import { GetUserTopItemsCommand } from '@commands/get-user-top-items.command';
 import { ArtistDTO } from '@dto/artist.dto';
 import { UserDataRepository } from '@repository/user-data.repository';
 import { ApiService } from '@service/api.service';
@@ -11,42 +12,21 @@ import { ApiService } from '@service/api.service';
   styleUrl: './user-top-artists.component.scss'
 })
 export class UserTopArtistsComponent {
-  private api: ApiService = inject(ApiService);
-
   private userDataRepository: UserDataRepository = inject(UserDataRepository);
-  private code: string = this.userDataRepository.getUserCode();
+  private getUserTopItems: GetUserTopItemsCommand = inject(GetUserTopItemsCommand);
 
-  page: WritableSignal<number> = signal(1);
-  pageSize: number = 10;
+  // page: WritableSignal<number> = signal(1);
+  // pageSize: number = 15;
 
-  userTopArtists: Array<ArtistDTO> = [];
+  periodOfTime: WritableSignal<'short_term' | 'medium_term' | 'long_term'> = signal('short_term');
 
-  pageNumberDecrease() {
-    if (this.page() === 1) {
-      return;
-    }
-    this.page.update(page => page - 1);
-  }
-  pageNumberIncrease() {
-    this.page.update(page => page + 1);
+  userTopArtists = computed(() => this.userDataRepository.getUserTopArtists());
+
+  loadMoreItems() {
+    this.getUserTopItems.getMoreUserTopItems('artists', this.periodOfTime(), this.userTopArtists().length);
   }
 
   constructor() {
-    effect(() => {
-      this.api.getUserTopItems(
-        this.code, 'artists',
-        'short_term', this.pageSize,
-        (this.page()-1)*this.pageSize
-      ).subscribe(res => {
-        console.log('res', res);
-
-        if (res.items.length === 0) {
-          this.pageNumberDecrease();
-          return;
-        }
-
-        this.userTopArtists = res.items;
-      })
-    })
+    this.getUserTopItems.getUserTopItems('artists', this.periodOfTime());
   }
 }

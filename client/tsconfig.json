@@ -13,6 +13,8 @@
       "@repository/*": ["app/data/repositories/*"],
       "@service/*": ["app/data/services/*"],
 
+      "@fragment/*" : ["app/fragments/*"],
+
       "@environment/*": ["environments/*"],
     },
     "outDir": "./dist/out-tsc",

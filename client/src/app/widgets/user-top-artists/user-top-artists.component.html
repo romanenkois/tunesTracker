@@ -1,6 +1,6 @@
 <div class="wrapper">
     <div class="items">
-    @for (item of this.userTopArtists; track $index) {
+    @for (item of this.userTopArtists(); track $index) {
         <div class="item">
             <p>{{item.name}}</p>
         </div>
@@ -8,10 +8,7 @@
     </div>
     <div class="actions">
         <div class="btn-inc">
-            <button (click)="pageNumberIncrease()">+</button>
-        </div>
-        <div class="btn-dec">
-            <button (click)="pageNumberDecrease()">-</button>
+            <button (click)="loadMoreItems()">+</button>
         </div>
     </div>
 </div>

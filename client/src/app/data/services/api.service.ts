@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { AlbumResponse, ArtistResponse, TrackResponse } from '@dto/response.dto';
+import { AlbumResponse, ArtistResponse, TrackResponse, UserTopItemsResponse } from '@dto/response.dto';
 import { environment } from 'enviroments/environment.development';
 import { Observable } from 'rxjs';
 
@@ -34,7 +34,7 @@ export class ApiService {
     time_range?: 'short_term' | 'medium_term' | 'long_term',
     limit?: number,
     offset?: number
-  ): Observable<any> {
+  ): Observable<UserTopItemsResponse> {
     let endpoint: string = `${environment.BASE_URL}/user-data/top-items/${type}`;
 
     if (time_range) {
@@ -51,6 +51,6 @@ export class ApiService {
       'code': code
     }
 
-    return this.http.get(endpoint, { headers });
+    return this.http.get<UserTopItemsResponse>(endpoint, { headers });
   }
 }
