@@ -3,25 +3,25 @@ import { GetUserTopItemsCommand } from '@commands/get-user-top-items.command';
 import { UserDataRepository } from '@repository/user-data.repository';
 
 @Component({
-  selector: 'app-user-top-artists',
+  selector: 'app-user-top-tracks',
   standalone: true,
   imports: [],
-  templateUrl: './user-top-artists.component.html',
-  styleUrl: './user-top-artists.component.scss'
+  templateUrl: './user-top-tracks.component.html',
+  styleUrl: './user-top-tracks.component.scss'
 })
-export class UserTopArtistsComponent {
+export class UserTopTracksComponent {
   private userDataRepository: UserDataRepository = inject(UserDataRepository);
   private getUserTopItems: GetUserTopItemsCommand = inject(GetUserTopItemsCommand);
 
   periodOfTime: WritableSignal<'short_term' | 'medium_term' | 'long_term'> = signal('short_term');
 
-  userTopArtists = computed(() => this.userDataRepository.getUserTopArtists());
+  userTopTracks = computed(() => this.userDataRepository.getUserTopTracks());
 
   loadMoreItems() {
-    this.getUserTopItems.getMoreUserTopItems('artists', this.periodOfTime(), this.userTopArtists().length);
+    this.getUserTopItems.getMoreUserTopItems('tracks', this.periodOfTime(), this.userTopTracks().length);
   }
 
   constructor() {
-    this.getUserTopItems.getUserTopItems('artists', this.periodOfTime());
+    this.getUserTopItems.getUserTopItems('tracks', this.periodOfTime());
   }
 }

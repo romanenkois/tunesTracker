@@ -5,7 +5,14 @@ export const routes: Routes = [
   {
     path: 'home',
     loadComponent: () => import('./pages/home/home.component'),
-    canActivate: [ authorizationGuard ]
+    canActivate: [ authorizationGuard ],
+    children: [
+      { path: 'home', loadComponent: () => import('./fragments/home-fragment/home-fragment.component') },
+      { path: 'top-artists', loadComponent: () => import('./fragments/top-artists-fragment/top-artists-fragment.component') },
+      { path: 'top-tracks', loadComponent: () => import('./fragments/top-tracks-fragment/top-tracks-fragment.component') },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: '**', redirectTo: 'home' }
+    ]
   },
   {
     path: 'login',
@@ -22,6 +29,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'login',
+    redirectTo: 'home',
   }
 ];

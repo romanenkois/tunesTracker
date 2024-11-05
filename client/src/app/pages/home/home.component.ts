@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { TopTracksFragmentComponent, TopArtistsFragmentComponent, HomeFragmentComponent } from '@fragment/index';
+import { RouterModule } from '@angular/router';
+import { BottomNavComponent } from "../../widgets/bottom-nav/bottom-nav.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ TopArtistsFragmentComponent, TopTracksFragmentComponent, HomeFragmentComponent ],
+  imports: [RouterModule, BottomNavComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

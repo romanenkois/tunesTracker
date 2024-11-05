@@ -8,6 +8,6 @@ import { UserTopArtistsComponent } from "../../widgets/user-top-artists/user-top
   templateUrl: './top-artists-fragment.component.html',
   styleUrl: './top-artists-fragment.component.scss'
 })
-export class TopArtistsFragmentComponent {
+export default class TopArtistsFragmentComponent {
 
 }

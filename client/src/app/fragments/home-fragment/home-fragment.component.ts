@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './home-fragment.component.html',
   styleUrl: './home-fragment.component.scss'
 })
-export class HomeFragmentComponent {
+export default class HomeFragmentComponent {
 
 }
