@@ -1,11 +1,12 @@
 import { Component, computed, inject, signal, WritableSignal } from '@angular/core';
 import { GetUserTopItemsCommand } from '@commands/get-user-top-items.command';
+import { ArtistCardComponent } from '@feature/artist-card/artist-card.component';
 import { UserDataRepository } from '@repository/user-data.repository';
 
 @Component({
   selector: 'app-user-top-artists',
   standalone: true,
-  imports: [],
+  imports: [ ArtistCardComponent],
   templateUrl: './user-top-artists.component.html',
   styleUrl: './user-top-artists.component.scss'
 })
@@ -22,6 +23,8 @@ export class UserTopArtistsComponent {
   }
 
   constructor() {
-    this.getUserTopItems.getUserTopItems('artists', this.periodOfTime());
+    if (this.userDataRepository.getUserTopArtists().length === 0) {
+      this.getUserTopItems.getUserTopItems('artists', this.periodOfTime());
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { BottomNavComponent } from "../../widgets/bottom-nav/bottom-nav.component";
+import { BottomNavComponent } from "@widget/bottom-nav/bottom-nav.component";
 
 @Component({
   selector: 'app-home',

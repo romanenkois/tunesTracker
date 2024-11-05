@@ -1,0 +1,11 @@
+<div class="card">
+    <div class="picture">
+        <img [src]="track().album.images[0].url" alt="track image">
+    </div>
+    <div class="info">
+        <p>{{track().name}}</p>
+        <p>{{track().artists[0].name}}</p>
+        <p>{{track().album.name}}</p>
+        <p>{{track().popularity}}</p>
+    </div>
+</div>

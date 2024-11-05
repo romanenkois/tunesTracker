@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserDataRepository } from '@repository/user-data.repository';
-import { AuthorizationButtonComponent } from "../../features/authorization-button/authorization-button.component";
+import { AuthorizationButtonComponent } from "@feature/authorization-button/authorization-button.component";
 
 @Component({
   selector: 'app-login',
