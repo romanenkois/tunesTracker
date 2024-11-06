@@ -10,4 +10,5 @@ import { Artist } from '@entity/artist.entity';
 })
 export class ArtistCardComponent {
   artist: InputSignal<Artist> = input.required();
+  index: InputSignal<number> = input.required();
 }

@@ -1,7 +1,9 @@
 <div class="wrapper">
     <div class="items">
     @for (item of this.userTopTracks(); track $index) {
-        <app-track-card [track]="item"></app-track-card>
+        <div class="item">
+            <app-track-card [track]="item"></app-track-card>
+        </div>
     }
     </div>
     <div class="actions">
