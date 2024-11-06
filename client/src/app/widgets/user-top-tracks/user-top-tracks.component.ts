@@ -22,6 +22,11 @@ export class UserTopTracksComponent {
     this.getUserTopItems.getMoreUserTopItems('tracks', this.periodOfTime(), this.userTopTracks().length);
   }
 
+  changeTimeFrame(timeFrame: 'short_term' | 'medium_term' | 'long_term') {
+    this.periodOfTime.set(timeFrame);
+    this.getUserTopItems.getUserTopItems('tracks', this.periodOfTime());
+  }
+
   constructor() {
     if (this.userDataRepository.getUserTopTracks().length === 0) {
       this.getUserTopItems.getUserTopItems('tracks', this.periodOfTime());

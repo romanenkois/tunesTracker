@@ -1,11 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
     --black-color: #080a0f;
+    --dark-color: #0c0e14;
+    --dark-gray-color: #3a3a3a;
+    --gray-color: #9b9b9b;
     --white-color: #FFFFFF;
     --green-spotify-color: #1ED760;
     --green-spotify-hover-color: #1ab952;
     --primary-color: #3d65a1;
-
 
     --small-font-size: 1rem;
     --small-medium-font-size: 1.2rem;
@@ -16,23 +18,38 @@
     --small-padding: 0.5rem;
     --medium-padding: 1rem;
     --large-padding: 1.5rem;
+
+    --standart-transition: 0.3s ease-in-out;
 }
 
+// * {
+//     outline: 1px red solid;
+// }
+
 * {
+    color: var(--white-color);
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 html, body {
     margin: 0;
     padding: 0;
-    color: var(--white-color);
     background: var(--black-color);
 }
 
 p {
     margin: 0;
+    font-size: 16px;
 }
 
 a {
     text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+
+    border: none;
+    background-color: none;
+    border-radius: 0;
 }

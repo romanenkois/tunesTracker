@@ -14,7 +14,7 @@ export class GetUserTopItemsCommand {
   private userDataRepository: UserDataRepository = inject(UserDataRepository);
 
   public getUserTopItems(type: 'artists'| 'tracks', timeRange: 'short_term' | 'medium_term' | 'long_term') {
-    this.apiService.getUserTopItems(this.userDataRepository.getUserCode(), type, timeRange).subscribe((response: UserTopItemsResponse) => {
+    this.apiService.getUserTopItems(this.userDataRepository.getUserCode(), type, timeRange, environment.ITEMS_LIMIT_PER_REQUEST).subscribe((response: UserTopItemsResponse) => {
       if (response && (response as NestedReponce).items !== undefined) {
         if (type === 'artists') {
           const artists = (response as NestedReponce).items.map((item: ArtistDTO) => ArtistMapper.toEntity(item));

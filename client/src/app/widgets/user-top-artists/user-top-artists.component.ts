@@ -22,6 +22,11 @@ export class UserTopArtistsComponent {
     this.getUserTopItems.getMoreUserTopItems('artists', this.periodOfTime(), this.userTopArtists().length);
   }
 
+  changeTimeFrame(timeFrame: 'short_term' | 'medium_term' | 'long_term') {
+    this.periodOfTime.set(timeFrame);
+    this.getUserTopItems.getUserTopItems('artists', this.periodOfTime());
+  }
+
   constructor() {
     if (this.userDataRepository.getUserTopArtists().length === 0) {
       this.getUserTopItems.getUserTopItems('artists', this.periodOfTime());

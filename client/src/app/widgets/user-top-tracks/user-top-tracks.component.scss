@@ -1,7 +1,68 @@
 .wrapper {
-    .items {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        grid-gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+
+    flex: 1;
+
+    .time-frame-selection {
+        position: sticky;
+        top: 0;
+        width: 100%;
+
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+
+        background-color: var(--black-color);
+
+        .item {
+            width: 100%;
+            padding: 8px 0;
+
+            cursor: pointer;
+            p {
+                text-align: center;
+                color: var(--gray-color);
+            }
+        }
     }
+
+    .content {
+        flex: 1;
+
+        .items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-gap: 1rem;
+        }
+        .load-more {
+            width: 100%;
+            padding: 4px;
+            box-sizing: border-box;
+
+            .load-more-button {
+                width: 100%;
+                height: 100%;
+                padding: 12px;
+                box-sizing: border-box;
+
+                display: flex;
+                justify-content: center;
+
+                background-color: transparent;
+                transition: var(--standart-transition);
+                p {
+                    width: max-content;
+                }
+                p:hover {
+                    text-decoration: underline;
+                }
+            }
+            .load-more-button:hover {
+                background-color: var(--dark-color);
+            }
+        }
+    }
+
 }

@@ -10,4 +10,5 @@ import { Track } from '@entity/index';
 })
 export class TrackCardComponent {
   track: InputSignal<Track> = input.required();
+  index: InputSignal<number> = input.required();
 }

@@ -1,0 +1,29 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    .content {
+        flex: 1;
+
+        router-outlet {
+            min-height: 100%;
+            flex: 1;
+
+            margin: 0;
+            padding: 0;
+        }
+        * {
+            min-height: 100%;
+            flex: 1;
+
+            margin: 0;
+            padding: 0;
+        }
+    }
+    .bottom-nav {
+        position: sticky;
+        bottom: 0;
+        width: 100%;
+    }
+}

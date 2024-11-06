@@ -1,14 +1,37 @@
 <div class="wrapper">
-    <div class="items">
-    @for (item of this.userTopTracks(); track $index) {
+    <div class="time-frame-selection">
         <div class="item">
-            <app-track-card [track]="item"></app-track-card>
+            <p (click)="changeTimeFrame('short_term')">
+                4 weeks
+            </p>
         </div>
-    }
+        <div class="item">
+            <p (click)="changeTimeFrame('medium_term')">
+                6 months
+            </p>
+        </div>
+        <div class="item">
+            <p (click)="changeTimeFrame('long_term')">
+                1 year
+            </p>
+        </div>
     </div>
-    <div class="actions">
-        <div class="btn-inc">
-            <button (click)="loadMoreItems()">load more...</button>
+
+    <div class="content">
+        <div class="items">
+        @for (item of this.userTopTracks(); track $index) {
+            <div class="item">
+                <app-track-card [track]="item" [index]="$index"></app-track-card>
+            </div>
+        }
+        </div>
+
+        <div class="load-more">
+            <button class="load-more-button" (click)="loadMoreItems()">
+                <p>
+                    load more...
+                </p>
+            </button>
         </div>
     </div>
 </div>
