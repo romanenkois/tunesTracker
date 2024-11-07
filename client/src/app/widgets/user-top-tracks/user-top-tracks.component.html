@@ -21,7 +21,7 @@
         <div class="items">
         @for (item of this.userTopTracks(); track $index) {
             <div class="item">
-                <app-track-card [track]="item" [index]="$index"></app-track-card>
+                <app-track-card [track]="item" [index]="$index+1"></app-track-card>
             </div>
         }
         </div>

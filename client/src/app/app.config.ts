@@ -7,6 +7,7 @@ import { PreloadService } from './shared/services/preload.service';
 import { UserDataRepository } from '@repository/user-data.repository';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export function preloadAppInitializer(preloadService: PreloadService) {
   return () => preloadService;

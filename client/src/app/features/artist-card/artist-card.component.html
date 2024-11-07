@@ -1,6 +1,9 @@
 <div class="card" [@fadeAnimation]>
     <div class="picture">
-        <img src="{{ artist().images[0].url }}" alt="{{ artist().name }}">
+        <img
+        src="{{ artist().images[0].url }}"
+        alt="{{ artist().name }}"
+        loading="lazy">
     </div>
     <div class="info">
         <p>{{artist().name}}</p>
