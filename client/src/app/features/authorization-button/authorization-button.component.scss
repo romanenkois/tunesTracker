@@ -9,7 +9,7 @@
 
     cursor: pointer;
     background-color: var(--green-spotify-color);
-    transition: background-color 0.3s ease-in-out;
+    transition: var(--standart-transition);
 
     a {
         width: 100%;
