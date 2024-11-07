@@ -17,6 +17,8 @@
       "@feature/*": ["app/features/*"],
       "@widget/*": ["app/widgets/*"],
 
+      "@animation/*": ["app/shared/animations/*"],
+
       "@environment/*": ["environments/*"],
     },
     "outDir": "./dist/out-tsc",

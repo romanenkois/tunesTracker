@@ -23,6 +23,10 @@ export class UserTopArtistsComponent {
   }
 
   changeTimeFrame(timeFrame: 'short_term' | 'medium_term' | 'long_term') {
+    if (this.periodOfTime() === timeFrame) {
+      return;
+    }
+    this.userDataRepository.setUserTopArtists([]);
     this.periodOfTime.set(timeFrame);
     this.getUserTopItems.getUserTopItems('artists', this.periodOfTime());
   }

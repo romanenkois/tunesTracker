@@ -23,6 +23,10 @@ export class UserTopTracksComponent {
   }
 
   changeTimeFrame(timeFrame: 'short_term' | 'medium_term' | 'long_term') {
+    if (this.periodOfTime() === timeFrame) {
+      return;
+    }
+    this.userDataRepository.setUserTopTracks([]);
     this.periodOfTime.set(timeFrame);
     this.getUserTopItems.getUserTopItems('tracks', this.periodOfTime());
   }

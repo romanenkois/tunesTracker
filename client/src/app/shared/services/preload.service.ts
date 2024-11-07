@@ -7,11 +7,11 @@ import { UserDataRepository } from '@repository/user-data.repository';
 })
 export class PreloadService {
   constructor(private userDataRepository: UserDataRepository) {
-    this.initializeFromSessionStorage();
+    this.loadUserDataFromSessionStorage();
   }
 
-  initializeFromSessionStorage() {
-    console.log('прелоадінг');
+  loadUserDataFromSessionStorage() {
+    // console.log('прелоадінг');
 
     const userCode = sessionStorage.getItem('userCode');
     if (userCode) {

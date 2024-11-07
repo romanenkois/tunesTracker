@@ -1,4 +1,5 @@
 import { Component, input, InputSignal } from '@angular/core';
+import { fadeAnimation } from '@animation/fade.animation';
 import { Track } from '@entity/index';
 
 @Component({
@@ -6,7 +7,10 @@ import { Track } from '@entity/index';
   standalone: true,
   imports: [],
   templateUrl: './track-card.component.html',
-  styleUrl: './track-card.component.scss'
+  styleUrl: './track-card.component.scss',
+  animations: [
+    fadeAnimation
+  ]
 })
 export class TrackCardComponent {
   track: InputSignal<Track> = input.required();
