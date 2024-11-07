@@ -3,7 +3,7 @@ import { Artist } from '@entity/artist.entity';
 import { Track } from '@entity/track.entity';
 
 @Injectable({providedIn: 'root'})
-export class UserDataRepository {
+export class UserTopDataRepository {
   private readonly userTopTracks: WritableSignal<Array<Track>> = signal<Array<Track>>([]);
   public setUserTopTracks(tracks: Array<Track>): void {
     this.userTopTracks.set(tracks);
