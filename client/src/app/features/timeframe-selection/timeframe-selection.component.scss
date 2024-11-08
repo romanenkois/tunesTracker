@@ -1,0 +1,22 @@
+.time-frame-selection {
+    position: sticky;
+    top: 0;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+
+    background-color: var(--black-color);
+
+    .item {
+        width: 100%;
+        padding: 8px 0;
+
+        cursor: pointer;
+        p {
+            text-align: center;
+            color: var(--gray-color);
+        }
+    }
+}

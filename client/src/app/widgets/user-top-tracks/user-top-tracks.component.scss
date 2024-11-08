@@ -38,33 +38,5 @@
 
             padding: 4px 16px;
         }
-        .load-more {
-            width: 100%;
-            padding: 4px;
-            box-sizing: border-box;
-
-            .load-more-button {
-                width: 100%;
-                height: 100%;
-                padding: 12px;
-                box-sizing: border-box;
-
-                display: flex;
-                justify-content: center;
-
-                background-color: transparent;
-                transition: var(--standart-transition);
-                p {
-                    width: max-content;
-                }
-                p:hover {
-                    text-decoration: underline;
-                }
-            }
-            .load-more-button:hover {
-                background-color: var(--dark-color);
-            }
-        }
     }
-
 }

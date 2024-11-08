@@ -2,11 +2,14 @@ import { Component, computed, inject, signal, WritableSignal } from '@angular/co
 import { GetUserTopItemsCommand } from '@commands/get-user-top-items.command';
 import { ArtistCardComponent } from '@feature/artist-card/artist-card.component';
 import { UserDataRepository } from '@repository/user-data.repository';
+import { LoadMoreButtonComponent } from "@feature/load-more-button/load-more-button.component";
+import { TimeframeSelectionComponent } from "@feature/timeframe-selection/timeframe-selection.component";
+import { TimeFrame } from '@entity/shared.entity';
 
 @Component({
   selector: 'app-user-top-artists',
   standalone: true,
-  imports: [ ArtistCardComponent],
+  imports: [ArtistCardComponent, LoadMoreButtonComponent, TimeframeSelectionComponent],
   templateUrl: './user-top-artists.component.html',
   styleUrl: './user-top-artists.component.scss'
 })
@@ -14,7 +17,7 @@ export class UserTopArtistsComponent {
   private userDataRepository: UserDataRepository = inject(UserDataRepository);
   private getUserTopItems: GetUserTopItemsCommand = inject(GetUserTopItemsCommand);
 
-  periodOfTime: WritableSignal<'short_term' | 'medium_term' | 'long_term'> = signal('short_term');
+  periodOfTime: WritableSignal<TimeFrame> = signal('short_term');
 
   userTopArtists = computed(() => this.userDataRepository.getUserTopArtists());
 
@@ -22,7 +25,7 @@ export class UserTopArtistsComponent {
     this.getUserTopItems.getMoreUserTopItems('artists', this.periodOfTime(), this.userTopArtists().length);
   }
 
-  changeTimeFrame(timeFrame: 'short_term' | 'medium_term' | 'long_term') {
+  changeTimeFrame(timeFrame: TimeFrame) {
     if (this.periodOfTime() === timeFrame) {
       return;
     }
