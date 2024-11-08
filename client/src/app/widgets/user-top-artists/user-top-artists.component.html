@@ -5,7 +5,7 @@
         <div class="items">
         @for (item of this.userTopArtists(); track $index) {
             <div class="item">
-                <app-artist-card [artist]="item" [index]="$index"></app-artist-card>
+                <app-artist-card [artist]="item" [index]="$index+1"></app-artist-card>
             </div>
         }
         </div>

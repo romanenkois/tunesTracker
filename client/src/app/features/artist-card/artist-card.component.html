@@ -6,7 +6,12 @@
         loading="lazy">
     </div>
     <div class="info">
-        <p>{{artist().name}}</p>
-        <p>{{artist().genres}}</p>
+        <div class="index">
+            <p>#{{index()}}</p>
+        </div>
+        <div class="track-info">
+            <p class="name">{{artist().name}}</p>
+            <p class="artist">{{artist().genres}}</p>
+        </div>
     </div>
 </div>
