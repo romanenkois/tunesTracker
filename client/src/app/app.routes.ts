@@ -15,6 +15,11 @@ export const routes: Routes = [
     ]
   },
   {
+    path: 'settings',
+    loadComponent: () => import('./pages/settings/settings.component'),
+    canActivate: [ authorizationGuard ],
+  },
+  {
     path: 'login',
     loadComponent: () => import('./pages/login/login.component')
   },

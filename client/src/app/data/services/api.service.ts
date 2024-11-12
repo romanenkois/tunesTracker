@@ -53,4 +53,12 @@ export class ApiService {
 
     return this.http.get<UserTopItemsResponse>(endpoint, { headers });
   }
+
+  public getUserProfile(code: string): Observable<any> {
+    let headers = {
+      'code': code
+    }
+
+    return this.http.get<any>(`${environment.BASE_URL}/user-data/user-profile/`, { headers });
+  }
 }

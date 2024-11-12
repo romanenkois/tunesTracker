@@ -13,14 +13,13 @@ export class UserDataRepository {
     return this.userCode();
   }
 
-  // for future use
-  // private readonly userData: WritableSignal<any> = signal<any>(null);
-  // public setUserData(data: any): void {
-  //   this.userData.set(data);
-  // }
-  // public getUserData(): any {
-  //   return this.userData();
-  // }
+  private readonly userProfile: WritableSignal<any> = signal<any>(null);
+  public setUserProfile(data: any): void {
+    this.userProfile.set(data);
+  }
+  public getUserProfile(): any {
+    return this.userProfile();
+  }
 
   private readonly userTopTracks: WritableSignal<Array<Track>> = signal<Array<Track>>([]);
   public setUserTopTracks(tracks: Array<Track>): void {
