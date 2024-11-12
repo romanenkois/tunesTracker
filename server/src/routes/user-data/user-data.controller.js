@@ -8,10 +8,6 @@ const getUserTopItems = async (req, res) => {
         const { code } = req.headers;
         const { tokenac } = req.headers;
 
-        // console.log('code', code);
-        // console.log('tokenac', tokenac);
-        // console.log('head', req.headers);
-
         const { type } = req.params;
         const { time_range } = req.query;
         const { limit } = req.query;
@@ -35,6 +31,24 @@ const getUserTopItems = async (req, res) => {
     }
 }
 
+const getUserProfile = async (req, res) => {
+    try {
+        const clientIP = req.connection.remoteAddress || req.socket.remoteAddress;
+
+        const { code } = req.headers;
+        const { tokenac } = req.headers;
+
+        // console.log('code:', code);
+        // console.log('tokenac:', tokenac);
+
+        const data = await fetchSpotifyApi(clientIP, 'v1/me', 'GET', null, code, tokenac);
+        res.status(200).json(data);
+    } catch (error) {
+        handleError(res, error);
+    }
+}
+
 module.exports = {
-    getUserTopItems
+    getUserTopItems,
+    getUserProfile
 }
