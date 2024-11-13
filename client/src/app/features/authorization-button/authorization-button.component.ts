@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { environment } from 'enviroments/environment';
+import { config } from '@config/config';
+
 
 @Component({
   selector: 'app-authorization-button',
@@ -10,10 +11,10 @@ import { environment } from 'enviroments/environment';
 })
 export class AuthorizationButtonComponent {
   private readonly BASE_URL: string = 'https://accounts.spotify.com/authorize?';
-  private readonly client_id: string = environment.SPOTIFY_CLIENT_ID;
-  private readonly redirect_uri: string = 'http://localhost:4200/login';
-  private readonly response_type: string = 'code'; // ????? code or token
-  private readonly state: string = '37';
+  private readonly client_id: string = config.SPOTIFY_CLIENT_ID;
+  private readonly redirect_uri: string = config.SPOTIFY_REDIRECT_URI;
+  private readonly response_type: string = 'code';
+  private readonly state: string = config.SPOTIFY_STATE;
   private scopes: string[] = [
     'user-read-email',
     'user-read-private',

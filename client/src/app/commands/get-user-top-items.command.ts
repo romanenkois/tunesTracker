@@ -1,4 +1,5 @@
 import { inject, Injectable } from "@angular/core";
+import { config } from "@config/config";
 import { ArtistDTO } from "@dto/artist.dto";
 import { NestedReponce, UserTopItemsResponse } from "@dto/response.dto";
 import { TrackDTO } from "@dto/track.dto";
@@ -6,7 +7,6 @@ import { ArtistMapper } from "@mapper/artist.mapper";
 import { TrackMapper } from "@mapper/track.mapper";
 import { UserDataRepository } from "@repository/user-data.repository";
 import { ApiService } from "@service/api.service";
-import { environment } from "enviroments/environment.development";
 
 @Injectable({ providedIn: 'root' })
 export class GetUserTopItemsCommand {
@@ -14,7 +14,7 @@ export class GetUserTopItemsCommand {
   private userDataRepository: UserDataRepository = inject(UserDataRepository);
 
   public getUserTopItems(type: 'artists'| 'tracks', timeRange: 'short_term' | 'medium_term' | 'long_term') {
-    this.apiService.getUserTopItems(this.userDataRepository.getUserCode(), type, timeRange, environment.ITEMS_LIMIT_PER_REQUEST).subscribe((response: UserTopItemsResponse) => {
+    this.apiService.getUserTopItems(this.userDataRepository.getUserCode(), type, timeRange, config.ITEMS_LIMIT_PER_REQUEST).subscribe((response: UserTopItemsResponse) => {
       if (response && (response as NestedReponce).items !== undefined) {
         if (type === 'artists') {
           const artists = (response as NestedReponce).items.map((item: ArtistDTO) => ArtistMapper.toEntity(item));
@@ -30,7 +30,7 @@ export class GetUserTopItemsCommand {
   }
 
   public getMoreUserTopItems(type: 'artists'| 'tracks', timeRange: 'short_term' | 'medium_term' | 'long_term', offset: number) {
-    this.apiService.getUserTopItems(this.userDataRepository.getUserCode(), type, timeRange, environment.ITEMS_LIMIT_PER_REQUEST, offset ).subscribe((response: UserTopItemsResponse) => {
+    this.apiService.getUserTopItems(this.userDataRepository.getUserCode(), type, timeRange, config.ITEMS_LIMIT_PER_REQUEST, offset ).subscribe((response: UserTopItemsResponse) => {
       if (response && (response as NestedReponce).items !== undefined) {
         if (type === 'artists') {
           const artists = (response as NestedReponce).items.map((item: ArtistDTO) => ArtistMapper.toEntity(item));

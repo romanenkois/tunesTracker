@@ -19,7 +19,8 @@
 
       "@animation/*": ["app/shared/animations/*"],
 
-      "@environment/*": ["environments/*"],
+      "@config/*": ["app/shared/config/*"],
+      // "@environment/*": ["environments/*"],
     },
     "outDir": "./dist/out-tsc",
     "strict": true,
