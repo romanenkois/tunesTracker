@@ -12,6 +12,20 @@ const getArtist = async (req, res) => {
         handleError(res, error);
     }
 }
+
+const getArtists = async (req, res) => {
+    try {
+        const clientIP = req.connection.remoteAddress || req.socket.remoteAddress;
+
+        const { ids } = req.params;
+
+        const data = await fetchSpotifyApi(clientIP, `v1/artists?${ids}`, 'GET');
+        res.status(200).json(data);
+    } catch (error) {
+        handleError(res, error);
+    }
+}
 module.exports = {
-    getArtist
+    getArtist,
+    getArtists
 }
