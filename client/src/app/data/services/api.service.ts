@@ -28,6 +28,12 @@ export class ApiService {
     )
   }
 
+  public getArtists(ids: Array<string>): Observable<any> {
+    return this.http.get<any>(
+      `${environment.BASE_URL}/artists/artists/ids=${ids.join(',')}`
+    )
+  }
+
   public getUserTopItems(
     code: string,
     type: 'artists' | 'tracks',
