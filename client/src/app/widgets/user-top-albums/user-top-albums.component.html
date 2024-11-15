@@ -1,1 +1,15 @@
-<p>user-top-albums works!</p>
+<div class="wrapper">
+    <app-timeframe-selection (timeFrameChangeEvent)="changeTimeFrame($event)"></app-timeframe-selection>
+
+    <div class="content">
+        <div class="items">
+        @for (item of this.userTopAlbums(); track $index) {
+            <div class="item">
+
+            </div>
+        }
+        </div>
+
+        <!-- <app-load-more-button (loadMoreEvent)="loadMoreItems()"></app-load-more-button> -->
+    </div>
+</div>
