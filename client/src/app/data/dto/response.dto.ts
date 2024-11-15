@@ -19,3 +19,5 @@ export type TrackResponse = TrackDTO | ResponseError401 | ResponseError403 | Res
 
 
 export type UserTopItemsResponse = NestedReponce | ResponseError401 | ResponseError403 | ResponseError429;
+
+export type UserTopAlbumsResponse = Array<AlbumDTO> | ResponseError401 | ResponseError403 | ResponseError429;

@@ -1,5 +1,5 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
-import { Track } from '@entity/track.entity';
+import { Track } from '@entity/index';
 
 @Injectable({providedIn: 'root'})
 export class TrackDataRepository {

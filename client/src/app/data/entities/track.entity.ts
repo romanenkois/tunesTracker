@@ -1,5 +1,4 @@
-import { ArtistSimplified } from "@entity/artist.entity";
-import { AlbumSimplified } from "@entity/album.entity";
+import { ArtistSimplified, AlbumSimplified } from "@entity/index";
 
 export type Track = {
   id: string,

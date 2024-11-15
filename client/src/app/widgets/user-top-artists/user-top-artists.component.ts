@@ -1,10 +1,10 @@
 import { Component, computed, inject, signal, WritableSignal } from '@angular/core';
 import { GetUserTopItemsCommand } from '@commands/get-user-top-items.command';
 import { ArtistCardComponent } from '@feature/artist-card/artist-card.component';
-import { UserDataRepository } from '@repository/user-data.repository';
 import { LoadMoreButtonComponent } from "@feature/load-more-button/load-more-button.component";
 import { TimeframeSelectionComponent } from "@feature/timeframe-selection/timeframe-selection.component";
 import { TimeFrame } from '@entity/shared.entity';
+import { UserTopItemsDataRepository } from '@repository/user-top-items.repository';
 
 @Component({
   selector: 'app-user-top-artists',
@@ -14,7 +14,7 @@ import { TimeFrame } from '@entity/shared.entity';
   styleUrl: './user-top-artists.component.scss'
 })
 export class UserTopArtistsComponent {
-  private userDataRepository: UserDataRepository = inject(UserDataRepository);
+  private userDataRepository: UserTopItemsDataRepository = inject(UserTopItemsDataRepository);
   private getUserTopItems: GetUserTopItemsCommand = inject(GetUserTopItemsCommand);
 
   periodOfTime: WritableSignal<TimeFrame> = signal('short_term');

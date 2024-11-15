@@ -1,10 +1,10 @@
 import { Component, computed, inject, signal, WritableSignal } from '@angular/core';
 import { GetUserTopItemsCommand } from '@commands/get-user-top-items.command';
 import { TrackCardComponent } from '@feature/track-card/track-card.component';
-import { UserDataRepository } from '@repository/user-data.repository';
 import { LoadMoreButtonComponent } from "@feature/load-more-button/load-more-button.component";
 import { TimeframeSelectionComponent } from "@feature/timeframe-selection/timeframe-selection.component";
 import { TimeFrame } from '@entity/shared.entity';
+import { UserTopItemsDataRepository } from '@repository/user-top-items.repository';
 
 @Component({
   selector: 'app-user-top-tracks',
@@ -14,12 +14,12 @@ import { TimeFrame } from '@entity/shared.entity';
   styleUrl: './user-top-tracks.component.scss'
 })
 export class UserTopTracksComponent {
-  private userDataRepository: UserDataRepository = inject(UserDataRepository);
+  private userTopItemsDataRepository: UserTopItemsDataRepository = inject(UserTopItemsDataRepository);
   private getUserTopItems: GetUserTopItemsCommand = inject(GetUserTopItemsCommand);
 
-  periodOfTime: WritableSignal<TimeFrame> = signal('short_term');
+  periodOfTime: WritableSignal<TimeFrame> = signal('short_term' as TimeFrame);
 
-  userTopTracks = computed(() => this.userDataRepository.getUserTopTracks());
+  userTopTracks = computed(() => this.userTopItemsDataRepository.getUserTopTracks());
 
   loadMoreItems() {
     this.getUserTopItems.getMoreUserTopItems('tracks', this.periodOfTime(), this.userTopTracks().length);
@@ -29,13 +29,13 @@ export class UserTopTracksComponent {
     if (this.periodOfTime() === timeFrame) {
       return;
     }
-    this.userDataRepository.setUserTopTracks([]);
+    this.userTopItemsDataRepository.setUserTopTracks([]);
     this.periodOfTime.set(timeFrame);
     this.getUserTopItems.getUserTopItems('tracks', this.periodOfTime());
   }
 
   constructor() {
-    if (this.userDataRepository.getUserTopTracks().length === 0) {
+    if (this.userTopItemsDataRepository.getUserTopTracks().length === 0) {
       this.getUserTopItems.getUserTopItems('tracks', this.periodOfTime());
     }
   }

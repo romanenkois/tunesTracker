@@ -1,5 +1,4 @@
 import { ArtistSimplified } from "@entity/artist.entity"
-import { Track } from "@entity/track.entity"
 
 export type Album = {
   id: string,

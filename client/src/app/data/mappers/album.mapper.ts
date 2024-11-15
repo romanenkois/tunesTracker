@@ -1,6 +1,6 @@
-import { Album, AlbumSimplified } from '@entity/album.entity';
-import { AlbumDTO, AlbumSimpifiedDTO } from '@dto/album.dto';
-import { ArtistMapper } from '@mapper/artist.mapper';
+import { Album, AlbumSimplified } from '@entity/index';
+import { AlbumDTO, AlbumSimpifiedDTO } from '@dto/index';
+import { ArtistMapper } from '@mapper/index';
 
 export class AlbumMapper {
 

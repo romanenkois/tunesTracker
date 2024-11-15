@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { config } from '@config/config';
-import { AlbumResponse, ArtistResponse, TrackResponse, UserTopItemsResponse } from '@dto/response.dto';
-
 import { Observable } from 'rxjs';
+
+import { config } from '@config/config';
+import { AlbumResponse, ArtistResponse, TrackResponse, UserTopItemsResponse } from '@dto/index';
+import { TimeFrame } from '@entity/index';
 
 @Injectable({
   providedIn: 'root'
@@ -35,10 +36,18 @@ export class ApiService {
     )
   }
 
+  public getUserProfile(code: string): Observable<any> {
+    let headers = {
+      'code': code
+    }
+
+    return this.http.get<any>(`${config.BASE_URL}/user-data/user-profile/`, { headers });
+  }
+
   public getUserTopItems(
     code: string,
     type: 'artists' | 'tracks',
-    time_range?: 'short_term' | 'medium_term' | 'long_term',
+    time_range?: TimeFrame,
     limit?: number,
     offset?: number
   ): Observable<UserTopItemsResponse> {
@@ -61,11 +70,24 @@ export class ApiService {
     return this.http.get<UserTopItemsResponse>(endpoint, { headers });
   }
 
-  public getUserProfile(code: string): Observable<any> {
+  public getUserTopAlbums(
+    code: string,
+    time_range?: TimeFrame,
+    limit?: number
+  ): Observable<UserTopItemsResponse> {
+    let endpoint: string = `${config.BASE_URL}/user-data/top-albums`;
+
+    if (time_range) {
+      endpoint += `?time_range=${time_range}`;
+    }
+    if (limit && limit > 0 && limit <= 50) {
+      endpoint += `&limit=${limit}`;
+    }
+
     let headers = {
       'code': code
     }
 
-    return this.http.get<any>(`${config.BASE_URL}/user-data/user-profile/`, { headers });
+    return this.http.get<any>(endpoint, { headers });
   }
 }

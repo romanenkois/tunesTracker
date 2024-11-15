@@ -1,5 +1,5 @@
-import { Artist, ArtistSimplified } from '@entity/artist.entity';
-import { ArtistDTO, ArtistSimplifiedDTO } from '@dto/artist.dto';
+import { Artist, ArtistSimplified } from '@entity/index';
+import { ArtistDTO, ArtistSimplifiedDTO } from '@dto/index';
 
 export class ArtistMapper {
   public static toEntity(dto: ArtistDTO): Artist {

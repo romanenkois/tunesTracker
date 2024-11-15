@@ -1,5 +1,5 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
-import { Album } from '@entity/album.entity';
+import { Album } from '@entity/index';
 
 @Injectable({providedIn: 'root'})
 export class AlbumDataRepository {

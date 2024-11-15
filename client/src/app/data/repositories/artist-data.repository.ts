@@ -1,5 +1,5 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
-import { Artist } from '@entity/artist.entity';
+import { Artist } from '@entity/index';
 
 @Injectable({providedIn: 'root'})
 export class ArtistDataRepository {

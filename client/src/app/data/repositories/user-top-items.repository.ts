@@ -1,9 +1,8 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
-import { Artist } from '@entity/artist.entity';
-import { Track } from '@entity/track.entity';
+import { Album, Track, Artist } from '@entity/index';
 
 @Injectable({providedIn: 'root'})
-export class UserTopDataRepository {
+export class UserTopItemsDataRepository {
   private readonly userTopTracks: WritableSignal<Array<Track>> = signal<Array<Track>>([]);
   public setUserTopTracks(tracks: Array<Track>): void {
     this.userTopTracks.set(tracks);
@@ -24,5 +23,13 @@ export class UserTopDataRepository {
   }
   public getUserTopArtists(): Array<Artist> {
     return this.userTopArtists();
+  }
+
+  private readonly userTopAlbums: WritableSignal<Array<Album>> = signal<Array<Album>>([]);
+  public setUserTopAlbums(albums: Array<Album>): void {
+    this.userTopAlbums.set(albums);
+  }
+  public getUserTopAlbums(): Array<Album> {
+    return this.userTopAlbums();
   }
 }

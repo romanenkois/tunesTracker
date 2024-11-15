@@ -1,7 +1,6 @@
-import { Track } from '@entity/track.entity';
-import { TrackDTO } from '@dto/track.dto';
-import { AlbumMapper } from '@mapper/album.mapper';
-import { ArtistMapper } from '@mapper/artist.mapper';
+import { Track } from '@entity/index';
+import { TrackDTO } from '@dto/index';
+import { AlbumMapper, ArtistMapper } from '@mapper/index';
 
 export class TrackMapper {
   public static toEntity(dto: TrackDTO): Track {
