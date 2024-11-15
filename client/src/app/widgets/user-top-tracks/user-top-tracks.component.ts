@@ -29,8 +29,9 @@ export class UserTopTracksComponent {
     if (this.periodOfTime() === timeFrame) {
       return;
     }
-    this.userTopItemsDataRepository.setUserTopTracks([]);
     this.periodOfTime.set(timeFrame);
+
+    this.userTopItemsDataRepository.setUserTopTracks([]);
     this.getUserTopItems.getUserTopItems('tracks', this.periodOfTime());
   }
 

@@ -29,8 +29,9 @@ export class UserTopArtistsComponent {
     if (this.periodOfTime() === timeFrame) {
       return;
     }
-    this.userDataRepository.setUserTopArtists([]);
     this.periodOfTime.set(timeFrame);
+
+    this.userDataRepository.setUserTopArtists([]);
     this.getUserTopItems.getUserTopItems('artists', this.periodOfTime());
   }
 
