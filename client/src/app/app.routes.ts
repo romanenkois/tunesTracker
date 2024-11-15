@@ -10,7 +10,8 @@ export const routes: Routes = [
       { path: 'home', loadComponent: () => import('./fragments/home-fragment/home-fragment.component') },
       { path: 'top-artists', loadComponent: () => import('./fragments/top-artists-fragment/top-artists-fragment.component') },
       { path: 'top-tracks', loadComponent: () => import('./fragments/top-tracks-fragment/top-tracks-fragment.component') },
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'top-albums', loadComponent: () => import('./fragments/top-albums-fragment/top-albums-fragment.component') },
+      { path: 'top-genres', loadComponent: () => import('./fragments/top-genres-fragment/top-genres-fragment.component') },
       { path: '**', redirectTo: 'home' }
     ]
   },
