@@ -5,7 +5,7 @@
         <div class="items">
         @for (item of this.userTopAlbums(); track $index) {
             <div class="item">
-
+                <app-album-card [album]="item" [index]="$index+1"></app-album-card>
             </div>
         }
         </div>

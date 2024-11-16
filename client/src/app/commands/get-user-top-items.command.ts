@@ -1,8 +1,8 @@
 import { inject, Injectable } from "@angular/core";
 import { config } from "@config/config";
-import { ArtistDTO, TrackDTO, NestedReponce, UserTopItemsResponse } from "@dto/index";
-import { TimeFrame } from "@entity/index";
-import { ArtistMapper, TrackMapper } from "@mapper/index";
+import { ArtistDTO, TrackDTO, NestedReponce, UserTopItemsResponse, AlbumDTO } from "@dto/index";
+import { Album, TimeFrame } from "@entity/index";
+import { AlbumMapper, ArtistMapper, TrackMapper } from "@mapper/index";
 import { UserDataRepository, UserTopItemsDataRepository } from "@repository/index";
 import { ApiService } from "@service/api.service";
 
@@ -65,12 +65,15 @@ export class GetUserTopItemsCommand {
     });
   }
 
-  public getUserTopAlbums(timeRange: TimeFrame) {
+  public getUserTopAlbums(timeRange: TimeFrame, limit: number) {
     this.apiService.getUserTopAlbums(
-      this.userDataRepository.getUserCode()
+      this.userDataRepository.getUserCode(),
+      timeRange,
+      limit
     ).subscribe((response: any) => {
       if (response) {
-        const albums = response.items.map((item: any) => TrackMapper.toEntity(item));
+        console.log(response);
+        const albums = (response as Array<AlbumDTO>).map((item: AlbumDTO) => AlbumMapper.toEntity(item));
         this.userTopItemsDataRepository.setUserTopAlbums(albums);
       }
     })

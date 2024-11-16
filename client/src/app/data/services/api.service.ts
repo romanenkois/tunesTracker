@@ -47,15 +47,14 @@ export class ApiService {
   public getUserTopItems(
     code: string,
     type: 'artists' | 'tracks',
-    time_range?: TimeFrame,
+    time_range: TimeFrame,
     limit?: number,
     offset?: number
   ): Observable<UserTopItemsResponse> {
     let endpoint: string = `${config.BASE_URL}/user-data/top-items/${type}`;
 
-    if (time_range) {
-      endpoint += `?time_range=${time_range}`;
-    }
+    endpoint += `?time_range=${time_range}`
+
     if (limit && limit > 0 && limit <= 50) {
       endpoint += `&limit=${limit}`;
     }
@@ -72,17 +71,13 @@ export class ApiService {
 
   public getUserTopAlbums(
     code: string,
-    time_range?: TimeFrame,
-    limit?: number
+    time_range: TimeFrame,
+    limit: number
   ): Observable<UserTopItemsResponse> {
     let endpoint: string = `${config.BASE_URL}/user-data/top-albums`;
 
-    if (time_range) {
-      endpoint += `?time_range=${time_range}`;
-    }
-    if (limit && limit > 0 && limit <= 50) {
-      endpoint += `&limit=${limit}`;
-    }
+    endpoint += `?time_range=${time_range}`;
+    endpoint += `&limit=${limit}`;
 
     let headers = {
       'code': code

@@ -1,0 +1,19 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+
+    flex: 1;
+
+    .content {
+        flex: 1;
+
+        .items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-gap: 16px;
+
+            padding: 4px 16px;
+        }
+    }
+}
