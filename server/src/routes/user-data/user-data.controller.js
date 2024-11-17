@@ -57,27 +57,63 @@ const getUserTopAlbums = async (req, res) => {
             // now we assemble api req endpoint and fetch it
             let endpoint = `v1/me/top/tracks?time_range=${time_range}&limit=${reqLimit}&offset=${tracksFetched}`;
             let response = await fetchSpotifyApi(clientIP, endpoint, 'GET', null, code, null);
-            tracksFetched += response.items.length;
+            // tracksFetched += response.items.length;
             if (response.items.length == 0) {
                 break;
             }
 
             // then, looping through every item, we add it to the ranking
             response.items.forEach(item => {
-                itemInAlbumsRanking = albumsRanking.find(album => album.id === item.album.id);
+                tracksFetched += 1;
+                let itemInAlbumsRanking = albumsRanking.find(album => album.id === item.album.id);
                 if (itemInAlbumsRanking) {
-                    itemInAlbumsRanking.score += 1;
+                    itemInAlbumsRanking.score.push(tracksFetched);
                 } else {
                     albumsRanking.push({
                         id: item.album.id,
-                        score: 1,
+                        score: [tracksFetched],
                     });
                 }
+
             });
         }
 
+        // let scoresTable = [
+        //     {'start': 1, 'end': 10, 'score': 200},
+        //     {'start': 11, 'end': 50, 'score': 100},
+        //     {'start': 51, 'end': 100, 'score': 80},
+        //     {'start': 101, 'end': 200, 'score': 60},
+        //     {'start': 201, 'end': 500, 'score': 45},
+        //     {'start': 501, 'end': 999999, 'score': 1},
+        // ];
+
+        albumsRanking.forEach((item) => {
+            let finalScore = 0;
+            item.score.forEach((scoreIndex) => {
+                if (scoreIndex <= 10) {
+                    finalScore += 200;
+                } else if (scoreIndex <= 50) {
+                    finalScore += 100;
+                } else if (scoreIndex <= 100) {
+                    finalScore += 80;
+                } else if (scoreIndex <= 200) {
+                    finalScore += 50;
+                } else if (scoreIndex <= 500) {
+                    finalScore += 20;
+                } else {
+                    finalScore += 5;
+                }
+
+
+            })
+            item.finalScore = finalScore;
+        })
+
+        console.log(albumsRanking);
+
         // after base look of the ranking, we can sort it
-        albumsRanking = albumsRanking.sort((a, b) => b.score - a.score).slice(0, limit);
+        albumsRanking = albumsRanking.sort((a, b) => b.finalScore - a.finalScore).slice(0, limit);
+        console.log(albumsRanking);
 
         // after sorting, we also fetch data, to return sorted full album data
         let albums = [];
