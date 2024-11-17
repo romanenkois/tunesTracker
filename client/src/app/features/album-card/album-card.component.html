@@ -1,17 +1,20 @@
 <div class="card" [@fadeAnimation]>
     <div class="picture">
-        <img
-        src="{{ album().images[0].url }}"
-        alt="{{ album().name }}"
-        loading="lazy">
+        <a [href]="'album/' + album().id">
+            <img
+                src="{{ album().images[0].url }}"
+                alt="{{ album().name }}"
+                loading="lazy"
+            />
+        </a>
     </div>
     <div class="info">
         <div class="index">
-            <p>#{{index()}}</p>
+            <p>#{{ index() }}</p>
         </div>
         <div class="track-info">
-            <p class="name">{{album().name}}</p>
-            <p class="artist">{{album().artists[0].name}}</p>
+            <p class="name" [title]="album().name">{{ album().name }}</p>
+            <p class="artist">{{ album().artists[0].name }}</p>
         </div>
     </div>
 </div>
