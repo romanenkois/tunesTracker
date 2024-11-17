@@ -1,15 +1,23 @@
 <div class="wrapper">
-    <app-timeframe-selection (timeFrameChangeEvent)="changeTimeFrame($event)"></app-timeframe-selection>
+    <app-timeframe-selection
+        (timeFrameChangeEvent)="changeTimeFrame($event)"
+        [timeFrameSelected]="this.periodOfTime()"
+    ></app-timeframe-selection>
 
     <div class="content">
         <div class="items">
-        @for (item of this.userTopTracks(); track $index) {
+            @for (item of this.userTopTracks(); track $index) {
             <div class="item">
-                <app-track-card [track]="item" [index]="$index+1"></app-track-card>
+                <app-track-card
+                    [track]="item"
+                    [index]="$index + 1"
+                ></app-track-card>
             </div>
-        }
+            }
         </div>
 
-        <app-load-more-button (loadMoreEvent)="loadMoreItems()"></app-load-more-button>
+        <app-load-more-button
+            (loadMoreEvent)="loadMoreItems()"
+        ></app-load-more-button>
     </div>
 </div>

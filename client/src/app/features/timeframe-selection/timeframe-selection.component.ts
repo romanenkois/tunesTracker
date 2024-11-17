@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, input, InputSignal, Output } from '@angular/core';
 import { TimeFrame } from '@entity/shared.entity';
 
 @Component({
@@ -9,6 +9,8 @@ import { TimeFrame } from '@entity/shared.entity';
   styleUrl: './timeframe-selection.component.scss'
 })
 export class TimeframeSelectionComponent {
+  timeFrameSelected: InputSignal<TimeFrame> = input.required();
+
   @Output() timeFrameChangeEvent = new EventEmitter<TimeFrame>();
 
   changeTimeFrame(timeframe: TimeFrame) {

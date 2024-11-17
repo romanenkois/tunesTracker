@@ -20,8 +20,18 @@
 
         p {
             padding: 8px 42px;
+            font-weight: 400;
             color: var(--gray-color);
             cursor: pointer;
+
+            transition: var(--standart-transition);
+        }
+
+        .active-item {
+            font-weight: 600;
+            color: var(--white-color);
+
+            transition: var(--standart-transition);
         }
     }
 }

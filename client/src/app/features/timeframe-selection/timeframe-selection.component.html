@@ -1,16 +1,25 @@
 <div class="time-frame-selection">
     <div class="item">
-        <p (click)="changeTimeFrame('short_term')">
+        <p
+            (click)="changeTimeFrame('short_term')"
+            [class.active-item]="this.timeFrameSelected() === 'short_term'"
+        >
             4 weeks
         </p>
     </div>
     <div class="item">
-        <p (click)="changeTimeFrame('medium_term')">
+        <p
+            (click)="changeTimeFrame('medium_term')"
+            [class.active-item]="this.timeFrameSelected() === 'medium_term'"
+        >
             6 months
         </p>
     </div>
     <div class="item">
-        <p (click)="changeTimeFrame('long_term')">
+        <p
+            (click)="changeTimeFrame('long_term')"
+            [class.active-item]="this.timeFrameSelected() === 'long_term'"
+        >
             1 year
         </p>
     </div>
