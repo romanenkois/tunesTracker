@@ -22,7 +22,9 @@
             padding: 8px 42px;
             font-weight: 400;
             color: var(--gray-color);
+
             cursor: pointer;
+            user-select: none;
 
             transition: var(--standart-transition);
         }
