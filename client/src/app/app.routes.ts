@@ -21,6 +21,21 @@ export const routes: Routes = [
     canActivate: [ authorizationGuard ],
   },
   {
+    path: 'album/:id',
+    loadComponent: () => import('./pages/album/album.component'),
+    canActivate: [ authorizationGuard ],
+  },
+  {
+    path: 'artist/:id',
+    loadComponent: () => import('./pages/artist/artist.component'),
+    canActivate: [ authorizationGuard ],
+  },
+  {
+    path: 'track/:id',
+    loadComponent: () => import('./pages/track/track.component'),
+    canActivate: [ authorizationGuard ],
+  },
+  {
     path: 'login',
     loadComponent: () => import('./pages/login/login.component')
   },
