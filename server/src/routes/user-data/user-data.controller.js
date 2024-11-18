@@ -141,6 +141,26 @@ const getUserTopAlbums = async (req, res) => {
     }
 }
 
+const getUserTopGenres = async (req, res) => {
+    try {
+        const clientIP = req.connection.remoteAddress || req.socket.remoteAddress;
+        const { code } = req.headers;
+        const { time_range } = req.query;
+        const { limit } = req.query;
+
+        let inflatedLimit = limit + 75;
+        genresRanking = []
+        while (genresRanking.length < inflatedLimit) {
+
+        }
+
+        genresList = [];
+        res.status(200).json()
+    } catch (error) {
+        handleError(res, error);
+    }
+}
+
 const getUserProfile = async (req, res) => {
     try {
         const clientIP = req.connection.remoteAddress || req.socket.remoteAddress;
@@ -158,5 +178,6 @@ const getUserProfile = async (req, res) => {
 module.exports = {
     getUserTopItems,
     getUserTopAlbums,
+    getUserTopGenres,
     getUserProfile
 }
