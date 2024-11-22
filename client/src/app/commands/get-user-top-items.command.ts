@@ -78,4 +78,10 @@ export class GetUserTopItemsCommand {
       }
     })
   }
+
+  public getUserTopGenres(timeRange: TimeFrame, limit: number) {
+    this.apiService.getUserTopGenres(this.userDataRepository.getUserCode(), timeRange, limit).subscribe((response: any) => {
+      this.userTopItemsDataRepository.setUserTopGenres(response);
+    });
+  }
 }

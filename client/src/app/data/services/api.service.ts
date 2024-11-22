@@ -85,4 +85,20 @@ export class ApiService {
 
     return this.http.get<any>(endpoint, { headers });
   }
+
+  public getUserTopGenres(
+    code: string,
+    time_range: TimeFrame,
+    limit: number
+  ): Observable<any> {
+    let endpoint = `${config.BASE_URL}/user-data/top-genres`
+
+    endpoint += `?time_range=${time_range}`;
+    endpoint += `&limit=${limit}`;
+
+    let headers = {
+      'code': code
+    }
+    return this.http.get<any>(endpoint, { headers });
+  }
 }

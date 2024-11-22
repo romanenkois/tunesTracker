@@ -32,4 +32,13 @@ export class UserTopItemsDataRepository {
   public getUserTopAlbums(): Array<Album> {
     return this.userTopAlbums();
   }
+
+  private readonly userTopGenres: WritableSignal<Array<string>> = signal<Array<string>>([]);
+  public setUserTopGenres(genres: Array<string>): void {
+    this.userTopGenres.set(genres);
+  }
+  public getUserTopGenres(): Array<string> {
+    console.log(this.userTopGenres());
+    return this.userTopGenres();
+  }
 }

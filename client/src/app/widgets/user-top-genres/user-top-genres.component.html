@@ -1,1 +1,19 @@
-<p>user-top-genres works!</p>
+<div class="wrapper">
+    <app-timeframe-selection
+        (timeFrameChangeEvent)="changeTimeFrame($event)"
+        [timeFrameSelected]="this.periodOfTime()"
+    ></app-timeframe-selection>
+
+    <div class="content">
+        <div class="items">
+            @for (item of this.userTopGenres(); track $index) {
+            <div class="item">
+                <app-genre-card
+                    [genre]="item"
+                    [index]="$index + 1"
+                ></app-genre-card>
+            </div>
+            }
+        </div>
+    </div>
+</div>
