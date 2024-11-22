@@ -44,6 +44,7 @@ async function fetchSpotifyApi(clientIP, endpoint, method, body, code, tokenAC) 
             tokenData.error_description === 'Invalid authorization code') {
 
                 console.log('error of 87');
+                return 'error_87'
             }
         }
     }
