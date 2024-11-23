@@ -19,7 +19,7 @@ export class UserTopTracksComponent {
 
   periodOfTime: WritableSignal<TimeFrame> = signal('short_term' as TimeFrame);
 
-  userTopTracks = computed(() => this.userTopItemsDataRepository.getUserTopTracks());
+  userTopTracks = computed(() => this.userTopItemsDataRepository.getUserTopTracks(this.periodOfTime()));
 
   loadMoreItems() {
     this.getUserTopItems.getMoreUserTopItems('tracks', this.periodOfTime(), this.userTopTracks().length);
@@ -31,12 +31,11 @@ export class UserTopTracksComponent {
     }
     this.periodOfTime.set(timeFrame);
 
-    this.userTopItemsDataRepository.setUserTopTracks([]);
     this.getUserTopItems.getUserTopItems('tracks', this.periodOfTime());
   }
 
   constructor() {
-    if (this.userTopItemsDataRepository.getUserTopTracks().length === 0) {
+    if (this.userTopItemsDataRepository.getUserTopTracks(this.periodOfTime()).length === 0) {
       this.getUserTopItems.getUserTopItems('tracks', this.periodOfTime());
     }
   }

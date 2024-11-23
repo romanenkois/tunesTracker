@@ -29,10 +29,10 @@ export class GetUserTopItemsCommand {
         if (type === 'artists') {
           // Before setting data, its mapped to entity
           const artists = (response as NestedReponce).items.map((item: ArtistDTO) => ArtistMapper.toEntity(item));
-          this.userTopItemsDataRepository.setUserTopArtists(artists);
+          this.userTopItemsDataRepository.setUserTopArtists(artists, timeRange);
         } if (type === 'tracks') {
           const tracks = (response as NestedReponce).items.map((item: TrackDTO) => TrackMapper.toEntity(item));
-          this.userTopItemsDataRepository.setUserTopTracks(tracks);
+          this.userTopItemsDataRepository.setUserTopTracks(tracks, timeRange);
         }
       } else {
         console.error('Error retrieving user top items:', response);
@@ -54,10 +54,10 @@ export class GetUserTopItemsCommand {
       if (response && (response as NestedReponce).items !== undefined) {
         if (type === 'artists') {
           const artists = (response as NestedReponce).items.map((item: ArtistDTO) => ArtistMapper.toEntity(item));
-          this.userTopItemsDataRepository.appendUserTopArtists(artists);
+          this.userTopItemsDataRepository.appendUserTopArtists(artists, timeRange);
         } if (type === 'tracks') {
           const tracks = (response as NestedReponce).items.map((item: TrackDTO) => TrackMapper.toEntity(item));
-          this.userTopItemsDataRepository.appendUserTopTracks(tracks);
+          this.userTopItemsDataRepository.appendUserTopTracks(tracks, timeRange);
         }
       } else {
         console.error('Error retrieving user top items:', response);
@@ -72,9 +72,8 @@ export class GetUserTopItemsCommand {
       limit
     ).subscribe((response: any) => {
       if (response) {
-        console.log(response);
         const albums = (response as Array<AlbumDTO>).map((item: AlbumDTO) => AlbumMapper.toEntity(item));
-        this.userTopItemsDataRepository.setUserTopAlbums(albums);
+        this.userTopItemsDataRepository.setUserTopAlbums(albums, timeRange);
       }
     })
   }

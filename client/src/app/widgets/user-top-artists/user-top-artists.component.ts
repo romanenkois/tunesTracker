@@ -19,7 +19,7 @@ export class UserTopArtistsComponent {
 
   periodOfTime: WritableSignal<TimeFrame> = signal('short_term');
 
-  userTopArtists = computed(() => this.userDataRepository.getUserTopArtists());
+  userTopArtists = computed(() => this.userDataRepository.getUserTopArtists(this.periodOfTime()));
 
   loadMoreItems() {
     this.getUserTopItems.getMoreUserTopItems('artists', this.periodOfTime(), this.userTopArtists().length);
@@ -31,12 +31,11 @@ export class UserTopArtistsComponent {
     }
     this.periodOfTime.set(timeFrame);
 
-    this.userDataRepository.setUserTopArtists([]);
     this.getUserTopItems.getUserTopItems('artists', this.periodOfTime());
   }
 
   constructor() {
-    if (this.userDataRepository.getUserTopArtists().length === 0) {
+    if (this.userDataRepository.getUserTopArtists(this.periodOfTime()).length === 0) {
       this.getUserTopItems.getUserTopItems('artists', this.periodOfTime());
     }
   }
