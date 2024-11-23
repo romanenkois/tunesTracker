@@ -77,8 +77,8 @@ export class GetUserTopItemsCommand {
   }
 
   public getUserTopAlbums(timeRange: TimeFrame, limit: number) {
-    // before we fetch, we check if data is alredy in repo
-    if (this.userTopItemsDataRepository.getUserTopAlbums(timeRange).length > 0) {
+    // before we fetch, we check if requered data of needed size is loaded
+    if (this.userTopItemsDataRepository.getUserTopAlbums(timeRange).length == limit) {
       return;
     }
 
@@ -95,12 +95,16 @@ export class GetUserTopItemsCommand {
   }
 
   public getUserTopGenres(timeRange: TimeFrame, limit: number) {
-    // before we fetch, we check if data is alredy in repo
-    if (this.userTopItemsDataRepository.getUserTopGenres(timeRange).length > 0) {
+    // before we fetch, we check if requered data of needed size is loaded
+    if (this.userTopItemsDataRepository.getUserTopGenres(timeRange).length == limit) {
       return;
     }
 
-    this.apiService.getUserTopGenres(this.userDataRepository.getUserCode(), timeRange, limit).subscribe((response: any) => {
+    this.apiService.getUserTopGenres(
+      this.userDataRepository.getUserCode(),
+      timeRange,
+      limit
+    ).subscribe((response: any) => {
       this.userTopItemsDataRepository.setUserTopGenres(response, timeRange);
     });
   }
