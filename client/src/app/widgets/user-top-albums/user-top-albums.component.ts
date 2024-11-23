@@ -17,10 +17,10 @@ export class UserTopAlbumsComponent {
   private getUserTopItems: GetUserTopItemsCommand = inject(GetUserTopItemsCommand);
   private userTopItemsRepository: UserTopItemsDataRepository = inject(UserTopItemsDataRepository);
 
-  userTopAlbums = computed(() => this.userTopItemsRepository.getUserTopAlbums());
-
   periodOfTime: WritableSignal<TimeFrame> = signal('short_term');
   itemsLimit: WritableSignal<number> = signal(40); // 40 is an optimal number, as it is only 2 req of albums data to spotify api
+
+  userTopAlbums = computed(() => this.userTopItemsRepository.getUserTopAlbums(this.periodOfTime()));
 
   changeTimeFrame(timeFrame: TimeFrame) {
     if (this.periodOfTime() === timeFrame) {
@@ -28,7 +28,6 @@ export class UserTopAlbumsComponent {
     }
     this.periodOfTime.set(timeFrame);
 
-    this.userTopItemsRepository.setUserTopAlbums([]);
     this.getUserTopItems.getUserTopAlbums(this.periodOfTime(), this.itemsLimit());
   }
 

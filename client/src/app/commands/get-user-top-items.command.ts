@@ -17,6 +17,17 @@ export class GetUserTopItemsCommand {
    * Artists and tracks uses same end point, so its the same function
    */
   public getUserTopItems(type: 'artists'| 'tracks', timeRange: TimeFrame) {
+    // before fetaching new data, we simply check whether the data is already in repository
+    if (type == 'artists') {
+      if (this.userTopItemsDataRepository.getUserTopArtists(timeRange).length > 0) {
+        return;
+      }
+    } else {
+      if (this.userTopItemsDataRepository.getUserTopTracks(timeRange).length > 0) {
+        return;
+      }
+    }
+
     this.apiService.getUserTopItems(
       this.userDataRepository.getUserCode(),
       type,
@@ -29,10 +40,10 @@ export class GetUserTopItemsCommand {
         if (type === 'artists') {
           // Before setting data, its mapped to entity
           const artists = (response as NestedReponce).items.map((item: ArtistDTO) => ArtistMapper.toEntity(item));
-          this.userTopItemsDataRepository.setUserTopArtists(artists);
+          this.userTopItemsDataRepository.setUserTopArtists(artists, timeRange);
         } if (type === 'tracks') {
           const tracks = (response as NestedReponce).items.map((item: TrackDTO) => TrackMapper.toEntity(item));
-          this.userTopItemsDataRepository.setUserTopTracks(tracks);
+          this.userTopItemsDataRepository.setUserTopTracks(tracks, timeRange);
         }
       } else {
         console.error('Error retrieving user top items:', response);
@@ -54,10 +65,10 @@ export class GetUserTopItemsCommand {
       if (response && (response as NestedReponce).items !== undefined) {
         if (type === 'artists') {
           const artists = (response as NestedReponce).items.map((item: ArtistDTO) => ArtistMapper.toEntity(item));
-          this.userTopItemsDataRepository.appendUserTopArtists(artists);
+          this.userTopItemsDataRepository.appendUserTopArtists(artists, timeRange);
         } if (type === 'tracks') {
           const tracks = (response as NestedReponce).items.map((item: TrackDTO) => TrackMapper.toEntity(item));
-          this.userTopItemsDataRepository.appendUserTopTracks(tracks);
+          this.userTopItemsDataRepository.appendUserTopTracks(tracks, timeRange);
         }
       } else {
         console.error('Error retrieving user top items:', response);
@@ -66,22 +77,35 @@ export class GetUserTopItemsCommand {
   }
 
   public getUserTopAlbums(timeRange: TimeFrame, limit: number) {
+    // before we fetch, we check if requered data of needed size is loaded
+    if (this.userTopItemsDataRepository.getUserTopAlbums(timeRange).length == limit) {
+      return;
+    }
+
     this.apiService.getUserTopAlbums(
       this.userDataRepository.getUserCode(),
       timeRange,
       limit
     ).subscribe((response: any) => {
       if (response) {
-        console.log(response);
         const albums = (response as Array<AlbumDTO>).map((item: AlbumDTO) => AlbumMapper.toEntity(item));
-        this.userTopItemsDataRepository.setUserTopAlbums(albums);
+        this.userTopItemsDataRepository.setUserTopAlbums(albums, timeRange);
       }
     })
   }
 
   public getUserTopGenres(timeRange: TimeFrame, limit: number) {
-    this.apiService.getUserTopGenres(this.userDataRepository.getUserCode(), timeRange, limit).subscribe((response: any) => {
-      this.userTopItemsDataRepository.setUserTopGenres(response);
+    // before we fetch, we check if requered data of needed size is loaded
+    if (this.userTopItemsDataRepository.getUserTopGenres(timeRange).length == limit) {
+      return;
+    }
+
+    this.apiService.getUserTopGenres(
+      this.userDataRepository.getUserCode(),
+      timeRange,
+      limit
+    ).subscribe((response: any) => {
+      this.userTopItemsDataRepository.setUserTopGenres(response, timeRange);
     });
   }
 }

@@ -1,44 +1,76 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
-import { Album, Track, Artist } from '@entity/index';
+import { Album, Track, Artist, TimeFrame } from '@entity/index';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class UserTopItemsDataRepository {
-  private readonly userTopTracks: WritableSignal<Array<Track>> = signal<Array<Track>>([]);
-  public setUserTopTracks(tracks: Array<Track>): void {
-    this.userTopTracks.set(tracks);
+  // user top tracks
+  private readonly userTopTracks: WritableSignal<{
+    [term in TimeFrame]? : Array<Track>
+  }> = signal({});
+  public setUserTopTracks(tracks: Array<Track>, term: TimeFrame): void {
+    this.userTopTracks.set({
+      ...this.userTopTracks(),
+      [term]: tracks,
+    });
   }
-  public appendUserTopTracks(tracks: Array<Track>): void {
-    this.userTopTracks.set([...this.userTopTracks(), ...tracks]);
+  public appendUserTopTracks(tracks: Array<Track>, term: TimeFrame): void {
+    this.userTopTracks.set({
+      ...this.userTopTracks(),
+      [term]: [...(this.userTopTracks()[term] || []), ...tracks]
+    });
   }
-  public getUserTopTracks(): Array<Track> {
-    return this.userTopTracks();
-  }
-
-  private readonly userTopArtists: WritableSignal<Array<Artist>> = signal<Array<Artist>>([]);
-  public setUserTopArtists(artists: Array<Artist>): void {
-    this.userTopArtists.set(artists);
-  }
-  public appendUserTopArtists(artists: Array<Artist>): void {
-    this.userTopArtists.set([...this.userTopArtists(), ...artists]);
-  }
-  public getUserTopArtists(): Array<Artist> {
-    return this.userTopArtists();
+  public getUserTopTracks(term: TimeFrame): Array<Track> {
+    return this.userTopTracks()[term] || [];
   }
 
-  private readonly userTopAlbums: WritableSignal<Array<Album>> = signal<Array<Album>>([]);
-  public setUserTopAlbums(albums: Array<Album>): void {
-    this.userTopAlbums.set(albums);
+  // user top artists
+  private readonly userTopArtists: WritableSignal<{
+    [term in TimeFrame]? : Array<Artist>}> = signal({});
+  public setUserTopArtists(artists: Array<Artist>, term: TimeFrame): void {
+    this.userTopArtists.set({
+      ...this.userTopArtists(),
+      [term]: artists,
+    });
   }
-  public getUserTopAlbums(): Array<Album> {
-    return this.userTopAlbums();
+  public appendUserTopArtists(artists: Array<Artist>, term: TimeFrame): void {
+    this.userTopArtists.set({
+      ...this.userTopArtists(),
+      [term]: [...(this.userTopArtists()[term] || []), artists]
+    });
+  }
+  public getUserTopArtists(term: TimeFrame): Array<Artist> {
+    return this.userTopArtists()[term] || [];
   }
 
-  private readonly userTopGenres: WritableSignal<Array<string>> = signal<Array<string>>([]);
-  public setUserTopGenres(genres: Array<string>): void {
-    this.userTopGenres.set(genres);
+  // user top albums
+  private readonly userTopAlbums: WritableSignal<{
+    [term in TimeFrame]?: Array<Album>;
+  }> = signal({});
+  public setUserTopAlbums(albums: Array<Album>, term: TimeFrame): void {
+    this.userTopAlbums.set({
+      ...this.userTopAlbums(),
+      [term]: albums,
+    });
   }
-  public getUserTopGenres(): Array<string> {
+  public getUserTopAlbums(term: TimeFrame): Array<Album> {
+    return this.userTopAlbums()[term] || [];
+  }
+
+  // user top genres
+  private readonly userTopGenres: WritableSignal<{
+    [term in TimeFrame]?: Array<any>;
+  }> = signal({});
+  public setUserTopGenres(data: Array<any>, term: TimeFrame) {
+    this.userTopGenres.set({
+      ...this.userTopGenres(),
+      [term]: data,
+    });
     console.log(this.userTopGenres());
-    return this.userTopGenres();
+  }
+  public getUserTopGenres(term: TimeFrame): Array<any> {
+    if ((this.userTopGenres()[term] || []).length > 0) {
+      return this.userTopGenres()[term] || [];
+    }
+    return [];
   }
 }
