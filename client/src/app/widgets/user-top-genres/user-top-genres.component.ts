@@ -16,10 +16,10 @@ export class UserTopGenresComponent {
   private getUserTopItems: GetUserTopItemsCommand = inject(GetUserTopItemsCommand);
   private userTopItemsRepository: UserTopItemsDataRepository = inject(UserTopItemsDataRepository);
 
-  userTopGenres = computed(() => this.userTopItemsRepository.getUserTopGenres());
-
   periodOfTime: WritableSignal<TimeFrame> = signal('short_term');
   itemsLimit: WritableSignal<number> = signal(20); // ??????
+
+  userTopGenres = computed(() => this.userTopItemsRepository.getUserTopGenres(this.periodOfTime()));
 
   changeTimeFrame(timeFrame: TimeFrame) {
     if (this.periodOfTime() === timeFrame) {
@@ -27,7 +27,6 @@ export class UserTopGenresComponent {
     }
     this.periodOfTime.set(timeFrame);
 
-    this.userTopItemsRepository.setUserTopGenres([]);
     this.getUserTopItems.getUserTopGenres(this.periodOfTime(), this.itemsLimit());
   }
 
