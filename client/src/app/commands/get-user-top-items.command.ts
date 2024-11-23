@@ -17,6 +17,17 @@ export class GetUserTopItemsCommand {
    * Artists and tracks uses same end point, so its the same function
    */
   public getUserTopItems(type: 'artists'| 'tracks', timeRange: TimeFrame) {
+    // before fetaching new data, we simply check whether the data is already in repository
+    if (type == 'artists') {
+      if (this.userTopItemsDataRepository.getUserTopArtists(timeRange).length > 0) {
+        return;
+      }
+    } else {
+      if (this.userTopItemsDataRepository.getUserTopTracks(timeRange).length > 0) {
+        return;
+      }
+    }
+
     this.apiService.getUserTopItems(
       this.userDataRepository.getUserCode(),
       type,
@@ -66,6 +77,11 @@ export class GetUserTopItemsCommand {
   }
 
   public getUserTopAlbums(timeRange: TimeFrame, limit: number) {
+    // before we fetch, we check if data is alredy in repo
+    if (this.userTopItemsDataRepository.getUserTopAlbums(timeRange).length > 0) {
+      return;
+    }
+
     this.apiService.getUserTopAlbums(
       this.userDataRepository.getUserCode(),
       timeRange,
@@ -79,6 +95,11 @@ export class GetUserTopItemsCommand {
   }
 
   public getUserTopGenres(timeRange: TimeFrame, limit: number) {
+    // before we fetch, we check if data is alredy in repo
+    if (this.userTopItemsDataRepository.getUserTopGenres(timeRange).length > 0) {
+      return;
+    }
+
     this.apiService.getUserTopGenres(this.userDataRepository.getUserCode(), timeRange, limit).subscribe((response: any) => {
       this.userTopItemsDataRepository.setUserTopGenres(response, timeRange);
     });
