@@ -1,6 +1,6 @@
 const config = {
     server: {
-        port: process.env.PORT
+        port: 3000
     },
     spotify: {
         clientId: process.env.SPOTIFY_CLIENT_ID,
