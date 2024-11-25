@@ -1,6 +1,8 @@
 const config = {
     server: {
-        port: 3000
+        port: 3000,
+        // testingRouteAccess: process.env.TESTING_ROUTE_ACCESS,
+        testingRouteAccess: true,
     },
     spotify: {
         clientId: process.env.SPOTIFY_CLIENT_ID,
