@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { config } from '@config/config';
 
-
 @Component({
   selector: 'app-authorization-button',
   standalone: true,
@@ -25,6 +24,7 @@ export class AuthorizationButtonComponent {
     'user-read-playback-position',
   ];
   private readonly scope: string = this.scopes.join('%20');
-  public readonly url: string = `${this.BASE_URL}client_id=${this.client_id}&redirect_uri=${this.redirect_uri}&response_type=${this.response_type}&state=${this.state}&scope=${this.scope}`;
+  private readonly show_dialog: string = config.SPOTIFY_SHOW_DIALOG_ON_AUTHORIZATION.toString();
+  public readonly url: string = `${this.BASE_URL}client_id=${this.client_id}&redirect_uri=${this.redirect_uri}&response_type=${this.response_type}&state=${this.state}&scope=${this.scope}&show_dialog=${this.show_dialog}`;
 
 }
