@@ -2,6 +2,8 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserDataRepository } from '@repository/user-data.repository';
 import { AuthorizationButtonComponent } from "@feature/authorization-button/authorization-button.component";
+import { config } from '@config/config';
+import { AuthService } from 'app/shared/utils/authoriaztion';
 
 @Component({
   selector: 'app-login',
@@ -11,23 +13,9 @@ import { AuthorizationButtonComponent } from "@feature/authorization-button/auth
   styleUrl: './login.component.scss'
 })
 export default class LoginComponent {
-  private activeRouter: ActivatedRoute = inject(ActivatedRoute);
-  private router: Router = inject(Router);
+  private authService: AuthService = inject(AuthService);
 
-  private userDataRepository: UserDataRepository = inject(UserDataRepository);
-
-  private readonly state = '37';
-
-  // when page loads, we check,
-  // either user is accepted spotify login or denied access
   constructor() {
-    this.activeRouter.queryParams.subscribe((params: any) => {
-      if (params.code && params.state === this.state) {
-        this.userDataRepository.setUserCode(params.code);
-        this.router.navigate(['/home']);
-      } else if (params.error) {
-        console.log('access denied'); // do sm else
-      }
-    });
+    this.authService.authorizeUser();
   }
 }

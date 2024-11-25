@@ -6,6 +6,8 @@ export class UserDataRepository {
   public setUserCode(code: string): void {
     this.userCode.set(code);
     sessionStorage.setItem('userCode', code);
+    localStorage.setItem('userCode', code);
+    console.log('code', code)
   }
   public getUserCode(): string {
     return this.userCode();
@@ -14,6 +16,7 @@ export class UserDataRepository {
   private readonly userProfile: WritableSignal<any> = signal<any>(null);
   public setUserProfile(data: any): void {
     this.userProfile.set(data);
+    console.log('up', data);
   }
   public getUserProfile(): any {
     return this.userProfile();

@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'app/shared/utils/authoriaztion';
 
 @Component({
   selector: 'app-log-out-button',
@@ -9,11 +10,9 @@ import { Router } from '@angular/router';
   styleUrl: './log-out-button.component.scss'
 })
 export class LogOutButtonComponent {
-  private router: Router = inject(Router);
+  private authService: AuthService = inject(AuthService);
 
   logOutUser() {
-    sessionStorage.clear();
-    localStorage.clear(); // not needed, but just in case
-    this.router.navigate(['/']);
+    this.authService.logOutUser();
   }
 }
