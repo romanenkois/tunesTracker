@@ -31,7 +31,7 @@ async function fetchSpotifyApi(clientIP, endpoint, method, body, code, tokenAC) 
             if (tokenData.access_token) {
                 tempToken = tokenData.access_token;
                 console.log(11);
-                const userData = await fetchSpotifyApi('::1', 'v1/me', 'GET', null, null, tempToken);
+                const userData = await fetchGeneralSpotifyApi('v1/me', 'GET', tempToken, null)
                 addNewRecord(tokenData.refresh_token, code, JSON.stringify(userData));
 
                 token = await getUserAccessToken(tokenData.refresh_token);
@@ -50,36 +50,34 @@ async function fetchSpotifyApi(clientIP, endpoint, method, body, code, tokenAC) 
         }
     }
 
-    // actual fetch to spotify api
-    let headers = {
-        Authorization: `Bearer ${token}`
-    }
-    const response = await fetch(`https://api.spotify.com/${endpoint}`, {
-        method,
-        headers: headers,
-        body
-    });
+    const response = await fetchGeneralSpotifyApi(endpoint, method, token, body);
 
-    // checks if the token is expired
-    if (response.status === 401 && !code && !tokenAC) {
-        const date = new Date();
-        console.log('Token expired ', date);
+    if (response?.error?.status == '401' && !code && !tokenAC) {
+        console.log('Token expired ', new Date());
 
         TOKEN_CLIENT_CRIDENTIALS = await getCCToken();
         message = `Token_expired/New_Token, ${TOKEN_CLIENT_CRIDENTIALS.access_token}`;
         writeLog(message);
 
-        return fetchSpotifyApi(clientIP, endpoint, method, body);
+        return await fetchGeneralSpotifyApi(endpoint, method, TOKEN_CLIENT_CRIDENTIALS.access_token, body);;
     }
 
-    // request completion
-    message = `${method}, ${endpoint}, ${clientIP}, ${body}, ${response.status},`;
-    writeLog(message);
+    return await response;
+}
 
+async function fetchGeneralSpotifyApi(endpoint, method, token, body) {
+    console.log('spotify_fetch', endpoint, method, token, body)
+
+    const response = await fetch(`https://api.spotify.com/${endpoint}`, {
+        method,
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+        body
+    });
     return await response.json();
-
 }
 
 module.exports = {
-    fetchSpotifyApi
+    fetchSpotifyApi,
 }
