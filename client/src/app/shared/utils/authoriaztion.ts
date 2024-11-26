@@ -42,7 +42,10 @@ export class AuthService {
       this.activeRouter.queryParams.subscribe((params: any) => {
         if (params.code && params.state === config.SPOTIFY_STATE) {
           this.authenticateUser(params.code).then((res: any) => {
+            console.log(res);
+            console.log(res['responseStatus']);
             if (res['responseStatus'] == 'access granted' && res['userData']) {
+              console.log(1111)
               this.userDataRepository.setUserCode(params.code);
               this.userDataRepository.setUserProfile(res['userData']);
               this.router.navigate(['/home']);
@@ -60,11 +63,12 @@ export class AuthService {
     });
   }
 
-  public authenticateUser(code: string): Promise<boolean> {
+  public authenticateUser(code: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiService.authenticateUser(code).subscribe(
         (res) => {
-          resolve(true);
+          console.log(res)
+          resolve(res);
         },
         (error) => {
           console.log('auth error', error);
