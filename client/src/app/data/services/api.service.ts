@@ -44,6 +44,14 @@ export class ApiService {
     return this.http.get<any>(`${config.BASE_URL}/user-data/user-profile/`, { headers });
   }
 
+
+  public authenticateUser(code: string): Observable<any> {
+    let headers = {
+      'code': code
+    }
+    return this.http.get<any>(`${config.BASE_URL}/user-data/authenticate/`, { headers })
+  }
+
   public getUserTopItems(
     code: string,
     type: 'artists' | 'tracks',
