@@ -28,10 +28,10 @@ v1Router.use('/user-data', userDataRouter);
 // implementing main router
 app.use('/tunes-tracker-api', v1Router);
 
-if (config.server.testingRouteAccess) {
+// if (config.server.testingRouteAccess || true) {
   const testingRouter = require('./routes/testing/testing-router');
   app.use('/testing', testingRouter);
-}
+// }
 
 // Start server
 const PORT = config.server.port;

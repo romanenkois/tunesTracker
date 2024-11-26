@@ -17,6 +17,11 @@ const getUserTopItems = async (req, res) => {
         if (!userData ||  userData == undefined ) {
            res.status(400).send('Not a valid code for user lmao')
         }
+        console.log(userData.country)
+        if (userData.error || userData['error']) {
+            res.status(401).send('something happend??????')
+        }
+
         // console.log(userData)
 
         data = {
