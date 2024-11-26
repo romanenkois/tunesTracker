@@ -5,7 +5,7 @@ const { addNewRecord, getUserRefreshToken } = require('./connections-handler');
 TOKEN_CLIENT_CRIDENTIALS = 'none';
 
 async function fetchSpotifyApi(clientIP, endpoint, method, body, code, tokenAC) {
-    console.log('fetchSpotifyApi', endpoint, method, body);
+    console.log('fetchSpotifyApi', clientIP, endpoint, method, body, code, tokenAC);
 
     // initially the token is set to be as a general server side token
     let token = TOKEN_CLIENT_CRIDENTIALS.access_token;
@@ -30,6 +30,7 @@ async function fetchSpotifyApi(clientIP, endpoint, method, body, code, tokenAC) 
             // if we get the token, we will use it to req info about user, and use it for further requests
             if (tokenData.access_token) {
                 tempToken = tokenData.access_token;
+                console.log(11);
                 const userData = await fetchSpotifyApi('::1', 'v1/me', 'GET', null, null, tempToken);
                 addNewRecord(tokenData.refresh_token, code, JSON.stringify(userData));
 

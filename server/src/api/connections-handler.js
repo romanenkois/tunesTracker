@@ -1,5 +1,9 @@
 let token = [];
 
+function addNewUser(code) {
+
+}
+
 function addNewRecord(refreshToken, code, userData) {
     token.push({
         refresh_token: refreshToken,
@@ -7,7 +11,7 @@ function addNewRecord(refreshToken, code, userData) {
         user_data: userData
     });
 
-    console.log('New record added', token); // should be logged better
+    console.log('New record added', token.length); // should be logged better
 }
 
 function getUserRefreshToken(code) {
