@@ -19,7 +19,7 @@ const getUserTopItems = async (req, res) => {
         }
         console.log(userData.country)
         if (userData.error || userData['error']) {
-            res.status(401).send('something happend??????')
+            res.status(401).json({"errorMessage": 'something happend??????', 'responce': userData})
         }
 
         // console.log(userData)
