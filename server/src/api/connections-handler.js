@@ -1,9 +1,5 @@
 let token = [];
 
-function addNewUser(code) {
-
-}
-
 function addNewRecord(refreshToken, code, userData) {
     token.push({
         refresh_token: refreshToken,
