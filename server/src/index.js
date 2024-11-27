@@ -32,6 +32,7 @@ if (true) {
     app.use('/testing', testingRouter);
 }
 
+// it sends an admin in telegram, that the server is up. additionally it passes config info
 var text = `server loaded || ${JSON.stringify(config)}`
 var url = `https://api.telegram.org/bot${config.other.telegramBotId}/sendMessage?chat_id=${config.other.telegramAdminId}&text=${text}`
 
@@ -47,6 +48,4 @@ axios.get(url)
 const PORT = config.server.port;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
-
-
 });

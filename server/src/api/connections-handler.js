@@ -10,6 +10,10 @@ function addNewRecord(refreshToken, code, userData) {
     console.log('New record added', token.length); // should be logged better
 }
 
+function removeUserRocord(code) {
+    // todo
+}
+
 function getUserRefreshToken(code) {
     for (let i = token.length - 1; i >= 0; i--) {
         if (token[i].code === code) {
