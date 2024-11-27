@@ -38,7 +38,7 @@ var url = `https://api.telegram.org/bot${config.other.telegramBotId}/sendMessage
 
 axios.get(url)
     .then(response => {
-        console.log('Message sent:', response.data);
+        console.log('Telegram message sent:', response.data.ok);
     })
     .catch(error => {
         console.error('Error sending message:', error);
