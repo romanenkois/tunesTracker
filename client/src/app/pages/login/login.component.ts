@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserDataRepository } from '@repository/user-data.repository';
 import { AuthorizationButtonComponent } from "@feature/authorization-button/authorization-button.component";
 import { config } from '@config/config';
-import { AuthService } from 'app/shared/utils/authoriaztion';
+import { AuthService } from 'app/shared/services/authorization.service';
 
 @Component({
   selector: 'app-login',

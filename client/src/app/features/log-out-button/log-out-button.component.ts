@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'app/shared/utils/authoriaztion';
+import { AuthService } from 'app/shared/services/authorization.service';
 
 @Component({
   selector: 'app-log-out-button',

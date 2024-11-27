@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { config } from '@config/config';
-import { AuthService } from 'app/shared/utils/authoriaztion';
+import { AuthService } from 'app/shared/services/authorization.service';
 
 @Component({
   selector: 'app-authorization-button',
