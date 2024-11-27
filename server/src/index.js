@@ -2,6 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const axios = require('axios');
 
 // env imports
 dotenv.config();
@@ -29,12 +30,23 @@ v1Router.use('/user-data', userDataRouter);
 app.use('/tunes-tracker-api', v1Router);
 
 // if (config.server.testingRouteAccess || true) {
-  const testingRouter = require('./routes/testing/testing-router');
-  app.use('/testing', testingRouter);
+    const testingRouter = require('./routes/testing/testing-router');
+    app.use('/testing', testingRouter);
 // }
 
 // Start server
 const PORT = config.server.port;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
+
+    var text = `server loaded on port ${PORT}`
+    var url = `https://api.telegram.org/bot${config.other.telegramBotId}/sendMessage?chat_id=${config.other.telegramAdminId}&text=${text}`
+
+    axios.get(url)
+        .then(response => {
+            console.log('Message sent:', response.data);
+        })
+        .catch(error => {
+            console.error('Error sending message:', error);
+        });
 });

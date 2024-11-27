@@ -8,6 +8,10 @@ const config = {
         clientId: process.env.SPOTIFY_CLIENT_ID,
         clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
         redirectURI: process.env.SPOTIFY_REDIRECT_URI,
+    },
+    other: {
+        telegramBotId: process.env.TELEGRAM_BOT_ID,
+        telegramAdminId: process.env.TELEGRAM_ADMIN_ID
     }
 }
 
