@@ -12,6 +12,10 @@ import { TimeFrame } from '@entity/index';
 export class ApiService {
   private readonly http: HttpClient = inject(HttpClient);
 
+  // public execute<T>(func: Observable<T>): Observable<T> {
+  //   return func;
+  // }
+
   public getTrack(id: string, market?: string): Observable<TrackResponse> {
     return this.http.get<TrackResponse>(
       `${config.BASE_URL}/tracks/track/${id}${market ? `?market=${market}` : ''}`

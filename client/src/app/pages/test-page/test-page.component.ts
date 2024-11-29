@@ -6,6 +6,7 @@ import { GetTrackCommand } from '@commands/get-track.command';
 import { Artist } from '@entity/artist.entity';
 import { AlbumDataRepository } from '@repository/album-data.repository';
 import { TrackDataRepository } from '@repository/track-data.repository';
+import { ApiService } from '@service/api.service';
 
 @Component({
   selector: 'app-test-page',
@@ -15,6 +16,8 @@ import { TrackDataRepository } from '@repository/track-data.repository';
   styleUrl: './test-page.component.scss'
 })
 export default class TestPageComponent {
+  private apiService: ApiService = inject(ApiService);
+
   private getTrackCommand: GetTrackCommand = inject(GetTrackCommand);
   private getAlbumCommand: GetAlbumCommand = inject(GetAlbumCommand);
   private getArtistCommand: GetArtistCommand = inject(GetArtistCommand);
@@ -28,10 +31,11 @@ export default class TestPageComponent {
   artistsData: Array<Artist> = [];
 
   constructor() {
-    this.getTrackCommand.getTrack('5bDol0wPoQlIgLWzP8tbkW', 'ES');
+    // this.getTrackCommand.getTrack('5bDol0wPoQlIgLWzP8tbkW', 'ES');
 
-    this.getArtistCommand.returnArtists(["30F64wQIHvLiFTGaNZ73nU"]).then((res) => {
-      this.artistsData = res;
-    })
+    // this.getArtistCommand.returnArtists(["30F64wQIHvLiFTGaNZ73nU"]).then((res) => {
+    //   this.artistsData = res;
+    // })
+    // this.apiService.execute(this.apiService.getTrack('5bDol0wPoQlIgLWzP8tbkW', 'US')).subscribe((res)=>{console.log(res)})
   }
 }

@@ -9,4 +9,6 @@ export const config = {
   SPOTIFY_SHOW_DIALOG_ON_AUTHORIZATION: production ? true : false, // idfc that it can be simpler
 
   ITEMS_LIMIT_PER_REQUEST: 25,
+
+  OFFLINE_MODE: true,
 };

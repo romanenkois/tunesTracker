@@ -1,8 +1,13 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { Album, Track, Artist, TimeFrame } from '@entity/index';
 
+// interface ItemRepository {
+
+// }
 @Injectable({ providedIn: 'root' })
 export class UserTopItemsDataRepository {
+
+
   // user top tracks
   private readonly userTopTracks: WritableSignal<{
     [term in TimeFrame]? : Array<Track>

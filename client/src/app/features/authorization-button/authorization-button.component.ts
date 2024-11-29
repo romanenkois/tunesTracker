@@ -7,10 +7,10 @@ import { AuthService } from 'app/shared/services/authorization.service';
   standalone: true,
   imports: [],
   templateUrl: './authorization-button.component.html',
-  styleUrl: './authorization-button.component.scss'
+  styleUrl: './authorization-button.component.scss',
 })
 export class AuthorizationButtonComponent {
   private authService: AuthService = inject(AuthService);
 
-  url = this.authService.getLogInUrl();
+  url = config.OFFLINE_MODE ? './home' : this.authService.getLogInUrl();
 }

@@ -4,7 +4,7 @@
         [timeFrameSelected]="this.periodOfTime()"
     ></app-timeframe-selection>
 
-    <div class="content">
+    <div class="content" *ngIf="this.userTopTracks().length > 0">
         <div class="items">
             @for (item of this.userTopTracks(); track $index) {
             <div class="item">
@@ -19,5 +19,52 @@
         <app-load-more-button
             (loadMoreEvent)="loadMoreItems()"
         ></app-load-more-button>
+    </div>
+
+    <div class="content" *ngIf="this.userTopTracks().length < 1">
+        <div class="items">
+            <div class="item">
+                <app-card-standart-compact
+                [index]="null"
+                [data]="{}"
+                >
+                </app-card-standart-compact>
+            </div>
+            <div class="item">
+                <app-card-standart-compact
+                [index]="null"
+                [data]="{}"
+                >
+                </app-card-standart-compact>
+            </div>
+            <div class="item">
+                <app-card-standart-compact
+                [index]="null"
+                [data]="{}"
+                >
+                </app-card-standart-compact>
+            </div>
+            <div class="item">
+                <app-card-standart-compact
+                [index]="null"
+                [data]="{}"
+                >
+                </app-card-standart-compact>
+            </div>
+            <div class="item">
+                <app-card-standart-compact
+                [index]="null"
+                [data]="{}"
+                >
+                </app-card-standart-compact>
+            </div>
+            <div class="item">
+                <app-card-standart-compact
+                [index]="null"
+                [data]="{}"
+                >
+                </app-card-standart-compact>
+            </div>
+        </div>
     </div>
 </div>
