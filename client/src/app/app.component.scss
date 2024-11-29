@@ -1,0 +1,18 @@
+.wrapper {
+    width: 100vw;
+    height: 100wh;
+    box-sizing: border-box;
+    border: 1px solid red;
+
+    .top-nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+    .content { // all that seems to do nothing
+        position: relative;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+    }
+}

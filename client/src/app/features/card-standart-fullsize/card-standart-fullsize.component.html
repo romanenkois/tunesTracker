@@ -1,1 +1,38 @@
-<p>card-standart-fullsize works!</p>
+<div class="card" *ngIf="data() && index()" [@fadeAnimation]>
+    <div class="picture">
+        <a [href]="data().link">
+            <img
+                *ngIf="data().image"
+                [src]="data().image"
+                [alt]="data().primaryText"
+                loading="lazy"
+            />
+        </a>
+    </div>
+    <div class="info">
+        <div class="index">
+            <p>#{{ index() }}</p>
+        </div>
+        <div class="track-info">
+            <p class="primaryText">{{ data().primaryText }}</p>
+            <p class="secondaryText" *ngIf="data().secondaryText">
+                {{ data().secondaryText }}
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="card card-placeholder" *ngIf="!data() || !index()">
+    <div class="picture">
+        <div class="placeholder"></div>
+    </div>
+    <div class="info">
+        <div class="index">
+            <div class="number">#<div class="placeholder">//</div></div>
+        </div>
+        <div class="card-info">
+            <p class="primary-text placeholder"></p>
+            <p class="secondary-text placeholder"><span></span><span></span></p>
+        </div>
+    </div>
+</div>
