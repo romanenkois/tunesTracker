@@ -39,7 +39,7 @@ export class UserTopTracksComponent {
 
   constructor() {
     if (this.userTopItemsDataRepository.getUserTopTracks(this.periodOfTime()).length === 0) {
-      // this.getUserTopItems.getUserTopItems('tracks', this.periodOfTime());
+      this.getUserTopItems.getUserTopItems('tracks', this.periodOfTime());
     }
   }
 }
