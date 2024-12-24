@@ -25,11 +25,15 @@
     --standart-transition: 0.3s ease-in-out;
 }
 
+// $small-breakpoint: 512px;
+
 * {
     // outline: 1px red solid;
 
     color: var(--white-color);
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    // width: 100vw;
+    // height: 100vh;
 }
 
 html, body {

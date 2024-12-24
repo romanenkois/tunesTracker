@@ -10,5 +10,5 @@ export const config = {
 
   ITEMS_LIMIT_PER_REQUEST: 25,
 
-  OFFLINE_MODE: true,
+  OFFLINE_MODE: false,
 };

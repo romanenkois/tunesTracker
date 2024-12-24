@@ -1,0 +1,49 @@
+.wrapper {
+    width: 100%;
+    height: 100vh;
+    padding: 12px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: center;
+
+    .logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding-bottom: 24px;
+
+        .logo-wrapper {
+
+            p {
+                width: max-content;
+                font-size: 48px;
+                font-weight: 600;
+
+                user-select: none;
+            }
+        }
+    }
+    .actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .auth-btn {
+            width: 400px;
+        }
+    }
+}
+
+@media screen and (max-width: 512px) {
+    .wrapper {
+        .actions {
+            .auth-btn {
+                width: 100%;
+            }
+        }
+    }
+}

@@ -1,7 +1,6 @@
 .button {
     height: 100%;
     width: 100%;
-    max-width: 400px;
 
     display: flex;
     justify-content: center;
@@ -10,6 +9,8 @@
     cursor: pointer;
     background-color: var(--green-spotify-color);
     transition: var(--standart-transition);
+
+    user-select: none;
 
     a {
         width: 100%;
@@ -30,6 +31,7 @@
             p {
                 margin: 0;
                 font-size: var(--medium-font-size);
+                // font-size: 16px;
                 font-weight: bold;
                 color: var(--white-color);
             }

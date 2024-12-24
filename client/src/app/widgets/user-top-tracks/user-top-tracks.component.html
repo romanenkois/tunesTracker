@@ -1,8 +1,10 @@
 <div class="wrapper">
-    <app-timeframe-selection
-        (timeFrameChangeEvent)="changeTimeFrame($event)"
-        [timeFrameSelected]="this.periodOfTime()"
-    ></app-timeframe-selection>
+    <div class="timeframe-selection">
+        <app-timeframe-selection
+            (timeFrameChangeEvent)="changeTimeFrame($event)"
+            [timeFrameSelected]="this.periodOfTime()"
+        ></app-timeframe-selection>
+    </div>
 
     <div class="content" *ngIf="this.userTopTracks().length > 0">
         <div class="items">
@@ -24,45 +26,27 @@
     <div class="content" *ngIf="this.userTopTracks().length < 1">
         <div class="items">
             <div class="item">
-                <app-card-standart-fullsize
-                [index]="null"
-                [data]="{}"
-                >
+                <app-card-standart-fullsize [index]="null" [data]="{}">
                 </app-card-standart-fullsize>
             </div>
             <div class="item">
-                <app-card-standart-fullsize
-                [index]="null"
-                [data]="{}"
-                >
+                <app-card-standart-fullsize [index]="null" [data]="{}">
                 </app-card-standart-fullsize>
             </div>
             <div class="item">
-                <app-card-standart-fullsize
-                [index]="null"
-                [data]="{}"
-                >
+                <app-card-standart-fullsize [index]="null" [data]="{}">
                 </app-card-standart-fullsize>
             </div>
             <div class="item">
-                <app-card-standart-fullsize
-                [index]="null"
-                [data]="{}"
-                >
+                <app-card-standart-fullsize [index]="null" [data]="{}">
                 </app-card-standart-fullsize>
             </div>
             <div class="item">
-                <app-card-standart-fullsize
-                [index]="null"
-                [data]="{}"
-                >
+                <app-card-standart-fullsize [index]="null" [data]="{}">
                 </app-card-standart-fullsize>
             </div>
             <div class="item">
-                <app-card-standart-fullsize
-                [index]="null"
-                [data]="{}"
-                >
+                <app-card-standart-fullsize [index]="null" [data]="{}">
                 </app-card-standart-fullsize>
             </div>
         </div>

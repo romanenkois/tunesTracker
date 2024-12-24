@@ -89,7 +89,7 @@ export class AuthService {
   public logOutUser(): void {
     sessionStorage.clear();
     localStorage.clear();
-    this.router.navigate(['/']);
-    window.location.reload(); // just like... to be sure
+    this.router.navigate(['/login']);
+    // window.location.reload(); // just like... to be sure
   }
 }
