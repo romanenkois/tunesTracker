@@ -3,11 +3,12 @@
     height: 100wh;
     box-sizing: border-box;
     // outline: 1px solid red;
+    position: relative;
 
     .top-nav {
         position: sticky;
         top: 0;
-        z-index: 100;
+        // z-index: 100;
     }
     .content { // all that seems to do nothing
         position: relative;

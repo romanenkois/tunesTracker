@@ -6,49 +6,36 @@
         ></app-timeframe-selection>
     </div>
 
-    <div class="content" *ngIf="this.userTopTracks().length > 0">
-        <div class="items">
-            @for (item of this.userTopTracks(); track $index) {
-            <div class="item">
-                <app-track-card
-                    [track]="item"
-                    [index]="$index + 1"
-                ></app-track-card>
+    @if (
+        this.userTopTracks().length > 0
+    ) {
+        <div class="content">
+            <div class="items">
+                @for (item of this.userTopTracks(); track $index) {
+                <div class="item">
+                    <app-track-card
+                        [track]="item"
+                        [index]="$index + 1"
+                    ></app-track-card>
+                </div>
+                }
             </div>
-            }
+
+            <app-load-more-button
+                (loadMoreEvent)="loadMoreItems()"
+            ></app-load-more-button>
         </div>
-
-        <app-load-more-button
-            (loadMoreEvent)="loadMoreItems()"
-        ></app-load-more-button>
-    </div>
-
-    <div class="content" *ngIf="this.userTopTracks().length < 1">
-        <div class="items">
-            <div class="item">
-                <app-card-standart-fullsize [index]="null" [data]="{}">
-                </app-card-standart-fullsize>
-            </div>
-            <div class="item">
-                <app-card-standart-fullsize [index]="null" [data]="{}">
-                </app-card-standart-fullsize>
-            </div>
-            <div class="item">
-                <app-card-standart-fullsize [index]="null" [data]="{}">
-                </app-card-standart-fullsize>
-            </div>
-            <div class="item">
-                <app-card-standart-fullsize [index]="null" [data]="{}">
-                </app-card-standart-fullsize>
-            </div>
-            <div class="item">
-                <app-card-standart-fullsize [index]="null" [data]="{}">
-                </app-card-standart-fullsize>
-            </div>
-            <div class="item">
-                <app-card-standart-fullsize [index]="null" [data]="{}">
-                </app-card-standart-fullsize>
+    } @else {
+        <!-- Like, if there is no data, it would be just a skeleton -->
+        <div class="content placeholder">
+            <div class="items placeholder">
+                <div class="item" *ngFor="let i of [].constructor(25)">
+                    <app-card-standart-fullsize
+                        [index]="0"
+                        [data]="undefined">
+                    </app-card-standart-fullsize>
+                </div>
             </div>
         </div>
-    </div>
+    }
 </div>

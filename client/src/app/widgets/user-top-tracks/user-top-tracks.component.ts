@@ -6,13 +6,12 @@ import { TimeframeSelectionComponent } from "@feature/timeframe-selection/timefr
 import { TimeFrame } from '@entity/shared.entity';
 import { UserTopItemsDataRepository } from '@repository/user-top-items.repository';
 import { CommonModule } from '@angular/common';
-import { CardStandartCompactComponent } from "../../features/card-standart-compact/card-standart-compact.component";
 import { CardStandartFullsizeComponent } from "../../features/card-standart-fullsize/card-standart-fullsize.component";
 
 @Component({
   selector: 'app-user-top-tracks',
   standalone: true,
-  imports: [CommonModule, TrackCardComponent, LoadMoreButtonComponent, TimeframeSelectionComponent, CardStandartFullsizeComponent],
+  imports: [CommonModule, LoadMoreButtonComponent, TimeframeSelectionComponent, CardStandartFullsizeComponent, TrackCardComponent],
   templateUrl: './user-top-tracks.component.html',
   styleUrl: './user-top-tracks.component.scss'
 })
@@ -22,7 +21,14 @@ export class UserTopTracksComponent {
 
   periodOfTime: WritableSignal<TimeFrame> = signal('short_term' as TimeFrame);
 
-  userTopTracks = computed(() => this.userTopItemsDataRepository.getUserTopTracks(this.periodOfTime()));
+  userTopTracks = computed(() => {
+    if (false &&this.userTopItemsDataRepository.getUserTopTracks(this.periodOfTime()).length > 0) {
+      console.log(this.userTopItemsDataRepository.getUserTopTracks(this.periodOfTime()));
+      return this.userTopItemsDataRepository.getUserTopTracks(this.periodOfTime());
+    } else {
+      return [];
+    }
+  });
 
   loadMoreItems() {
     this.getUserTopItems.getMoreUserTopItems('tracks', this.periodOfTime(), this.userTopTracks().length);

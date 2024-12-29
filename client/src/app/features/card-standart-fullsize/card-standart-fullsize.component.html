@@ -1,22 +1,28 @@
-<div class="card" *ngIf="data() && index()" [@fadeAnimation]>
+<div
+    *ngIf="data() != undefined"
+    class="card"
+    [@fadeAnimation]
+    >
     <div class="picture">
-        <a [href]="data().link">
+        <a [href]="data()?.link">
             <img
-                *ngIf="data().image"
-                [src]="data().image"
-                [alt]="data().primaryText"
+                *ngIf="data()?.image"
+                [src]="data()?.image"
+                [alt]="data()?.primaryText + ' image...'"
                 loading="lazy"
             />
         </a>
     </div>
     <div class="info">
         <div class="index">
-            <p>#{{ index() }}</p>
+            <div class="number">
+                #<div class="placeholder">{{ index() != null ? index() : '//' }}</div>
+            </div>
         </div>
         <div class="track-info">
-            <p class="primaryText">{{ data().primaryText }}</p>
-            <p class="secondaryText" *ngIf="data().secondaryText">
-                {{ data().secondaryText }}
+            <p class="primaryText">{{ data()?.primaryText }}</p>
+            <p class="secondaryText" *ngIf="data()?.secondaryText">
+                {{ data()?.secondaryText }}
             </p>
         </div>
     </div>
@@ -28,7 +34,9 @@
     </div>
     <div class="info">
         <div class="index">
-            <div class="number">#<div class="placeholder">//</div></div>
+            <div class="number">
+                #<div class="placeholder">//</div>
+            </div>
         </div>
         <div class="card-info">
             <p class="primary-text placeholder"></p>

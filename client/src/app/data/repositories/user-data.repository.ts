@@ -7,7 +7,7 @@ export class UserDataRepository {
     this.userCode.set(code);
     sessionStorage.setItem('userCode', code);
     localStorage.setItem('userCode', code);
-    console.log('code', code)
+    // console.log('code', code)
   }
   public getUserCode(): string {
     return this.userCode();
