@@ -1,0 +1,50 @@
+.wrapper {
+    padding: 20px 48px;
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+
+        .title {
+            p {
+                font-size: 24px;
+                font-weight: 700;
+                color: var(--white-color);
+            }
+        }
+        .settings-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            .name {
+                font-size: 18px;
+                font-weight: 400;
+                color: var(--white-color);
+            }
+            .description {
+                font-size: 14px;
+                font-weight: 400;
+                color: var(--gray-color);
+            }
+            .actions {
+                max-width: 400px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .wrapper {
+        padding: 20px 24px;
+        .container {
+            .settings-item {
+                .actions {
+                    max-width: initial;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

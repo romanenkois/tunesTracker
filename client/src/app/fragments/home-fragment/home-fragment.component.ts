@@ -4,7 +4,7 @@ import { LogOutButtonComponent } from "../../features/log-out-button/log-out-but
 @Component({
   selector: 'app-home-fragment',
   standalone: true,
-  imports: [LogOutButtonComponent],
+  imports: [],
   templateUrl: './home-fragment.component.html',
   styleUrl: './home-fragment.component.scss'
 })

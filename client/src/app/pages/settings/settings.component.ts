@@ -1,11 +1,12 @@
 import { Component, computed, inject } from '@angular/core';
 import { GetUserProfileCommand } from '@commands/get-user-profile.command';
 import { UserDataRepository } from '@repository/user-data.repository';
+import { LogOutButtonComponent } from "../../features/log-out-button/log-out-button.component";
 
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [],
+  imports: [LogOutButtonComponent],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss'
 })

@@ -6,7 +6,6 @@
     justify-content: center;
     align-items: center;
 
-    cursor: pointer;
     background-color: var(--green-spotify-color);
     transition: var(--standart-transition);
 
@@ -29,9 +28,7 @@
             padding: var(--small-padding) var(--medium-padding);
 
             p {
-                margin: 0;
                 font-size: var(--medium-font-size);
-                // font-size: 16px;
                 font-weight: bold;
                 color: var(--white-color);
             }
