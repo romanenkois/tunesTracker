@@ -6,8 +6,6 @@ import { Album, Track, Artist, TimeFrame } from '@entity/index';
 // }
 @Injectable({ providedIn: 'root' })
 export class UserTopItemsDataRepository {
-
-
   // user top tracks
   private readonly userTopTracks: WritableSignal<{
     [term in TimeFrame]? : Array<Track>
