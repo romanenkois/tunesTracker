@@ -13,10 +13,16 @@
             <div class="items">
                 @for (item of this.userTopTracks(); track $index) {
                 <div class="item">
-                    <app-track-card
-                        [track]="item"
+                    <app-card-standart-fullsize
                         [index]="$index + 1"
-                    ></app-track-card>
+                        [data]="{
+                            primaryText: item.name,
+                            secondaryText: item.artists[0].name,
+                            image: item.album.images[0].url,
+                            imageLink: item.id,
+                            primaryTextLink: item.id,
+                        }">
+                    </app-card-standart-fullsize>
                 </div>
                 }
             </div>
@@ -27,8 +33,8 @@
         </div>
     } @else {
         <!-- Like, if there is no data, it would be just a skeleton -->
-        <div class="content placeholder">
-            <div class="items placeholder">
+        <div class="content">
+            <div class="items">
                 <div class="item" *ngFor="let i of [].constructor(25)">
                     <app-card-standart-fullsize
                         [index]="0"

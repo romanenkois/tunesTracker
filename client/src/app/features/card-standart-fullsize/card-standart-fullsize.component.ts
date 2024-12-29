@@ -16,7 +16,9 @@ export class CardStandartFullsizeComponent {
   data: InputSignal<{
     primaryText: string;
     secondaryText?: string;
-    image?: Array<string>;
-    link?: string;
+    image?: Array<string> | string;
+    imageLink?: string;
+    primaryTextLink?: string;
+    secondaryTextLink?: string;
   } | undefined> = input.required();
 }

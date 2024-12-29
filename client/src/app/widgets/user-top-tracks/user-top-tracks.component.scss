@@ -3,15 +3,15 @@
     // flex-direction: column;
     // min-height: 100%;
     position: relative;
-    outline: 2px solid red;
-    border: 2px solid red;
+    // outline: 2px solid red;
+    // border: 2px solid red;
 
     // flex: 1;
 
     .timeframe-selection {
         position: sticky; // isnt realy sticky, couse it goes under top nav bar
         top: 0;
-        z-index: 1000;
+        // z-index: 1000;
     }
 
     .content {
@@ -23,18 +23,6 @@
             grid-gap: 16px;
 
             padding: 4px 16px;
-        }
-    }
-    .content.placeholder {
-        overflow: hidden;
-        height: 100%;
-        width: 100%;
-        position: relative;
-        .items.placeholder {
-            overflow: hidden;
-            height: 100%;
-            width: 100%;
-            position: relative;
         }
     }
 }

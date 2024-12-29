@@ -11,7 +11,7 @@ import { CardStandartFullsizeComponent } from "../../features/card-standart-full
 @Component({
   selector: 'app-user-top-tracks',
   standalone: true,
-  imports: [CommonModule, LoadMoreButtonComponent, TimeframeSelectionComponent, CardStandartFullsizeComponent, TrackCardComponent],
+  imports: [CommonModule, LoadMoreButtonComponent, TimeframeSelectionComponent, CardStandartFullsizeComponent],
   templateUrl: './user-top-tracks.component.html',
   styleUrl: './user-top-tracks.component.scss'
 })
@@ -22,7 +22,7 @@ export class UserTopTracksComponent {
   periodOfTime: WritableSignal<TimeFrame> = signal('short_term' as TimeFrame);
 
   userTopTracks = computed(() => {
-    if (false &&this.userTopItemsDataRepository.getUserTopTracks(this.periodOfTime()).length > 0) {
+    if ( this.userTopItemsDataRepository.getUserTopTracks(this.periodOfTime()).length > 0) {
       console.log(this.userTopItemsDataRepository.getUserTopTracks(this.periodOfTime()));
       return this.userTopItemsDataRepository.getUserTopTracks(this.periodOfTime());
     } else {

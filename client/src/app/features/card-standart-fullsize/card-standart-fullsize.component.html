@@ -4,7 +4,7 @@
     [@fadeAnimation]
     >
     <div class="picture">
-        <a [href]="data()?.link">
+        <a [href]="data()?.imageLink">
             <img
                 *ngIf="data()?.image"
                 [src]="data()?.image"
@@ -15,13 +15,22 @@
     </div>
     <div class="info">
         <div class="index">
-            <div class="number">
-                #<div class="placeholder">{{ index() != null ? index() : '//' }}</div>
-            </div>
+            <span>#</span>
+            <span>{{ index() != null ? index() : '00' }}</span>
         </div>
-        <div class="track-info">
-            <p class="primaryText">{{ data()?.primaryText }}</p>
-            <p class="secondaryText" *ngIf="data()?.secondaryText">
+        <div class="card-info">
+            <p
+                class="primary-text"
+                [title]="data()?.primaryText"
+
+                >
+                {{ data()?.primaryText }}
+            </p>
+            <p
+                *ngIf="data()?.secondaryText"
+                class="secondary-text"
+                [title]="data()?.secondaryText"
+                >
                 {{ data()?.secondaryText }}
             </p>
         </div>
@@ -34,9 +43,8 @@
     </div>
     <div class="info">
         <div class="index">
-            <div class="number">
-                #<div class="placeholder">//</div>
-            </div>
+            <span class="placeholder">#</span>
+            <span class="placeholder">00</span>
         </div>
         <div class="card-info">
             <p class="primary-text placeholder"></p>
