@@ -18,25 +18,25 @@ export class ApiService {
 
   public getTrack(id: string, market?: string): Observable<TrackResponse> {
     return this.http.get<TrackResponse>(
-      `${config.BASE_URL}/tracks/track/${id}${market ? `?market=${market}` : ''}`
+      `${config.BASE_API_URL}/tracks/track/${id}${market ? `?market=${market}` : ''}`
     )
   }
 
   public getAlbum(id: string, market?: string): Observable<AlbumResponse> {
     return this.http.get<AlbumResponse>(
-      `${config.BASE_URL}/albums/album/${id}${market ? `?market=${market}` : ''}` // custom api uses /album/:id, when spotify uses /albums/:id
+      `${config.BASE_API_URL}/albums/album/${id}${market ? `?market=${market}` : ''}` // custom api uses /album/:id, when spotify uses /albums/:id
     )
   }
 
   public getArtist(id: string): Observable<ArtistResponse> {
     return this.http.get<ArtistResponse>(
-      `${config.BASE_URL}/artists/artist/${id}` // custom api uses /artists/:id, when spotify uses /artists/:id
+      `${config.BASE_API_URL}/artists/artist/${id}` // custom api uses /artists/:id, when spotify uses /artists/:id
     )
   }
 
   public getArtists(ids: Array<string>): Observable<any> {
     return this.http.get<any>(
-      `${config.BASE_URL}/artists/artists/ids=${ids.join(',')}`
+      `${config.BASE_API_URL}/artists/artists/ids=${ids.join(',')}`
     )
   }
 
@@ -45,7 +45,7 @@ export class ApiService {
       'code': code
     }
 
-    return this.http.get<any>(`${config.BASE_URL}/user-data/user-profile/`, { headers });
+    return this.http.get<any>(`${config.BASE_API_URL}/user-data/user-profile/`, { headers });
   }
 
 
@@ -53,7 +53,7 @@ export class ApiService {
     let headers = {
       'code': code
     }
-    return this.http.get<any>(`${config.BASE_URL}/user-data/authenticate/`, { headers })
+    return this.http.get<any>(`${config.BASE_API_URL}/user-data/authenticate/`, { headers })
   }
 
   public getUserTopItems(
@@ -63,7 +63,7 @@ export class ApiService {
     limit?: number,
     offset?: number
   ): Observable<UserTopItemsResponse> {
-    let endpoint: string = `${config.BASE_URL}/user-data/top-items/${type}`;
+    let endpoint: string = `${config.BASE_API_URL}/user-data/top-items/${type}`;
 
     endpoint += `?time_range=${time_range}`
 
@@ -86,7 +86,7 @@ export class ApiService {
     time_range: TimeFrame,
     limit: number
   ): Observable<UserTopItemsResponse> {
-    let endpoint: string = `${config.BASE_URL}/user-data/top-albums`;
+    let endpoint: string = `${config.BASE_API_URL}/user-data/top-albums`;
 
     endpoint += `?time_range=${time_range}`;
     endpoint += `&limit=${limit}`;
@@ -103,7 +103,7 @@ export class ApiService {
     time_range: TimeFrame,
     limit: number
   ): Observable<any> {
-    let endpoint = `${config.BASE_URL}/user-data/top-genres`
+    let endpoint = `${config.BASE_API_URL}/user-data/top-genres`
 
     endpoint += `?time_range=${time_range}`;
     endpoint += `&limit=${limit}`;

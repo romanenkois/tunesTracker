@@ -20,6 +20,7 @@ export class AlbumMapper {
       total_tracks: dto.total_tracks,
 
       artists: dto.artists.map(artist => ArtistMapper.toSimplifiedEntity(artist)),
+      type: dto.type,
     };
   }
 
@@ -36,7 +37,8 @@ export class AlbumMapper {
       album_type: dto.album_type,
       total_tracks: dto.total_tracks,
 
-      artists: dto.artists.map(artist => ArtistMapper.toSimplifiedEntity(artist))
+      artists: dto.artists.map(artist => ArtistMapper.toSimplifiedEntity(artist)),
+      type: dto.type,
     };
   }
 }

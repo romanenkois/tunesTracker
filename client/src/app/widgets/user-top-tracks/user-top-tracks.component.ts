@@ -7,6 +7,7 @@ import { TimeFrame } from '@entity/shared.entity';
 import { UserTopItemsDataRepository } from '@repository/user-top-items.repository';
 import { CommonModule } from '@angular/common';
 import { CardStandartFullsizeComponent } from "../../features/card-standart-fullsize/card-standart-fullsize.component";
+import { CardMapper } from '@mapper/card.mapper';
 
 @Component({
   selector: 'app-user-top-tracks',
@@ -23,8 +24,7 @@ export class UserTopTracksComponent {
 
   userTopTracks = computed(() => {
     if ( this.userTopItemsDataRepository.getUserTopTracks(this.periodOfTime()).length > 0) {
-      console.log(this.userTopItemsDataRepository.getUserTopTracks(this.periodOfTime()));
-      return this.userTopItemsDataRepository.getUserTopTracks(this.periodOfTime());
+      return this.userTopItemsDataRepository.getUserTopTracks(this.periodOfTime()).map(track => CardMapper.toEntity(track));
     } else {
       return [];
     }

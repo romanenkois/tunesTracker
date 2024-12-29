@@ -12,6 +12,7 @@ export class ArtistMapper {
       images: dto.images,
       genres: dto.genres,
       popularity: dto.popularity,
+      type: dto.type,
     };
   }
 
@@ -22,6 +23,7 @@ export class ArtistMapper {
       uri: dto.uri,
 
       name: dto.name,
+      type: dto.type,
     };
   }
 }

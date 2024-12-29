@@ -17,6 +17,7 @@ export type Album = {
   genres: Array<string>,
   popularity: number,
   total_tracks: number,
+  type: 'album',
 
   artists: Array<ArtistSimplified>
 
@@ -42,6 +43,7 @@ export type AlbumSimplified = {
   release_date: string,
   album_type: 'album' | 'single' | 'compilation',
   total_tracks: number,
+  type: 'album',
 
   artists: Array<ArtistSimplified>
 }

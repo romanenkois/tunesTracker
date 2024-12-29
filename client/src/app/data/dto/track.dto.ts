@@ -27,7 +27,7 @@ export type TrackDTO = {
   popularity: number,
   preview_url: string | undefined,
   track_number: number,
-  type: string,
+  type: 'track',
   uri: string,
   is_local: boolean
 }

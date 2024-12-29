@@ -11,5 +11,6 @@ export type Track = {
   duration_ms: number,
 
   artists: Array<ArtistSimplified>
-  album: AlbumSimplified
+  album: AlbumSimplified,
+  type: 'track',
 }

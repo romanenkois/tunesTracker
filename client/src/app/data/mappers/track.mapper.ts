@@ -15,7 +15,8 @@ export class TrackMapper {
       duration_ms: dto.duration_ms,
 
       artists: dto.artists.map(artist => ArtistMapper.toSimplifiedEntity(artist)),
-      album: AlbumMapper.toSimplifiedEntity(dto.album)
+      album: AlbumMapper.toSimplifiedEntity(dto.album),
+      type: dto.type,
     };
   }
 }

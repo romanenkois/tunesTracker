@@ -7,11 +7,11 @@
     </div>
 
     @if (
-        this.userTopTracks().length > 0
+        this.userTopItems().length > 0
     ) {
         <div class="content">
             <div class="items">
-                @for (item of this.userTopTracks(); track $index) {
+                @for (item of this.userTopItems(); track $index) {
                 <div class="item">
                     <app-card-standart-fullsize
                         [index]="$index + 1"
@@ -22,6 +22,7 @@
             </div>
 
             <app-load-more-button
+                *ngIf="this.itemType() !== 'albums'"
                 (loadMoreEvent)="loadMoreItems()"
             ></app-load-more-button>
         </div>

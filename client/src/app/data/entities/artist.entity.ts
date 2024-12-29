@@ -11,12 +11,14 @@ export type Artist = {
   }>,
   genres: Array<string>,
   popularity: number,
+  type: 'artist',
 }
 
 export type ArtistSimplified = {
   id: string,
   href: string,
   uri: string,
+  type: 'artist',
 
   name: string,
 }

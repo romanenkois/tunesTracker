@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { UserTopAlbumsComponent } from "../../widgets/user-top-albums/user-top-albums.component";
+import { UserTopItemsComponent } from "@widget/user-top-items/user-top-items.component";
 
 @Component({
   selector: 'app-top-albums-fragment',
   standalone: true,
-  imports: [UserTopAlbumsComponent],
+  imports: [UserTopItemsComponent],
   templateUrl: './top-albums-fragment.component.html',
   styleUrl: './top-albums-fragment.component.scss'
 })
