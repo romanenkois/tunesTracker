@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject, input, InputSignal, OnInit } from '@angular/core';
 import { GetTrackCommand } from '@commands/get-track.command';
+import { config } from '@config/config';
 import { TrackDataRepository } from '@repository/track-data.repository';
 
 @Component({
@@ -17,6 +18,8 @@ export class TrackInfoComponent implements OnInit {
   trackId: InputSignal<string> = input.required();
 
   track = computed(() => this.trackRepository.getTrackData());
+
+  baseUrl: string = `${config.BASE_CLIENT_URL}`;
 
   ngOnInit() {
     if (this.trackId() != '') {

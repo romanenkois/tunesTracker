@@ -4,7 +4,7 @@
     --dark-color: #0c0e14;
     --dark-gray-color: #3a3a3a;
     --gray-color: #9b9b9b;
-    --white-color: #FFFFFF;
+    --white-color: #fcfcfc;
     --white-hover-color: #e6e6e6;
 
     --green-spotify-color: #1ED760;
@@ -45,6 +45,7 @@ p {
 
 a {
     text-decoration: none;
+    color: inherit;
 }
 
 button {
@@ -56,17 +57,37 @@ button {
 }
 
 // needed for icons, used by google matterial icons
-.material-symbols-outlined {
-    font-variation-settings:
-        'FILL' 0,
-        'wght' 600,
-        'GRAD' 0,
-        'opsz' 24,
-}
-svg {
-    fill: var(--white-color);
-}
+
 .icon {
     width: 24px;
     height: 24px;
+
+    .material-symbols-outlined {
+        font-variation-settings:
+            'FILL' 1,
+            'wght' 600,
+            'GRAD' 0,
+            'opsz' 24;
+
+        user-select: none;
+
+        color: var(--white-color);
+        font-size: 24px;
+    }
+}
+
+.small-icon {
+    width: 16px;
+    height: 16px;
+
+    .material-symbols-outlined {
+        font-variation-settings:
+            'FILL' 1,
+            'wght' 600,
+            'GRAD' 0,
+            'opsz' 16;
+
+        color: var(--white-color);
+        font-size: 16px;
+    }
 }
