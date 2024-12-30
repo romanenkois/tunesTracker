@@ -1,0 +1,23 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+
+    .info {
+        display: flex;
+        gap: 4px;
+
+        .rank {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--dark-gray-color);
+        }
+
+        .name {
+            display: flex;
+            align-items: center;
+
+            font-size: 18px;
+            color: var(--white-color);
+        }
+    }
+}

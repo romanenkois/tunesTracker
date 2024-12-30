@@ -30,8 +30,6 @@
 
     color: var(--white-color);
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    // width: 100vw;
-    // height: 100vh;
 }
 
 html, body {
@@ -55,4 +53,20 @@ button {
     border: none;
     background-color: none;
     border-radius: 0;
+}
+
+// needed for icons, used by google matterial icons
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 600,
+        'GRAD' 0,
+        'opsz' 24,
+}
+svg {
+    fill: var(--white-color);
+}
+.icon {
+    width: 24px;
+    height: 24px;
 }
