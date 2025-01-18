@@ -1,11 +1,17 @@
 const { writeLog } = require('../shared/utils/logger');
 const { getCCToken, getRefreshToken, getUserAccessToken } = require('./token-handler');
 const { addNewRecord, getUserRefreshToken } = require('./connections-handler');
+const { config } = require('../shared/config/config');
 
 TOKEN_CLIENT_CRIDENTIALS = 'none';
 
 async function fetchSpotifyApi(clientIP, endpoint, method, body, code, tokenAC) {
-    console.log('fetchSpotifyApi', clientIP, endpoint, method, body, code, tokenAC);
+    if (config.consoleLoging.fetchSpotifyFunction) {
+        console.log(
+            'Fetch Spotify Api function call \n',
+            { clientIP, endpoint, method, body, code, tokenAC }
+        );
+    }
 
     // initially the token is set to be as a general server side token
     let token = TOKEN_CLIENT_CRIDENTIALS.access_token;
@@ -30,7 +36,6 @@ async function fetchSpotifyApi(clientIP, endpoint, method, body, code, tokenAC) 
             // if we get the token, we will use it to req info about user, and use it for further requests
             if (tokenData.access_token) {
                 tempToken = tokenData.access_token;
-                console.log(11);
                 const userData = await fetchGeneralSpotifyApi('v1/me', 'GET', tempToken, null)
                 addNewRecord(tokenData.refresh_token, code, JSON.stringify(userData));
 
@@ -52,6 +57,10 @@ async function fetchSpotifyApi(clientIP, endpoint, method, body, code, tokenAC) 
 
     const response = await fetchGeneralSpotifyApi(endpoint, method, token, body);
 
+    if (config.server.consoleLogTokenUsed) {
+        console.log('TOKEN TO BE USED:\n', token);
+    }
+
     if (response?.error?.status == '401' && !code && !tokenAC) {
         console.log('Token expired ', new Date());
 
@@ -66,7 +75,13 @@ async function fetchSpotifyApi(clientIP, endpoint, method, body, code, tokenAC) 
 }
 
 async function fetchGeneralSpotifyApi(endpoint, method, token, body) {
-    console.log('spotify_fetch', endpoint, method, token, body)
+    if (config.server.consoleLogActualSpotifyFetch) {
+        console.warn(
+            'Direct fetch to spotify \n',
+            { endpoint, method, token, body}
+        );
+    }
+
 
     const response = await fetch(`https://api.spotify.com/${endpoint}`, {
         method,

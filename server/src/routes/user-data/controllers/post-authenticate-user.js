@@ -1,6 +1,7 @@
 const { response } = require('express');
 const { fetchSpotifyApi } = require('../../../api/api-connect');
 const { handleError } = require('../../../shared/utils/error-handler');
+const { config } = require('../../../shared/config/config');
 
 const getUserTopItems = async (req, res) => {
     try {
@@ -17,18 +18,21 @@ const getUserTopItems = async (req, res) => {
         if (!userData ||  userData == undefined ) {
            res.status(400).send('Not a valid code for user lmao')
         }
-        console.log(userData.country)
         if (userData.error || userData['error']) {
             res.status(401).json({"errorMessage": 'something happend??????', 'response': userData})
         }
 
-        // console.log(userData)
-
+        if (config.consoleLoging.userAuth) {
+            if (config.consoleLoging.userAuth === 'full') {
+                console.log('User authenticated:', userData);
+            } else {
+                console.log('User authenticated:', userData.display_name);
+            }
+        }
         data = {
             "userData": userData,
             "responseStatus": 'access granted'
         }
-        console.log(data);
         res.status(200).json(data);
     } catch (error) {
         handleError(res, error);

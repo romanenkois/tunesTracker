@@ -5,7 +5,14 @@ const { writeLog } = require('./logger');
  *
  */
 const handleError = (res, error) => {
-    console.log(error);
+    console.warn(
+        `
+        ------------------------------
+        RUNTIME ERROR
+        ------------------------------
+
+        `,
+        error, '\n');
     writeLog(`ERROR: ${error}`);
     res.status(500).json({error});
 }
