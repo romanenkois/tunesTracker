@@ -1,4 +1,4 @@
-const { sendMessage } = require('../shared/utils/telegram.notifier')
+const {  } = require('../shared/utils/telegram.notifier')
 
 let token = [];
 
@@ -9,8 +9,7 @@ function addNewRecord(refreshToken, code, userData) {
         user_data: userData
     });
 
-    console.log('New record added', token.length); // should be logged better
-    sendMessage('New record added: ' + token.length); // should be logged better
+    console.log('New token record added'); // should be logged better
 }
 
 function removeUserRocord(code) {

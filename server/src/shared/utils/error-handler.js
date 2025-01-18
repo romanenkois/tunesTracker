@@ -7,10 +7,10 @@ const { writeLog } = require('./logger');
 const handleError = (res, error) => {
     console.warn(
         `
-        ------------------------------
-        RUNTIME ERROR
-        ------------------------------
-
+        ------------------------------\n
+        RUNTIME ERROR\n
+        ------------------------------\n
+        \n
         `,
         error, '\n');
     writeLog(`ERROR: ${error}`);

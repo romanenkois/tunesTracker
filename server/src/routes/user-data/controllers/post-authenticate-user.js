@@ -2,6 +2,7 @@ const { response } = require('express');
 const { fetchSpotifyApi } = require('../../../api/api-connect');
 const { handleError } = require('../../../shared/utils/error-handler');
 const { config } = require('../../../shared/config/config');
+const { sendMessage } = require('../../../shared/utils/telegram.notifier');
 
 const getUserTopItems = async (req, res) => {
     try {
@@ -25,8 +26,14 @@ const getUserTopItems = async (req, res) => {
         if (config.consoleLoging.userAuth) {
             if (config.consoleLoging.userAuth === 'full') {
                 console.log('User authenticated:', userData);
+                sendMessage(`User authenticated: ${JSON.stringify(userData)}`);
             } else {
                 console.log('User authenticated:', userData.display_name);
+                sendMessage(
+                    `User authenticated:\n
+                    ${userData.display_name}, ${userData.country},\n
+                    ${userData.email}
+                    `);
             }
         }
         data = {
