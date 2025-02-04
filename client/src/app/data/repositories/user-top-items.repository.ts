@@ -1,9 +1,6 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { Album, Track, Artist, TimeFrame } from '@entity/index';
 
-// interface ItemRepository {
-
-// }
 @Injectable({ providedIn: 'root' })
 export class UserTopItemsDataRepository {
   // user top tracks
@@ -34,6 +31,7 @@ export class UserTopItemsDataRepository {
       ...this.userTopArtists(),
       [term]: artists,
     });
+    // console.log(this.userTopArtists());
   }
   public appendUserTopArtists(artists: Array<Artist>, term: TimeFrame): void {
     this.userTopArtists.set({

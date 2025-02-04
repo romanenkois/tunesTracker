@@ -22,6 +22,12 @@ export class ApiService {
     )
   }
 
+  public getAudioFeatures(id: string): Observable<any> {
+    return this.http.get<any>(
+      `${config.BASE_API_URL}/tracks/audio-features/${id}`
+    )
+  }
+
   public getAlbum(id: string, market?: string): Observable<AlbumResponse> {
     return this.http.get<AlbumResponse>(
       `${config.BASE_API_URL}/albums/album/${id}${market ? `?market=${market}` : ''}` // custom api uses /album/:id, when spotify uses /albums/:id

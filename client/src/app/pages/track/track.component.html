@@ -1,3 +1,8 @@
 <div *ngIf="this.trackId != ''" class="wrapper">
-    <app-track-info [trackId]="this.trackId"></app-track-info>
+    <div class="container">
+        <app-track-info [trackId]="this.trackId"></app-track-info>
+    </div>
+    <div class="container">
+        <app-audio-features-info [trackId]="this.trackId"></app-audio-features-info>
+    </div>
 </div>
