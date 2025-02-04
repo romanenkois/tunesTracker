@@ -21,6 +21,15 @@ export class TrackInfoComponent implements OnInit {
 
   baseUrl: string = `${config.BASE_CLIENT_URL}`;
 
+  copyToClipboard(text: string) {
+    try {
+      navigator.clipboard.writeText(text);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+      window.alert('Failed to copy');
+    }
+  }
+
   ngOnInit() {
     if (this.trackId() != '') {
       this.getTrackCommand.getTrack(this.trackId());

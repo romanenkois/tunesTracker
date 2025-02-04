@@ -56,6 +56,14 @@ button {
     border-radius: 0;
 }
 
+.truncate {
+    display: -webkit-box;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
 // needed for icons, used by google matterial icons
 
 .icon {

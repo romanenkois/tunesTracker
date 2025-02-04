@@ -20,16 +20,16 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/settings/settings.component'),
     canActivate: [ authorizationGuard ],
   },
-  {
-    path: 'album/:id',
-    loadComponent: () => import('./pages/album/album.component'),
-    canActivate: [ authorizationGuard ],
-  },
-  {
-    path: 'artist/:id',
-    loadComponent: () => import('./pages/artist/artist.component'),
-    canActivate: [ authorizationGuard ],
-  },
+  // {
+  //   path: 'album/:id',
+  //   loadComponent: () => import('./pages/album/album.component'),
+  //   canActivate: [ authorizationGuard ],
+  // },
+  // {
+  //   path: 'artist/:id',
+  //   loadComponent: () => import('./pages/artist/artist.component'),
+  //   canActivate: [ authorizationGuard ],
+  // },
   {
     path: 'track/:id',
     loadComponent: () => import('./pages/track/track.component'),

@@ -1,127 +1,127 @@
 @if (this.track() != undefined) {
-    <div class="wrapper">
-        <div class="container">
-            <div class="picture">
-                <img
-                    [src]="this.track().album.images[0].url"
-                    [alt]="this.track().album.name + ' album cover'"
-                />
-            </div>
+<div class="wrapper">
+    <div class="container">
+        <div class="picture">
+            <img
+                [src]="this.track().album.images[0].url"
+                [alt]="this.track().album.name + ' album cover'"
+            />
         </div>
-        <div class="container">
-            <div class="info">
-                <div class="info-frame">
-                    <div class="info-item">
-                        <p class="primary-text">
-                            {{this.track().name}}
-                        </p>
-                    </div>
-                    <div class="info-item">
-                        <span class="icon">
-                            <span class="material-symbols-outlined">
-                                artist
-                            </span>
+    </div>
+    <div class="container">
+        <div class="info">
+            <div class="info-frame">
+                <div class="info-item">
+                    <p class="primary-text truncate" [title]="this.track().name" (dblclick)="this.copyToClipboard(this.track().name)">
+                        {{this.track().name}}
+                    </p>
+                </div>
+                <div class="info-item">
+                    <span class="icon">
+                        <span class="material-symbols-outlined">
+                            artist
                         </span>
-                        <p class="secondary-text">
-                            @for (item of track().artists; track $index) {
-                                @if ($index < track().artists.length - 1) {
-                                    <a [href]="baseUrl+'/artist/'+item.id">
-                                        {{item.name}},
-                                    </a>
-                                } @else {
-                                    <a [href]="baseUrl+'/artist/'+item.id">
-                                        {{item.name}}
-                                    </a>
-                                }
+                    </span>
+                    <p class="secondary-text truncate">
+                        @for (item of track().artists; track $index) {
+                            @if ($index < track().artists.length - 1) {
+                                <a [href]="baseUrl+'/artist/'+item.id">
+                                    {{item.name}},
+                                </a>
+                            } @else {
+                                <a [href]="baseUrl+'/artist/'+item.id">
+                                    {{item.name}}
+                                </a>
                             }
-                        </p>
-                    </div>
-                    <div class="info-item">
-                        <span class="icon">
-                            <span class="material-symbols-outlined">
-                                album
-                            </span>
-                        </span>
-                        <p class="secondary-text">
-                            <a [href]="baseUrl+'/albums/'+this.track().album.id">
-                                {{this.track().album.name}}
-                            </a>
-                        </p>
-                    </div>
+                        }
+                    </p>
                 </div>
-                <div class="info-frame">
-                    <div class="info-item">
-                        <span class="icon">
-                            <span class="material-symbols-outlined">
-                                date_range
-                            </span>
+                <div class="info-item">
+                    <span class="icon">
+                        <span class="material-symbols-outlined">
+                            album
                         </span>
-                        <p class="secondary-text">
-                            {{this.track().album.release_date | date: 'dd-MM-YYYY'}}
-                        </p>
-                    </div>
-                    <div class="info-item">
-                        <span class="icon">
-                            <span class="material-symbols-outlined">
-                                groups
-                            </span>
+                    </span>
+                    <p class="secondary-text truncate">
+                        <a [href]="baseUrl+'/albums/'+this.track().album.id">
+                            {{this.track().album.name}}
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="info-frame">
+                <div class="info-item">
+                    <span class="icon">
+                        <span class="material-symbols-outlined">
+                            date_range
                         </span>
-                        <p class="secondary-text">
-                            popularity: {{this.track().popularity}}
-                        </p>
-                    </div>
-                    <div class="info-item">
-                        <span class="icon">
-                            <span class="material-symbols-outlined">
-                                access_time
-                            </span>
+                    </span>
+                    <p class="secondary-text">
+                        {{this.track().album.release_date | date: 'dd-MM-YYYY'}}
+                    </p>
+                </div>
+                <div class="info-item">
+                    <span class="icon">
+                        <span class="material-symbols-outlined">
+                            groups
                         </span>
-                        <p class="secondary-text">
-                            duration: {{this.track().duration_ms }}
-                        </p>
-                    </div>
+                    </span>
+                    <p class="secondary-text">
+                        popularity: {{this.track().popularity}}
+                    </p>
+                </div>
+                <div class="info-item">
+                    <span class="icon">
+                        <span class="material-symbols-outlined">
+                            access_time
+                        </span>
+                    </span>
+                    <p class="secondary-text">
+                        duration: {{this.track().duration_ms }}
+                    </p>
                 </div>
             </div>
         </div>
     </div>
+</div>
 } @else {
-    <!-- SCELETON PLACEHOLDER -->
-    <div class="wrapper">
-        <div class="container">
-            <div class="picture">
-                <div class="picture-placeholder"></div>
-            </div>
+<!-- SCELETON PLACEHOLDER -->
+<div class="wrapper">
+    <div class="container">
+        <div class="picture">
+            <div class="picture-placeholder"></div>
         </div>
-        <div class="container">
-            <div class="info">
-                <div class="info-frame">
-                    <div class="info-item placeholder">
-                        <p class="primary-text placeholder"></p>
-                    </div>
-                    <div class="info-item placeholder">
-                        <span class="icon placeholder"></span>
-                        <p class="secondary-text placeholder"></p>
-                    </div>
-                    <div class="info-item placeholder">
-                        <span class="icon placeholder"></span>
-                        <p class="secondary-text placeholder"></p>
-                    </div>
+    </div>
+    <div class="container">
+        <div class="info">
+            <div class="info-frame">
+                <div class="info-item placeholder">
+                    <p class="primary-text placeholder"></p>
                 </div>
-                <div class="info-frame">
-                    <div class="info-item placeholder">
-                        <span class="icon placeholder"></span>
-                        <p class="secondary-text placeholder"></p>
-                    </div>
-                    <div class="info-item placeholder">
-                        <span class="icon placeholder"></span>
-                        <p class="secondary-text placeholder"></p>
-                    </div>
-                    <div class="info-item placeholder">
-                        <span class="icon placeholder"></span>
-                        <p class="secondary-text placeholder"></p>
-                    </div>
+                <div class="info-item placeholder">
+                    <span class="icon placeholder"></span>
+                    <p class="secondary-text placeholder"></p>
+                </div>
+                <div class="info-item placeholder">
+                    <span class="icon placeholder"></span>
+                    <p class="secondary-text placeholder"></p>
+                </div>
+            </div>
+            <div class="info-frame">
+                <div class="info-item placeholder">
+                    <span class="icon placeholder"></span>
+                    <p class="secondary-text placeholder"></p>
+                </div>
+                <div class="info-item placeholder">
+                    <span class="icon placeholder"></span>
+                    <p class="secondary-text placeholder"></p>
+                </div>
+                <div class="info-item placeholder">
+                    <span class="icon placeholder"></span>
+                    <p class="secondary-text placeholder"></p>
                 </div>
             </div>
         </div>
     </div>
+</div>
 }
