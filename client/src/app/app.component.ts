@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { TopNavComponent } from "@widget/top-nav/top-nav.component";
 import { CommonModule } from '@angular/common';
+import { MouseTrailComponent } from "./features/mouse-trail/mouse-trail.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, TopNavComponent],
+  imports: [RouterOutlet, CommonModule, TopNavComponent, MouseTrailComponent],
   templateUrl: 'app.component.html',
   styleUrl: 'app.component.scss',
 })
