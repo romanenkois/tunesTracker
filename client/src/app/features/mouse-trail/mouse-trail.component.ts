@@ -7,27 +7,13 @@ import {
   OnInit,
   ViewChild,
   AfterViewInit,
+  InputSignal,
+  input,
 } from '@angular/core';
-
-interface PalleteHSLA {
-  hue: number;
-  saturation: number;
-  lightness: number;
-  opasity: number;
-}
-interface TrailPoint {
-  x: number;
-  y: number;
-  age: number;
-}
-interface TrailingTriangle {
-  x: number;
-  y: number;
-  rotation: number;
-  size: number;
-  color: PalleteHSLA;
-  age: number;
-}
+import { TrailingTriangle, TrailPoint } from './types/types';
+import { trailConfig, trianglesConfig } from './config/trail.config';
+import { drawLineTrail } from './painters/line.painter';
+import { drawTriangle } from './painters/triangles.painter';
 
 @Component({
   selector: 'app-mouse-trail',
@@ -57,38 +43,19 @@ export class MouseTrailComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private trianglePoints: TrailingTriangle[] = [];
 
-  private readonly trailConfig = {
-    maxPoints: 200,
-    minDistance: 10,
-    maxDistance: 400,
+  private readonly moduleConfig = {
+    customCursor: false,
+    onClickCursor: false,
 
-    minTimeInBetween: 5,
+    showMouseTrail: false,
+    showTriangles: false,
+  }
+  private readonly trailConfig = trailConfig;
+  private readonly trianglesConfig = trianglesConfig;
 
-    lineWidth: 3,
-    opasity: 0.5,
-    color: '100, 140, 256',
-
-    maxAge: 15,
-    ageToFade: 10,
-    ageToChangeOpasity: 10,
-  };
-
-  private readonly trianglesConfig = {
-    maxTriangles: 10,
-    minDistance: 10,
-    maxDistance: 400,
-    minTimeInBetween: 6,
-    lineWidth: 3,
-    opasity: 0.5,
-    color: {
-      hue: 220,
-      saturation: 45,
-      lightness: 41,
-    },
-    maxAge: 15,
-    ageToFade: 10,
-    ageToChangeOpasity: 0,
-  };
+  customCursor: InputSignal<'show' | false> = input<'show' | false>(false);
+  showMouseTrail: InputSignal<Boolean> = input<Boolean>(false);
+  showTriangles: InputSignal<Boolean> = input<Boolean>(false);
 
   constructor() {
     this.resizeObserver = new ResizeObserver(() => {
@@ -101,6 +68,16 @@ export class MouseTrailComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     const canvas = this.canvasRef.nativeElement;
     this.ctx = canvas.getContext('2d')!;
+
+    if (this.customCursor() === 'show') {
+      this.moduleConfig.customCursor = true;
+    }
+    if (this.showMouseTrail()) {
+      this.moduleConfig.showMouseTrail = true;
+    }
+    if (this.showTriangles()) {
+      this.moduleConfig.showTriangles = true;
+    }
 
     // Add global event listeners since the container is pointer-events: none
     document.addEventListener('mousemove', this.onMouseMove.bind(this));
@@ -208,9 +185,11 @@ export class MouseTrailComponent implements OnInit, AfterViewInit, OnDestroy {
         size: Math.random() * 5 + 10,
         color: {
           hue: this.trianglesConfig.color.hue,
-          saturation: this.trianglesConfig.color.saturation + Math.random() * 40 - 20,
-          lightness: this.trianglesConfig.color.lightness + Math.random() * 80 - 30,
-          opasity: this.trianglesConfig.opasity,
+          saturation:
+            this.trianglesConfig.color.saturation + Math.random() * 40 - 20,
+          lightness:
+            this.trianglesConfig.color.lightness + Math.random() * 80 - 30,
+          opacity: this.trianglesConfig.opasity,
         },
         age: 0,
       });
@@ -221,98 +200,36 @@ export class MouseTrailComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  private drawLineTrail(
-    point: { x: number; y: number; age: number },
-    index: number
-  ): void {
-    const opacity = this.trailConfig.opasity;
-
-    if (index > 0) {
-      const prevPoint = this.trailPoints[index - 1];
-      const gradient = this.ctx.createLinearGradient(
-        prevPoint.x,
-        prevPoint.y,
-        point.x,
-        point.y
-      );
-
-      const startOpacity =
-        point.age > this.trailConfig.ageToFade
-          ? this.trailConfig.opasity - point.age
-          : opacity;
-
-      const endOpacity =
-        point.age > this.trailConfig.ageToFade
-          ? this.trailConfig.opasity - point.age - 1
-          : opacity;
-
-      gradient.addColorStop(
-        0,
-        `rgba(${this.trailConfig.color}, ${startOpacity})`
-      );
-      gradient.addColorStop(
-        1,
-        `rgba(${this.trailConfig.color}, ${endOpacity})`
-      );
-
-      this.ctx.beginPath();
-      this.ctx.strokeStyle = gradient;
-      this.ctx.lineWidth =
-        point.age > this.trailConfig.ageToFade
-          ? this.trailConfig.lineWidth * point.age
-          : this.trailConfig.lineWidth;
-      this.ctx.moveTo(prevPoint.x, prevPoint.y);
-      this.ctx.lineTo(point.x, point.y);
-      this.ctx.stroke();
-    }
-  }
-
-  private drawTriangle(
-    ctx: CanvasRenderingContext2D,
-    triangle: TrailingTriangle
-  ) {
-    const _color = `hsla(${triangle.color.hue}, ${triangle.color.saturation}%, ${triangle.color.lightness}%, ${triangle.color.opasity})`;
-
-    ctx.save();
-    ctx.translate(triangle.x, triangle.y);
-    ctx.rotate(triangle.rotation);
-
-    ctx.beginPath();
-    ctx.moveTo(0, -triangle.size / 2);
-    ctx.lineTo(-triangle.size / 2, triangle.size / 2);
-    ctx.lineTo(triangle.size / 2, triangle.size / 2);
-    ctx.closePath();
-
-    ctx.fillStyle = _color;
-    ctx.fill();
-    ctx.restore();
-  }
-
   private animate() {
     if (!this.isInitialized) return;
     const canvas = this.canvasRef.nativeElement;
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
     this.lastTimeStamp = Date.now();
 
-    this.trailPoints.forEach((point, index) => {
-      point.age++;
-      if (point.age > this.trailConfig.maxAge) {
-        this.trailPoints.splice(index, 1);
-        return;
-      }
+    if (this.moduleConfig.showMouseTrail) {
+      this.trailPoints.forEach((point, index) => {
+        point.age++;
+        if (point.age > this.trailConfig.maxAge) {
+          // console.log('removed point');
+          this.trailPoints.splice(index, 1);
+          return;
+        }
 
-      this.drawLineTrail(point, index);
-    });
+        drawLineTrail(point, this.trailPoints, index, this.ctx);
+      });
+    }
+    if (this.moduleConfig.showTriangles) {
+      this.trianglePoints.forEach((triangle: TrailingTriangle, index) => {
+        triangle.age++;
+        if (triangle.age > this.trianglesConfig.maxAge) {
+          // console.log('removed triangle');
+          this.trianglePoints.splice(index, 1);
+          return;
+        }
 
-    this.trianglePoints.forEach((triangle: TrailingTriangle, index) => {
-      triangle.age++;
-      if (triangle.age > this.trianglesConfig.maxAge) {
-        this.trianglePoints.splice(index, 1);
-        return;
-      }
-
-      this.drawTriangle(this.ctx, triangle);
-    });
+        drawTriangle(triangle, this.ctx);
+      });
+    }
 
     this.animationFrameId = requestAnimationFrame(() => this.animate());
   }

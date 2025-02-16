@@ -1,12 +1,3 @@
-<div
-    #container
-    class="mouse-trail-container"
-    (mousemove)="onMouseMove($event)"
-
-    (touchstart)="onTouchStart($event)"
-    (touchmove)="onTouchMove($event)"
-    (touchend)="onTouchEnd()"
->
+<div #container class="mouse-trail-container">
     <canvas #canvas class="trail-canvas"></canvas>
-    <ng-content></ng-content>
 </div>
