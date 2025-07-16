@@ -35,7 +35,7 @@ if (config.server.testingRouteAccess) {
 // Start server
 const PORT = config.server.port;
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     const text = `server loaded || config on load: ${JSON.stringify(config)}`;
     sendMessage(text);
 
